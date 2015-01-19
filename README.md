@@ -4,11 +4,11 @@
 
 ## What is TorrDex?
 
-In short, TorrDex is a Semi-Private BitTorrent Indexing Community. It is licensed under the GNU GPLv3, and hosted on GitHub by its creator Sorcerer Merlin. TorrDex is NOT a main-stream entry-level web application developed by a team of dedicated programmers. It is a hobby-project developed by ONE intermediate-level+™ hobbyist programmer. It is therefore subject to bugs and other issues, which should be reported at the repository Issues page. Any feature requests and the like can also be submitted there as well.
+In short, TorrDex is a Semi-Private BitTorrent Indexing Community. It is licensed under the [GNU GPLv3](http://www.gnu.org/licenses/gpl-3.0-standalone.html), and hosted on [GitHub](https://github.com/sorcerer-merlin/torrdex) by its creator [Sorcerer Merlin](https://github.com/sorcerer-merlin/). TorrDex is NOT a main-stream entry-level web application developed by a team of dedicated programmers. It is a hobby-project developed by ONE intermediate-level+™ hobbyist programmer. It is therefore subject to bugs and other issues, which should be reported at the repository [Issues](https://github.com/sorcerer-merlin/torrdex/issues) page. Any feature requests and the like can also be submitted there as well.
 
 ## Technical Specs
 
-TorrDex is built using HTML5, PHP5, MySQL, JavaScript , and AJAX. Account passwords are encrypted, using the PasswordHash class for PHP developed by Taylor Hornby. BitTorrent processing and support is provided by the PHP_BitTorrent library (in PHAR format) developed by Christer Edvartsen. The entire color scheme and theme for TorrDex is completely dynamic and achieved using CSS and Web Fonts (which MAY allow for additional theming support in the future!).
+TorrDex is built using [HTML5](http://en.wikipedia.org/wiki/HTML5), [PHP5](http://php.net/), [MySQL](http://www.mysql.com/), [JavaScript](http://en.wikipedia.org/wiki/JavaScript) , and [AJAX](http://en.wikipedia.org/wiki/Ajax_%28programming%29). Account passwords are encrypted, using the [PasswordHash](https://github.com/defuse/password-hashing) class for PHP developed by [Taylor Hornby](https://github.com/defuse). BitTorrent processing and support is provided by the [PHP_BitTorrent](https://github.com/christeredvartsen/php-bittorrent) library (in PHAR format) developed by [Christer Edvartsen](https://github.com/christeredvartsen). The entire color scheme and theme for TorrDex is completely dynamic and achieved using [CSS](http://en.wikipedia.org/wiki/Cascading_Style_Sheets) and [Web Fonts](http://www.cssfontstack.com/Web-Fonts) (which MAY allow for additional theming support in the future!).
 
 ## Feature List
 
