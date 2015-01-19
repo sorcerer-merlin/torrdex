@@ -1,0 +1,4 @@
+# Re-write code so we can have the URL not include the PHP extension
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
