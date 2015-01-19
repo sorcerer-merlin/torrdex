@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>iBox v2</title>
+    <link rel="stylesheet" href="../../readme/global.css" type="text/css" media="screen"/>
+    <script type="text/javascript" src="../../ibox.js"></script>
+    <script type="text/javascript">iBox.setPath('../../');</script>
+    <script type="text/javascript">
+    iBox.addEvent(iBox, 'show', function(){alert('iBox was shown');});
+    iBox.addEvent(iBox, 'hide', function(){alert('iBox was hidden');});
+    </script>
+    <link rel="stylesheet" href="../../skins/darkbox/darkbox.css" type="text/css" media="screen"/>
+</head>
+
+<body>
+    <div id="top">
+        <h1>Events Test</h1>
+        <p>The intended result of this test case is to show a notification on the <code>show</code> and <code>hide</code> events in iBox.</p>
+        <p><a href="#my_form" rel="ibox">Run Test.</a></p>
+        <form id="my_form" onsubmit="alert(document.getElementById('id_one').value); return false;" style="display: none;">
+            <p><label for="id_one">One:</label> <input type="text" id="id_one" name="one" value="" /></label></p>
+            <p><label for="id_one">Two:</label> <input type="text" id="id_one" name="one" value="default" /></label></p>
+            <p><input type="submit" /></p>
+        </form>
+    </div>
+</body>
+</html>

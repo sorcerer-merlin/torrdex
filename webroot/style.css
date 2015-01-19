@@ -1,0 +1,228 @@
+/* Style for the main background */
+html { 
+  background: url(img/Background.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color:#00aeff;
+}
+
+/* fix the list items */
+ul {
+   list-style-image: url('img/Bullet.png');
+   vertical-align: middle;
+}
+li { 
+  margin: 3px; 
+  padding: 3px; 
+  color: #54ff00;
+  text-shadow:2px 2px 3px #a200ff;
+  font-family: 'Snippet';
+  font-style: italic;
+}
+
+/* pre element style for comment */
+pre {
+    display: block;
+    font-family: monospace;
+    white-space: pre;
+    margin: 1em 0;
+    line-height: 10px;
+    font-family: 'Inconsolata';
+    color: #fff;
+}
+
+/* style the input form buttons */
+#submit {
+    border: 1px solid #54ff00;
+    color: #54ff00;
+    background: #a200ff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-weight: normal;
+    font-family: 'Sigmar One';
+    font-size: 18px;
+    text-shadow:3px 3px 4px #444;
+}
+#submit:hover {
+    border: 1px solid #a200ff;
+    color: #a200ff;
+    background: #54ff00;
+    font-weight: bold;
+    font-family: 'Sigmar One';
+    font-size: 18px;
+    text-shadow:3px 3px 4px #444;
+}
+#submit_small {
+    border: 1px solid #54ff00;
+    color: #54ff00;
+    background: #a200ff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-weight: normal;
+    font-family: 'Sigmar One';
+    font-size: 10px;
+    text-shadow:3px 3px 4px #444;
+}
+#submit_small:hover {
+    border: 1px solid #a200ff;
+    color: #a200ff;
+    background: #54ff00;
+    font-weight: bold;
+    font-family: 'Sigmar One';
+    font-size: 10px;
+    text-shadow:3px 3px 4px #444;
+}
+
+
+/* Style for the check user name shit and errors */
+.taken, .error {
+  color:#FE0001;
+  font-weight: bold;
+}
+.available {
+  color:#54ff00;
+  font-weight:bold;
+}
+
+/* style for the linux inside */
+#bottom{ 
+  position: 
+  fixed;
+  right:0;
+  bottom:0;
+  transform:rotate(5deg);
+}
+
+/* Style for headings */
+h1 { 
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    color: #54ff00;
+    font-size:48px;
+    font-family: 'Sigmar One';
+    text-shadow:3px 3px 4px #a200ff;
+}
+
+
+h3 { 
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+	  color: #54ff00;
+	  font-size:18px;
+    font-family: Unlock;
+    text-shadow:3px 3px 4px #a200ff;
+}
+
+/* Style for the links */
+a {
+}
+a:link, a:active, a:visited {
+    color: #ff00ae;
+    text-decoration: none;
+	font-family:Verdana;
+	font-size:12px;
+}
+ 
+a:hover {
+    color: #e4ff00;
+    text-decoration:underline overline;
+	font-style:normal;
+	font-weight:bold;
+	font-family:Verdana;
+	font-size:12px;
+}
+
+/* style for torrent table */
+.rowcap { border:1px solid #54ff00;
+ background:#a200ff;
+ color:#54ff00;
+ font-weight:bold;
+/* letter-spacing:20px;*/
+ padding:6px 4px 8px 10px;
+ text-align:right;
+ /*text-transform:uppercase;*/
+ font-family:Unlock;
+ font-size:18px;
+ text-decoration:underline;
+ vertical-align:middle;
+}
+
+.rowdata { border:1px solid #a200ff;
+ padding:3px 10px 3px 10px;
+ text-align:left;
+/* text-transform:uppercase;*/
+ font-size:14px;
+ font-family: Merriweather;
+ vertical-align:middle;
+}
+
+.rowdata:hover {
+	background:#666;	
+}
+
+/* Style for the main table */
+table.mytable { background:#101010 ;
+ border:1px solid #a200ff;
+ /*border-collapse:collapse;*/
+ color:#00aeff;
+ font:normal 12px verdana, arial, helvetica, sans-serif;
+ vertical-align:middle;
+ /*(white-space: nowrap;*/
+ opacity:0.9;
+ filter:alpha(opacity=90);
+ table-layout:fixed;
+ position:absolute;
+ top:45%;
+ left:50%;
+ margin-top:-375px; /* this is half the height of your div*/  
+ margin-left:-620px; /*this is half of width of your div*/
+}
+caption { border:1px solid #54ff00;
+ background:#a200ff;
+ color:#54ff00;
+ font-weight:bold;
+/* letter-spacing:20px;*/
+ padding:6px 4px 8px 0px;
+ text-align:center;
+ /*text-transform:uppercase;*/
+ font-family:Aclonica;
+ font-size:32px;
+ text-shadow:3px 3px 4px #444;
+}
+td.mytable, th.mytable { color:#000000;
+ padding:.4em;
+ vertical-align:middle;
+ border:1.5px solid #454545;
+}
+tr.mytable { border:1.5px solid #454545;
+}
+thead th, tfoot th { background:#54ff00;
+ color:#a200ff;
+ padding:3px 10px 3px 10px;
+ text-align:left;
+/* text-transform:uppercase;*/
+ font-size:24px;
+ font-family: Unlock;
+ text-shadow:3px 3px 4px #444;
+}
+tbody th.mytable, tbody td.mytable { 
+ /* text-align:center; */
+ vertical-align:middle;
+ color:#00aeff;
+}
+tfoot td.mytable { background:#5C443A;
+ color:#FFFFFF;
+ padding-top:3px;
+}
+}

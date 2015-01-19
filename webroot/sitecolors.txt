@@ -1,0 +1,5 @@
+pink:	ff00ae
+blue:	00aeff
+green:	54ff00
+yellow:	e4ff00
+purple:	a200ff
