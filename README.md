@@ -1,5 +1,7 @@
 # TorrDex
 
+[See screen shots](https://github.com/sorcerer-merlin/torrdex/wiki/Screenshots)
+
 ## What is TorrDex?
 
 In short, TorrDex is a Semi-Private BitTorrent Indexing Community. It is licensed under the GNU GPLv3, and hosted on GitHub by its creator Sorcerer Merlin. TorrDex is NOT a main-stream entry-level web application developed by a team of dedicated programmers. It is a hobby-project developed by ONE intermediate-level+™ hobbyist programmer. It is therefore subject to bugs and other issues, which should be reported at the repository Issues page. Any feature requests and the like can also be submitted there as well.
