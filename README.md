@@ -1,6 +1,6 @@
 # TorrDex
 
-[See screen shots](https://github.com/sorcerer-merlin/torrdex/wiki/Screenshots)
+Check out the [TorrDex Wiki](https://github.com/sorcerer-merlin/torrdex/wiki/) for [screenshots](https://github.com/sorcerer-merlin/torrdex/wiki/Screenshots) and other useful information!
 
 ## What is TorrDex?
 
