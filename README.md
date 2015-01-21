@@ -15,6 +15,7 @@ TorrDex is built using [HTML5](http://en.wikipedia.org/wiki/HTML5), [PHP5](http:
 Below is a list of completely finished features incorporated into TorrDex. For incomplete or planned features, look at the next section.
 
 - 3 types of User Accounts with encrypted Passwords and Display Names
+- Profile picture (avatar) support
 - New User sign up's available only when enabled in the Administration panel
 - Session-based login system, with modifiable User profiles
 - Searchable database of Torrents with sortable Table columns
@@ -26,7 +27,6 @@ Below is a list of completely finished features incorporated into TorrDex. For i
 
 This list of features and ideas is not yet implemented in TorrDex. They may have partially working code, or not even be coded at all. Look for them in future releases of the site.
 
-- Profile picture (avatar) support
 - Theme support
 - Torrent comment/rating system
 - Certified Uploader (aka the Green Skull) system

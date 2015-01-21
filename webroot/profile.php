@@ -13,6 +13,67 @@ $AccountType = $_SESSION['acct_type'];
 // Add our script
  echo <<<_END
   <script type="text/javascript">
+    function doRemove()
+    {
+      user = O('user').innerHTML
+
+      params  = "user=" + user
+      request = new ajaxRequest()
+      request.open("POST", "delpic.php", true)
+      request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+      //request.setRequestHeader("Content-length", params.length)
+      //request.setRequestHeader("Connection", "close")
+
+      request.onreadystatechange = function()
+      {
+        if (this.readyState == 4)
+          if (this.status == 200)
+            if (this.responseText != null)
+              O('avatar_img').innerHTML = this.responseText
+      }
+      request.send(params)  
+    }
+    function doUpload()
+    {
+      fileSelect = O('imageToUpload');
+
+      // Get the selected files from the input.
+      var files = fileSelect.files;
+
+      // Create a new FormData object.
+      var formData = new FormData();
+      formData.append('user', '$User') // if this works properly it will add our user to the form
+
+      // Loop through each of the selected files.
+      for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+
+        // Check the file type.
+        if (!file.type.match('image.*')) {
+          continue;
+        }
+
+        // Add the file to the request.
+        formData.append('imageToUpload', file, file.name);
+      }
+
+      // Do the actual request
+      request = new ajaxRequest()
+      request.open("POST", "uploadpic.php", true)
+      //request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+      //request.setRequestHeader("Content-length", params.length)
+      //request.setRequestHeader("Connection", "close")
+
+      request.onreadystatechange = function()
+      {
+        if (this.readyState == 4)
+          if (this.status == 200)
+            if (this.responseText != null)
+              O('avatar_img').innerHTML = this.responseText
+      }
+      request.send(formData)
+    }
+
     function checkNewPass()
     {
       pass1 = O('newpass').value
@@ -103,7 +164,6 @@ $AccountType = $_SESSION['acct_type'];
       }
       request.send(params)
     }
-
     function ajaxRequest()
     {
       try { var request = new XMLHttpRequest() }
@@ -183,11 +243,46 @@ if (isset($_POST['mode'])) {
             <tr>
             	<td><input type="text" maxlength="72" required="required" id="newfullname" name="newfullname" value="<?php print $Fullname; ?>"></td>
                 <td>&nbsp;&nbsp;&nbsp;</td>
-                <td><input type="submit" onclick="changeName()" value="Change..." id="submit">&nbsp;&nbsp;<span id='info_fullname'></span></td>
+                <td><input type="submit" onclick="changeName()" value="Change..." id="submit_small">&nbsp;&nbsp;<span id='info_fullname'></span></td>
             </tr>
             </table>			
             <!--</form>-->
             </td>
+        </tr>
+        <tr>
+          <td class="rowcap" width="168px">Avatar:</td>
+          <td class="rowdata">
+            <table>
+              <tr>
+                <td><span id="avatar_img">
+                  <?php
+                    $filename = "avatars/" . $User  . ".jpg";
+                    $have_avatar = FALSE;
+                    if (file_exists($filename)) {
+                      // echo the image tag for the actual avatar
+                      echo "<img src='$filename' width='100' height='100' ALT='Avatar'>";
+                      $have_avatar = TRUE;
+                    } else {
+                      // the avatar doesn't exist, so use the default
+                      echo "<img src='img/default_avatar.jpg' width='100' height='100' ALT='Avatar'>";
+                      $have_avatar = FALSE;
+                    }
+                  ?>  
+                </span></td>
+                <td>&nbsp;&nbsp;&nbsp;</td>
+                <td>
+                  <!--<form id="file-form" action="uploadpic" method="post" enctype="multipart/form-data">-->
+                    <input type="file" name="imageToUpload" id="imageToUpload" required="required">&nbsp;&nbsp;<input type="submit" value="Change" id="submit_small" onclick="doUpload()"><br>
+                    <span id="avatar-info"></span>
+                  <!--</form>-->
+                  <br>
+                  <?php 
+                    if ($have_avatar) echo "<input type='submit' value='Remove' id='submit_small' onclick='doRemove()'>";
+                  ?>
+                </td>
+              </tr>
+            </table>
+          </td>
         </tr>
         <tr>
         	<td class="rowcap" width="168px">Password:</td>
@@ -215,7 +310,7 @@ if (isset($_POST['mode'])) {
                     <span id='info_oldpass'></span><br>
                     <span id='info_newpass'></span>
                     <br><br>
-                    <input type="submit" value="Change..." id="submit" onclick="changePass()">
+                    <input type="submit" value="Change..." id="submit_small" onclick="changePass()">
                 </td>
             </tr>
             </table>

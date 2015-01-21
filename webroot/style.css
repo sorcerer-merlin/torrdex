@@ -34,6 +34,47 @@ pre {
 }
 
 /* style the input form buttons */
+::-webkit-file-upload-button {
+    border: 1px solid #54ff00;
+    color: #54ff00;
+    background: #a200ff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-weight: normal;
+    font-family: 'Sigmar One';
+    font-size: 10px;
+    text-shadow:3px 3px 4px #444;
+}
+::-webkit-file-upload-button:hover {
+    border: 1px solid #a200ff;
+    color: #a200ff;
+    background: #54ff00;
+    font-weight: bold;
+    font-family: 'Sigmar One';
+    font-size: 10px;
+    text-shadow:3px 3px 4px #444;
+}
+::-ms-browse {
+    border: 1px solid #54ff00;
+    color: #54ff00;
+    background: #a200ff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-weight: normal;
+    font-family: 'Sigmar One';
+    font-size: 10px;
+    text-shadow:3px 3px 4px #444; 
+}
+::-ms-browse:hover {
+    border: 1px solid #a200ff;
+    color: #a200ff;
+    background: #54ff00;
+    font-weight: bold;
+    font-family: 'Sigmar One';
+    font-size: 10px;
+    text-shadow:3px 3px 4px #444;  
+}
+
 #submit {
     border: 1px solid #54ff00;
     color: #54ff00;

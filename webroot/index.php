@@ -84,6 +84,7 @@ developed by <a href="https://github.com/defuse">Taylor Hornby</a>. BitTorrent p
  Below is a list of completely finished features incorporated into <strong>TorrDex</strong>.  For incomplete or planned features, look at the next section.
  <ul>
  	<li>3 types of User Accounts with encrypted Passwords and Display Names</li>
+ 	<li>Profile picture (avatar) support</li>
  	<li>New User sign up's available only when enabled in the Administration panel</li>
  	<li>Session-based login system, with modifiable User profiles</li>
  	<li>Searchable database of Torrents with sortable Table columns</li>
@@ -94,7 +95,6 @@ developed by <a href="https://github.com/defuse">Taylor Hornby</a>. BitTorrent p
  <h3>To-Do List</h3>
  This list of features and ideas is not yet implemented in <strong>TorrDex</strong>. They may have partially working code, or not even be coded at all. Look for them in future releases of the site.
  <ul>
- 	<li>Profile picture (avatar) support</li>
  	<li>Theme support</li>
  	<li>Torrent comment/rating system</li>
  	<li>Certified Uploader (aka the Green Skull) system</li>
