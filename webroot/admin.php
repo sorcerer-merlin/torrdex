@@ -143,7 +143,7 @@ _END;
 </form>
 <br><br>
 <h3>User Administration</h3>
-<table width="90%">
+<table width="90%" class="sortable">
 <tr>
     <td class="rowcap" style="text-align:center;">Type:</td>
     <td class="rowcap" style="text-align:center;">Login:</td>

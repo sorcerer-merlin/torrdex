@@ -5,19 +5,10 @@
 	if ($loggedin) {
 		
 		/* First let's get the torrent's info-hash from the GET protocol */
-		if (!isset($_GET['hash'])) die('<h3>Ooops!!!</h3><br><b><u>Error:</b></u> <i>Invalid Info-Hash!<i>');
 		$TorrentHash = $_GET['hash'];
 
-		/* We need to make sure that info hash isn't empty */
-		if ($TorrentHash === "") die('<h3>Ooops!!!</h3><br><b><u>Error:</b></u> <i>Invalid Info-Hash!<i>');
-
 		/* Now it is time to make the database connection and find all of our information */
-		$result = queryMySQL("select * from torrents where hash ='". $TorrentHash ."'") or die('<h3>Ooops!!!</h3><br><b><u>Error:</b></u> <i>Info-Hash not in database!<i>');
-		
-		// Check to make sure we have it in the database before continuing
-		if ($result->num_rows == 0) {
-        	die('<h3>Ooops!!!</h3><br><b><u>Error:</b></u> <i>Info-Hash not in database!<i>');
-        }
+		$result = queryMySQL("select * from torrents where hash ='". $TorrentHash ."'");
 	
 		$row = $result->fetch_object();
 		$TorrentName = $row->name;
@@ -51,7 +42,15 @@
             <td class="rowdata">
             	<table>
                 	<tr>
-                        <td><?php print $TorrentAuthor; ?></td>
+                        <td>
+                            <?php 
+                                if ($TorrentAuthor != "Anonymous") {
+                                    print "<a href='author?name=$row->author'>$TorrentAuthor</a>";
+                                } else {
+                                    print $TorrentAuthor; 
+                                }
+                            ?>
+                        </td>
                         <td><?php print isCertified($row->author); ?></td>
                     </tr>
                 </table>

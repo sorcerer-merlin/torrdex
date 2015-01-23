@@ -59,7 +59,16 @@
             <td class="rowdata" style="text-align:right;"><?php print $TorrentAge; ?></td>
             <td class="rowdata" style="text-align:center;"><?php print humanFileSize($TorrentSize); ?></td>
             <td class="rowdata" style="text-align:center;"><?php print $TorrentFileCount; ?></td>
-            <td class="rowdata" style="text-align:right;" ><?php print $TorrentAuthor; ?>&nbsp;<?php print isCertified($row->author); ?></td>
+            <td class="rowdata" style="text-align:right;" >
+	            <?php
+	            	if ($TorrentAuthor != "Anonymous") {
+	            		print "<a href='author?name=$row->author'>$TorrentAuthor</a>";
+	            	} else {
+	            		print $TorrentAuthor; 
+	            	}
+	             ?>
+	             &nbsp;<?php print isCertified($row->author); ?>
+             </td>
         </tr>
 
 <?php

@@ -4,6 +4,9 @@ $pageTitle = "My Profile";
 require_once 'header.php';
 require_once 'PasswordHash.php';
 
+// SECURITY: If we are not logged in, you shouldn't be looking at a profile
+if ($loggedin == FALSE) echo '<script type="text/javascript">window.location = "/"</script>';
+
 // Pull the details from the Session
 $User = $_SESSION['user'];
 $CurrentPassword = $_SESSION['pass'];
