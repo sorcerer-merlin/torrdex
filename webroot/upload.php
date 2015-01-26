@@ -135,14 +135,15 @@ _END;
     <tr>
         <td class="rowcap" width="168px">Type:</td>
         <td class="rowdata">
-        <select name="torrent-type" id="torrent-type">
+        <select class="select-style" name="torrent-type" id="torrent-type" width="200px">
         	<option>Application</option>
             <option>Game</option>
             <option>Movie</option>
             <option>TV</option>
             <option>Music</option>
             <option selected="selected">Other</option>
-        </select>&nbsp;&nbsp;&nbsp;<input type="submit" value="Description Template" name="submit_small" id="submit_small" form="" onclick="loadTemplate()">
+        </select>
+        &nbsp;&nbsp;&nbsp;<input type="submit" value="Description Template" name="submit_small" id="submit_small" form="" onclick="loadTemplate()">
         </td>
     </tr>
     <tr>

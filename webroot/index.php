@@ -91,6 +91,7 @@ developed by <a href="https://github.com/defuse">Taylor Hornby</a>. BitTorrent p
  and <a href="http://www.cssfontstack.com/Web-Fonts">Web Fonts</a> (which <strong>MAY</strong> allow for additional theming support in the future!).
  <h3>Feature List</h3>
  Below is a list of completely finished features incorporated into <strong>TorrDex</strong>.  For incomplete or planned features, look at the next section.
+ <div class="feature_list">
  <ul>
  	<li>3 types of User Accounts with encrypted Passwords and Display Names</li>
  	<li>Profile picture (avatar) support</li>
@@ -100,15 +101,16 @@ developed by <a href="https://github.com/defuse">Taylor Hornby</a>. BitTorrent p
  	<li>Ability to Upload Torrents to database</li>
  	<li>Administration panel with the ability to make changes and remove users, as well as enable/disable global options that change functionality of the site</li>
  	<li>Customizable Torrent Description templates for new uploads to ease in the writing of Torrent Descriptions</li>
- </ul>
+ </ul></div>
  <h3>To-Do List</h3>
  This list of features and ideas is not yet implemented in <strong>TorrDex</strong>. They may have partially working code, or not even be coded at all. Look for them in future releases of the site.
+ <div class="feature_list">
  <ul>
  	<li>Theme support</li>
  	<li>Torrent comment/rating system</li>
  	<li>Certified Uploader (aka the Green Skull) system</li>
  	<li>Email invite system using encrypted GUIDs</li>
- </ul>
+ </ul></div>
 </blockquote></div><br /><br />
 <!-- end news page or whatever -->
 

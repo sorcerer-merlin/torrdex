@@ -1,5 +1,5 @@
 pink:	ff00ae
 blue:	00aeff
-green:	54ff00
+green:	54ff00		84,255,0
 yellow:	e4ff00
-purple:	a200ff
+purple:	a200ff		162,0,255		162,94,252

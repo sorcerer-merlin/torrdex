@@ -7,7 +7,7 @@ require_once 'PasswordHash.php';
 // SECURITY: If we are not logged in, you shouldn't be looking at a profile
 if ($loggedin == FALSE) echo '<script type="text/javascript">window.location = "/"</script>';
 
-// Pull the details from the Session
+// Pull the details from the Session 
 $User = $_SESSION['user'];
 $CurrentPassword = $_SESSION['pass'];
 $Fullname = $_SESSION['fullname'];
@@ -79,8 +79,8 @@ $AccountType = $_SESSION['acct_type'];
 
     function checkNewPass()
     {
-      pass1 = O('newpass').value
-      pass2 = O('newpass2').value
+      pass1 = O('newpass-hidden').value
+      pass2 = O('newpass2-hidden').value
       if (pass1 == pass2) {
         O('info_newpass').innerHTML = "<span class='available'>&nbsp;&#x2714; The passwords match.</span>"
       } else {
@@ -91,8 +91,8 @@ $AccountType = $_SESSION['acct_type'];
     function changePass()
     {
         user = O('user').innerHTML
-        pass1 = O('newpass').value
-        pass2 = O('newpass2').value
+        pass1 = O('newpass-hidden').value
+        pass2 = O('newpass2-hidden').value
         if (pass1 == pass2) {
           // reset the info to nothing on oldpass 
           O('info_oldpass').innerHTML = ''
@@ -144,7 +144,7 @@ $AccountType = $_SESSION['acct_type'];
     function checkOldPass()
     {
       user = O('user').innerHTML;
-      pass = O('oldpass').value
+      pass = O('oldpass-hidden').value
       if (pass == '')
       {
         O('info_oldpass').innerHTML = ''
@@ -296,15 +296,15 @@ if (isset($_POST['mode'])) {
             <table>
             <tr>
             	<td align="right">Old Password:</td>
-                <td><input type="password" maxlength="72" name="oldpass" id="oldpass" required="required" placeholder="Old Password" onblur="checkOldPass()"></td>
+                <td><input type="password" maxlength="72" name="oldpass" id="oldpass-field" required="required" placeholder="Old Password" onblur="checkOldPass()"></td>
             </tr>
 			<tr>
             	<td align="right">New Password:</td>
-                <td><input type="password" maxlength="72" name="newpass" id="newpass" required="required" placeholder="New Password"></td>
+                <td><input type="password" maxlength="72" name="newpass" id="newpass-field" required="required" placeholder="New Password"></td>
             </tr>
             <tr>
             	<td align="right">Re-type:</td>
-                <td><input type="password" maxlength="72" name="newpass2" id="newpass2" required="required" placeholder="Confirm New Password" onblur="checkNewPass()"></td>
+                <td><input type="password" maxlength="72" name="newpass2" id="newpass2-field" required="required" placeholder="Confirm New Password" onblur="checkNewPass()"></td>
             </tr>
             <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
             <tr>
@@ -322,6 +322,15 @@ if (isset($_POST['mode'])) {
             </td>
         </tr>
         </table>
+    <script type="text/javascript">
+      new MaskedPassword(document.getElementById("oldpass-field"), '\u25C6'); //'\u25CF');
+    </script>
+    <script type="text/javascript">
+      new MaskedPassword(document.getElementById("newpass-field"), '\u25C6'); //'\u25CF');
+    </script>
+    <script type="text/javascript">
+      new MaskedPassword(document.getElementById("newpass2-field"), '\u25C6'); //'\u25CF');
+  </script>
 <!-- end actual page -->
 <?php
 /* End of Old Dynamic Code 

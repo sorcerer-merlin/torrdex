@@ -126,7 +126,7 @@ _END;
 <tr>
 	<td class="rowdata" style="text-align:left;"><?php print $opn_desc; ?></td>
 	<td class="rowdata" style="text-align:center;">
-		<select name="<?php print $opn_name; ?>">
+		<select class="select-style" name="<?php print $opn_name; ?>">
 			<option value="true"<?php if ($opn_value == "true") echo ' selected="selected"'; ?>>On</option>
 			<option value="false"<?php if ($opn_value == "false") echo ' selected="selected"'; ?>>Off</option>
 		</select>
@@ -168,7 +168,7 @@ _END;
 <!-- rows for accounts -->
 <tr>
     <td class="rowdata" style="text-align:center;">
-    	<select id="<?php print $user; ?>_acct_type" onchange="statusModified('<?php print $user; ?>')">
+    	<select class="select-style" id="<?php print $user; ?>_acct_type" onchange="statusModified('<?php print $user; ?>')">
 		    <?php 
 		    	foreach ($AccountTypes as $key => $value) {
 		    		echo "<option value='$key'";
@@ -186,7 +186,7 @@ _END;
     <input type="text" maxlength="72" id="<?php print $user; ?>_fullname" name="<?php print $user; ?>_fullname" value="<?php print $fullname; ?>" onchange="statusModified('<?php print $user; ?>')" onkeypress="statusModified('<?php print $user; ?>')">
     </td>
     <td class="rowdata" style="text-align:center;">
-    	<select id="<?php print $user; ?>_certified" onchange="statusModified('<?php print $user; ?>')">
+    	<select class="select-style" id="<?php print $user; ?>_certified" onchange="statusModified('<?php print $user; ?>')">
     		<?php print isCertified_ADMIN($user); ?>
     	</select>
     </td>

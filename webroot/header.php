@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="ibox/skins/darkbox/darkbox.css" type="text/css" media="screen"/>
 <script src='javascript.js'></script>
 <script src="sorttable.js"></script> 
+<script type="text/javascript" src="MaskedPassword.js"></script>
 </head>
   
 <?php
@@ -53,13 +54,15 @@
   </tr></thead>
   <tr class="mytable">
   <td class="mytable" align="center">
+  <div class="table">
+  <div class="navbar"><ul>
 <?php
   // Special links to pages with options showing/hiding them are listed below, followed
   // by their logic statements to enable/disable based on mySQL configuration options
   // table.
-  $signup_link = " <a href='signup'>Sign Up</a> |";
-  $upload_link = " <a href='upload'>Upload</a> |";
-  $admin_link = " <a href='admin'>Admin</a> |";
+  $signup_link = "<li><a href='signup'>Sign Up</a></li>";
+  $upload_link = "<li><a href='upload'>Upload</a></li>";
+  $admin_link = "<li><a href='admin'>Admin</a></li>";
   
   // Output the menu
   if ($loggedin)
@@ -75,7 +78,8 @@
       if ($_SESSION['acct_type'] != ACCT_TYPE_ADMIN) $admin_link = "";
 		
 		// Finally output the constructed member menu
-		echo "| <a href='logout'>Logout</a> | <a href='profile'>Profile</a> |" . $admin_link . " . . . . . | <a href='/'>Home</a> | <a href='search'>Search</a> |" . $upload_link;
+
+		echo "<li><a href='logout'>Logout</a></li><li><a href='profile'>Profile</a></li>" . $admin_link . "<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li><li><a href='/'>Home</a></li><li><a href='search'>Search</a></li>" . $upload_link;
   }
   else
   {
@@ -83,10 +87,14 @@
 		// appropriate.	  
 	  	if ($configOptions['allow_signup'] == "false") $signup_link = "";
 	  
-		// Finally output the constructed public menu	  
-		echo "| <a href='login'>Login</a> |" . $signup_link . " . . . . . | <a href='/'>Home</a> |";
+		// Finally output the constructed public menu
+    echo "<li><a href='login'>Login</a></li>";
+    echo $signup_link;
+    echo "<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>";
+    echo "<li><a href='/'>Home</a></li>";
   }
 ?>
+</ul></div></div>
 </td>
 </tr>
   <thead><tr class="mytable">

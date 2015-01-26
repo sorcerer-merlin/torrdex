@@ -11,7 +11,14 @@
 <!-- the search form -->
         <form method='get' action='search'>
         <!--<input type='text' maxlength='50' size='60' name='keywords' placeholder="Torrent Keywords..." autofocus="autofocus" required="required">-->
-        <input type='search' results='5' autosave='tordex_search_autosave' maxlength='50' size='60' name='keywords' placeholder="Torrent Keywords..." autofocus="autofocus" required="required">
+        <input type='search' results='5' autosave='tordex_search_autosave' maxlength='50' size='60' name='keywords' placeholder="Torrent Keywords..." autofocus="autofocus" required="required"><br>
+        <input type="radio" id="type_all" name="type" value="all" checked><label for="type_all"><span><span></span></span>All</label>&nbsp;&nbsp;
+        <input type="radio" id="type_app" name="type" value="app"><label for="type_app"><span><span></span></span>Application</label>&nbsp;&nbsp;
+        <input type="radio" id="type_game" name="type" value="game"><label for="type_game"><span><span></span></span>Game</label>&nbsp;&nbsp;
+        <input type="radio" id="type_movie" name="type" value="movie"><label for="type_movie"><span><span></span></span>Movie</label>&nbsp;&nbsp;
+        <input type="radio" id="type_tv" name="type" value="tv"><label for="type_tv"><span><span></span></span>TV</label>&nbsp;&nbsp;
+        <input type="radio" id="type_music" name="type" value="music"><label for="type_music"><span><span></span></span>Music</label>&nbsp;&nbsp;
+        <input type="radio" id="type_other" name="type" value="other"><label for="type_other"><span><span></span></span>Other</label>
         <br><br><input type='submit' value='Search...' id='submit'>
         </form>
 <!-- end search form -->

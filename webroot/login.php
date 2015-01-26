@@ -58,11 +58,11 @@
     <table>
     	<tr>
         	<td class="rowcap">&nbsp;&nbsp;Username:&nbsp;&nbsp;</td>
-            <td class="rowdata"><input type='text' maxlength='32' name='user' value='<?php print $user; ?>' autofocus='autofocus' required="required" placeholder="Username"></td>
+            <td class="rowdata"><input type='text' maxlength='32' name='user' id='user' value='<?php print $user; ?>' autofocus='autofocus' required="required" placeholder="Username"></td>
         </tr>
         <tr>
         	<td class="rowcap">&nbsp;&nbsp;Password:&nbsp;&nbsp;</td>
-            <td class="rowdata"><input type='password' maxlength='72' name='pass' value='<?php print $pass; ?>' required="required" placeholder="Password"></td>
+            <td class="rowdata"><input type='password' maxlength='72' name='pass' id='pass-field' value='<?php print $pass; ?>' required="required" placeholder="Password"></td>
         </tr>
     </table>
 <?php
@@ -76,6 +76,12 @@
     <span class='fieldname'>&nbsp;</span>
     <input type='submit' value='Login' id='submit'>
     </form><br></div>
+  <script type="text/javascript">
+  
+    //apply masking to the password field
+    //pass the field reference, masking symbol, and character limit
+    new MaskedPassword(document.getElementById("pass-field"), '\u25C6'); //'\u25CF');
+  </script>
 <?php
   require_once 'footer.php';
 ?>
