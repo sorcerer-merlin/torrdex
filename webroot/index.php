@@ -12,7 +12,7 @@
 		
 	// Check to make sure we have it in the database before continuing
 	if ($result->num_rows == 0) {
-		echo '<h3>Ooops!!!</h3><br><b><u>Error:</b></u> <i>Something\'s wrong, OR your database is empty!<i>';
+		showError("Your database is EMPTY. Please contact your administrator.");
 	} else {
 ?>
 		<h3>Torrents</h3>
@@ -30,7 +30,7 @@
 	
 	// Go through each one and print it out
 	while($row = $result->fetch_object()) { 
-		$TorrentType = $row->type;
+		$TorrentType = $TorrentTypes[$row->type];
 		$TorrentName = $row->name;
 		//$TorrentUploaded = $row->uploaded;
 		$TorrentHash = $row->hash;
@@ -41,20 +41,41 @@
 ?>
 
         <tr>
-        	<td class="rowdata"><?php print $TorrentType; ?></td>
+        	<td class="rowdata">
+				<table align="right">
+					<tr>
+					<td>
+						<img src="img/type_icons/<?php print $TorrentType; ?>.png" ALT="<?php print $TorrentType; ?>" width="16px" height="16px">
+					</td>
+					<td>&nbsp;</td>
+					<td>
+						<?php print $TorrentType; ?>
+					</td>
+					</tr>
+				</table>        		
+        	</td>
             <td class="rowdata" width="300px"><a href="details?hash=<?php print $TorrentHash; ?>"><?php print $TorrentName; ?></a></td>
             <td class="rowdata" style="text-align:right;"><?php print $TorrentAge; ?></td>
             <td class="rowdata" style="text-align:center;"><?php print humanFileSize($TorrentSize); ?></td>
             <td class="rowdata" style="text-align:center;"><?php print $TorrentFileCount; ?></td>
             <td class="rowdata" style="text-align:right;" >
-	            <?php
-	            	if ($TorrentAuthor != "Anonymous") {
-	            		print "<a href='author?name=$row->author'>$TorrentAuthor</a>";
-	            	} else {
-	            		print $TorrentAuthor; 
-	            	}
-	             ?>
-	             &nbsp;<?php print isCertified($row->author); ?>
+            	<table align="right">
+            		<tr>
+            		<td>
+		            	 <?php
+			            	if ($TorrentAuthor != "Anonymous") {
+			            		print "<a href='author?name=$row->author'>$TorrentAuthor</a>";
+			            	} else {
+			            		print $TorrentAuthor; 
+			            	}
+			             ?>
+            		</td>
+            		<td>&nbsp;</td>
+            		<td>
+            			<?php print isCertified($row->author); ?>	
+            		</td>
+            		</tr>
+            	</table>
              </td>
         </tr>
 

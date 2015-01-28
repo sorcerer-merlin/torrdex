@@ -8,6 +8,12 @@ html {
   color:#00aeff;
 }
 
+/* description HTML tages */
+/* TODO : Add stuff for description HTML for torrents */
+.torrent-desc {
+    /* TODO */
+}
+
 /* navigation bar */
 .table {
     display: table;   /* Allow the centering to work */
@@ -415,10 +421,16 @@ pre {
 .taken, .error {
   color:#FE0001;
   font-weight: bold;
+  font-family: 'Spirax';
+  font-size:16px;
+  text-shadow:3px 3px 4px #444;
 }
 .available {
   color:#54ff00;
   font-weight:bold;
+  font-family: 'Spirax';
+  font-size:16px;
+  text-shadow:3px 3px 4px #444;
 }
 
 /* style for the linux inside */

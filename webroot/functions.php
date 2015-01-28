@@ -16,14 +16,46 @@
   $AccountTypes[ACCT_TYPE_SEEDER] = "Seeder";
   $AccountTypes[ACCT_TYPE_ADMIN] = "Administrator";
 
+  /* Define Torrent Type Constants */
+  define("TORR_TYPE_APP", 0);
+  define("TORR_TYPE_GAME", 1);
+  define("TORR_TYPE_MOVIE", 2);
+  define("TORR_TYPE_TV", 3);
+  define("TORR_TYPE_MUSIC", 4);
+  define("TORR_TYPE_OTHER", 5);
+  $TorrentTypes[TORR_TYPE_APP] = "App";
+  $TorrentTypes[TORR_TYPE_GAME] = "Game";
+  $TorrentTypes[TORR_TYPE_MOVIE] = "Movie";
+  $TorrentTypes[TORR_TYPE_TV] = "TV";
+  $TorrentTypes[TORR_TYPE_MUSIC] = "Music";
+  $TorrentTypes[TORR_TYPE_OTHER] = "Other";
+  define("DEFAULT_TORR_TYPE", TORR_TYPE_OTHER);
+
   /* Begin Functions code block */
   // Run MySQL query and return the result object
   function queryMysql($query)
   {
     global $connection;
     $result = $connection->query($query);
-    if (!$result) die($connection->error);
+    if (!$result) showError($connection->error);
     return $result;
+  }
+
+  // Get the MySQL error
+  function errorMysql()
+  {
+  	global $connection;
+  	return($connection->error);
+  }
+
+  // Torrent in Database BOOL by 
+  function isTorrentinDatabase($var)
+  {
+
+  	$TorrentExists = FALSE;
+	$result = queryMySQL("SELECT * FROM torrents WHERE hash='$var';");
+	if ($result->num_rows != 0) $TorrentExists = TRUE;
+	return($TorrentExists);
   }
 
   // Destroy cookie session
@@ -37,6 +69,12 @@
     session_destroy();
   }
   
+  function showError($var)
+  {
+  	echo "<h3>Ooops!!!</h3>";
+  	echo "<span class='error'>$var</span>";
+  }
+
   // Get the status of a certified member by name
   function isCertified($var)
   {
@@ -146,73 +184,73 @@
 	}
 	
 	// Time and date stuff
-	 // Set timezone
-	  date_default_timezone_set("UTC");
+    // Set timezone
+	date_default_timezone_set("UTC");
 	 
-	  // Time format is UNIX timestamp or
-	  // PHP strtotime compatible strings
-	  function dateDiff($time1, $time2, $precision = 6) {
-		// If not numeric then convert texts to unix timestamps
-		if (!is_int($time1)) {
-		  $time1 = strtotime($time1);
-		}
-		if (!is_int($time2)) {
-		  $time2 = strtotime($time2);
-		}
-	 
-		// If time1 is bigger than time2
-		// Then swap time1 and time2
-		if ($time1 > $time2) {
-		  $ttime = $time1;
-		  $time1 = $time2;
-		  $time2 = $ttime;
-		}
-	 
-		// Set up intervals and diffs arrays
-		$intervals = array('year','month','day','hour','minute','second');
-		$diffs = array();
-	 
-		// Loop thru all intervals
-		foreach ($intervals as $interval) {
-		  // Create temp time from time1 and interval
-		  $ttime = strtotime('+1 ' . $interval, $time1);
-		  // Set initial values
-		  $add = 1;
-		  $looped = 0;
-		  // Loop until temp time is smaller than time2
-		  while ($time2 >= $ttime) {
-			// Create new temp time from time1 and interval
-			$add++;
-			$ttime = strtotime("+" . $add . " " . $interval, $time1);
-			$looped++;
-		  }
-	 
-		  $time1 = strtotime("+" . $looped . " " . $interval, $time1);
-		  $diffs[$interval] = $looped;
-		}
-		
-		$count = 0;
-		$times = array();
-		// Loop thru all diffs
-		foreach ($diffs as $interval => $value) {
-		  // Break if we have needed precission
-		  if ($count >= $precision) {
-	 break;
-		  }
-		  // Add value and interval 
-		  // if value is bigger than 0
-		  if ($value > 0) {
-	 // Add s if value is not 1
-	 if ($value != 1) {
-	   $interval .= "s";
-	 }
-	 // Add value and interval to times array
-	 $times[] = $value . " " . $interval;
-	 $count++;
-		  }
-		}
-	 
-		// Return string with times
-		return implode(", ", $times);
+  // Time format is UNIX timestamp or
+  // PHP strtotime compatible strings
+  function dateDiff($time1, $time2, $precision = 6) {
+	// If not numeric then convert texts to unix timestamps
+	if (!is_int($time1)) {
+	  $time1 = strtotime($time1);
+	}
+	if (!is_int($time2)) {
+	  $time2 = strtotime($time2);
+	}
+ 
+	// If time1 is bigger than time2
+	// Then swap time1 and time2
+	if ($time1 > $time2) {
+	  $ttime = $time1;
+	  $time1 = $time2;
+	  $time2 = $ttime;
+	}
+ 
+	// Set up intervals and diffs arrays
+	$intervals = array('year','month','day','hour','minute','second');
+	$diffs = array();
+ 
+	// Loop thru all intervals
+	foreach ($intervals as $interval) {
+	  // Create temp time from time1 and interval
+	  $ttime = strtotime('+1 ' . $interval, $time1);
+	  // Set initial values
+	  $add = 1;
+	  $looped = 0;
+	  // Loop until temp time is smaller than time2
+	  while ($time2 >= $ttime) {
+		// Create new temp time from time1 and interval
+		$add++;
+		$ttime = strtotime("+" . $add . " " . $interval, $time1);
+		$looped++;
 	  }
+ 
+	  $time1 = strtotime("+" . $looped . " " . $interval, $time1);
+	  $diffs[$interval] = $looped;
+	}
+	
+	$count = 0;
+	$times = array();
+	// Loop thru all diffs
+	foreach ($diffs as $interval => $value) {
+	  // Break if we have needed precission
+	  if ($count >= $precision) {
+ break;
+	  }
+	  // Add value and interval 
+	  // if value is bigger than 0
+	  if ($value > 0) {
+ // Add s if value is not 1
+ if ($value != 1) {
+   $interval .= "s";
+ }
+ // Add value and interval to times array
+ $times[] = $value . " " . $interval;
+ $count++;
+	  }
+	}
+ 
+	// Return string with times
+	return implode(", ", $times);
+  }
 ?>

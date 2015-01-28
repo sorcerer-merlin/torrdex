@@ -14,6 +14,7 @@
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Sigmar+One" />
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Inconsolata" />
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Atomic+Age" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Spirax" />
 <link href="/style.css" rel="stylesheet" type="text/css" />
 <link href="favicon.ico" rel="icon" type="image/x-icon" />
 <script type="text/javascript" src="ibox/ibox.js"></script>

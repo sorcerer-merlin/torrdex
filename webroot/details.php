@@ -1,6 +1,10 @@
 <?php
     $pageTitle = "Torrent Details";
 	require_once 'header.php';
+    require_once 'Parsedown.php';
+
+    // Init the MarkDown parsing library
+    $Parsedown = new Parsedown();
     
 	if ($loggedin) {
 		
@@ -12,16 +16,18 @@
 	
 		$row = $result->fetch_object();
 		$TorrentName = $row->name;
-		$TorrentType = $row->type;
+		$TorrentType = $TorrentTypes[$row->type];
 		$TorrentUploaded = date("Y-m-d @ h:ia",$row->uploaded);
 		$TorrentFiles = $row->files;
 		$TorrentComment = $row->comment;
-		$TorrentDesc = $row->description;
 		$TorrentMagnet = $row->magnet;
 		$TorrentFile = "uploads/" . $TorrentHash . ".torrent";
 		$TorrentAuthor = getDisplayName($row->author);
 		$TorrentSize = $row->size;
 		$TorrentFileCount = $row->filecount;
+
+        // Do the description parsing (take MarkDown text from database and change into HTML to display)
+        $TorrentDesc = $Parsedown->text($row->description);
 ?>
     	<!-- Torrent Information -->
         <table width="992px">
@@ -35,7 +41,19 @@
         </tr>
         <tr>
         	<td class="rowcap" width="168px">Type:</td>
-            <td class="rowdata"><?php print $TorrentType; ?></td>
+            <td class="rowdata">
+                <table>
+                    <tr>
+                    <td>
+                        <img src="img/type_icons/<?php print $TorrentType; ?>.png" ALT="<?php print $TorrentType; ?>" width="16px" height="16px">
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <?php print $TorrentType; ?>
+                    </td>
+                    </tr>
+                </table>                
+            </td>
         </tr>
         <tr>
         	<td class="rowcap" width="168px">Author:</td>
@@ -51,6 +69,7 @@
                                 }
                             ?>
                         </td>
+                        <td>&nbsp;</td>
                         <td><?php print isCertified($row->author); ?></td>
                     </tr>
                 </table>
@@ -83,9 +102,9 @@
         <tr>
         	<td class="rowcap">Description:</td>
             <td class="rowdata">
-            <pre>
-<?php print $TorrentDesc; ?>
-            </pre>
+            <div class="torrent-desc">
+                <?php print $TorrentDesc; ?>
+            </div>
             </td>
         </tr>
         <tr>
