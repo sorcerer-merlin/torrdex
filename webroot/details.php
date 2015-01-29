@@ -45,7 +45,7 @@
                 <table>
                     <tr>
                     <td>
-                        <img src="img/type_icons/<?php print $TorrentType; ?>.png" ALT="<?php print $TorrentType; ?>" width="16px" height="16px">
+                        <img src="img/type_icons/<?php print $TorrentType; ?>.png" ALT="<?php print $TorrentType; ?>" width="32px" height="32px">
                     </td>
                     <td>&nbsp;</td>
                     <td>
@@ -93,7 +93,8 @@
             </div>
             <table>
                 <tr>
-                    <td><img src="/img/files-icon.png" height="13" width="16" alt="Files" /></a></td>
+                    <td><img src="/img/files-icon.png" height="24" width="24" alt="Files" /></a></td>
+                    <td>&nbsp;</td>
                     <td><a href="#file_list" rel="ibox&width=900&height=500" title="Torrent's Files" >Show List of Files...</a></td>
                 </tr>
             </table>
