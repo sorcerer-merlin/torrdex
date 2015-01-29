@@ -8,7 +8,7 @@ In short, TorrDex is a Semi-Private BitTorrent Indexing Community. It is license
 
 ## Technical Specs
 
-TorrDex is built using [HTML5](http://en.wikipedia.org/wiki/HTML5), [PHP5](http://php.net/), [MySQL](http://www.mysql.com/), [JavaScript](http://en.wikipedia.org/wiki/JavaScript) , and [AJAX](http://en.wikipedia.org/wiki/Ajax_%28programming%29). Account passwords are encrypted, using the [PasswordHash](https://github.com/defuse/password-hashing) class for PHP developed by [Taylor Hornby](https://github.com/defuse). BitTorrent processing and support is provided by the [PHP_BitTorrent](https://github.com/christeredvartsen/php-bittorrent) library (in PHAR format) developed by [Christer Edvartsen](https://github.com/christeredvartsen). The entire color scheme and theme for TorrDex is completely dynamic and achieved using [CSS](http://en.wikipedia.org/wiki/Cascading_Style_Sheets) and [Web Fonts](http://www.cssfontstack.com/Web-Fonts) (which MAY allow for additional theming support in the future!).
+TorrDex is built using [HTML5](http://en.wikipedia.org/wiki/HTML5), [PHP5](http://php.net/), [MySQL](http://www.mysql.com/), [JavaScript](http://en.wikipedia.org/wiki/JavaScript) , and [AJAX](http://en.wikipedia.org/wiki/Ajax_%28programming%29). Account passwords are encrypted, using the [PasswordHash](https://github.com/defuse/password-hashing) class for PHP developed by [Taylor Hornby](https://github.com/defuse). BitTorrent processing and support is provided by the [PHP_BitTorrent](https://github.com/christeredvartsen/php-bittorrent) library (in PHAR format) developed by [Christer Edvartsen](https://github.com/christeredvartsen). The entire color scheme and theme for TorrDex is completely dynamic and achieved using [CSS](http://en.wikipedia.org/wiki/Cascading_Style_Sheets) and [Web Fonts](http://www.cssfontstack.com/Web-Fonts) (which MAY allow for additional theming support in the future!). TorrDex also makes use of the [Parsedown](https://github.com/erusev/parsedown) library for PHP developed by [Emanuil Rusev](https://github.com/erusev) to implement [MarkDown](http://en.wikipedia.org/wiki/Markdown) support for Torrent Descriptions.
 
 ## Feature List
 
@@ -21,7 +21,7 @@ Below is a list of completely finished features incorporated into TorrDex. For i
 - Searchable database of Torrents with sortable Table columns
 - Ability to Upload Torrents to database
 - Administration panel with the ability to make changes and remove users, as well as enable/disable global options that change functionality of the site
-- Customizable Torrent Description templates for new uploads to ease in the writing of Torrent Descriptions
+- Customizable Torrent Description templates for new uploads to ease in the writing of Torrent Descriptions (now with MarkDown support!)
 
 ## To-Do List
 
