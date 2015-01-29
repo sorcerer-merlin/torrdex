@@ -132,7 +132,7 @@
         <tr>
         	<td class="rowcap" width="168px">Remove:</td>
             <td class="rowdata">
-				<form method="post" action="remove">
+				<form method="post" action="remove" onsubmit="return confirm('Are you sure you want to permanently REMOVE this torrent?');">
                 	<input type="hidden" name="torrent-hash" value="<?php print $TorrentHash; ?>" />
 					<input type="submit" value="Remove" id="submit">&nbsp;&nbsp;&nbsp;(Note: This will <b><u>ONLY</b></u> remove the torrent from our databases!)
                 </form>
