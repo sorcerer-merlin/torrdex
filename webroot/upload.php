@@ -67,9 +67,37 @@ _END;
 		$TorrentComment = $torrent->getComment();
 		$TorrentTotalSize = $torrent->getSize();
 		$TorrentAuthor = $_SESSION['user'];
+
+		// Grab the trackers list (or single tracker if not multiple listed in torrent) and URL encode for use in MAGNET link
+		if ($torrent->getAnnounceList() == "") {
+			$TorrentTrackers =  $torrent->getAnnounce();
+			$TorrentTrackerList = "&tr=" . rawurlencode($TorrentTrackers);
+		} else {
+			$TorrentTrackers = $torrent->getAnnounceList();
+			$TorrentTrackerList = "";
+			foreach ($TorrentTrackers as $Tracker) {
+				//$TorrentTrackerList .= "- " . $Tracker[0] . "<br>";
+				$TorrentTrackerList .= "&tr=" . rawurlencode($Tracker[0]);
+			}
+		}
+
+		// Comment shouldn't be NULL
+		if ($TorrentComment == "") $TorrentComment = "No Comment";
 		
-		// TODO: Find a better way to grab the magnet link, everyone may not have access to transmission CLI on their server box
-		$TorrentMagnet = `transmission-show -m "/var/www/html/tordex/$target_file"`;
+		// Manually create the magnet link using the info provided by the torrent
+		/* Magnet URI: magnet:?xt=urn:sbtih:YNCKHTQCWBTRNJIV4WNAE52SJUQCZO5C (valid)
+
+		  Display Name .... (dn): 
+		  eXact Length .... (xl): 
+		  eXact Topic ..... (xt): urn:btih:YNCKHTQCWBTRNJIV4WNAE52SJUQCZO5C
+		  Acceptable Source (as): 
+		  eXact Source .... (xs): 
+		  Keyword Topic ... (kt): 
+		  Manifest Topic .. (mt): 
+		  address TRacker . (tr): */
+		//$TorrentMagnetOld = `transmission-show -m "/var/www/html/torrdex/$target_file"`;
+		$TorrentMagnet = "magnet:?xt=urn:btih:" . $TorrentHash . "&dn=" . rawurlencode($TorrentName) . $TorrentTrackerList;
+
 
 		// Parse the torrent description so we can save new lines and also convert all special chars to
 		// HTML entities
@@ -87,12 +115,17 @@ _END;
 		}
 		$TorrentFileList = EscapeQuotes($TorrentFileList);
 		
-		/* DEBUG: print out all of the torrent information before we drop it into the DB
+		/*DEBUG: print out all of the torrent information before we drop it into the DB
 		echo "<div align='left'>";
 		echo "Name:     " . $TorrentName . "<br>";
 		echo "Hash:     " . $TorrentHash . "<br>";
 		echo "Type:     " . $TorrentType . "<br>";
 		echo "Created:  " . $TorrentUploaded . "<br>";
+		echo "Trackers:<Br>";
+		echo "<blockquote>";
+		//print_r($TorrentTrackers);
+		echo $TorrentTrackerList;
+		echo "</blockquote>";
 		echo "Files:    <br>";
 		echo "<blockquote><pre>";
 		//print_r($TorrentFiles);
@@ -103,7 +136,8 @@ _END;
 		echo "<blockquote>";
 		echo $TorrentDesc;
 		echo "</blockquote><br>";
-		echo "Magnet:   " . $TorrentMagnet . "<br>";
+		echo "Magnet:   <br>";
+		echo $TorrentMagnet . "<br>";
 		echo "</div>";*/
 		
 		// Delete the torrent file, as we don't really want to keep it
