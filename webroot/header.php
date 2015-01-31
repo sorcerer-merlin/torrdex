@@ -80,7 +80,14 @@
 		
 		// Finally output the constructed member menu
 
-		echo "<li><a href='logout'>Logout</a></li><li><a href='profile'>Profile</a></li>" . $admin_link . "<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li><li><a href='/'>Home</a></li><li><a href='search'>Search</a></li>" . $upload_link;
+		echo "<li><a href='logout'>Logout</a></li>";
+    echo "<li><a href='profile'>Profile</a></li>";
+    echo $admin_link;
+    echo "<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>";
+    echo "<li><a href='/'>Recent</a></li>";
+    echo "<li><a href='listby?mode=browse'>Browse</a></li>";
+    echo "<li><a href='search'>Search</a></li>";
+    echo $upload_link;
   }
   else
   {

@@ -79,7 +79,7 @@
 		<td class="rowdata">
 			<?php 
 				if ($TotalTorrents != 0)
-					print $TotalTorrents . " torrents (" . $TotalHumanSize . " in " . $TotalFileCount . " files)";
+					print "<a href='listby?mode=author&param=" . $Author . "'>" . $TotalTorrents . " torrents (" . $TotalHumanSize . " in " . $TotalFileCount . " files)</a>";
 				else
 					print "0 torrents";
 			?> 

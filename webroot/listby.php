@@ -1,39 +1,43 @@
 <?php
-	$pageTitle = "Search";
+	$pageTitle = "List By";
 	require_once 'header.php';
+	$ListHeading = "";
     
 	// SECURITY: If we are not logged in, you shouldn't be uploading
 	if ($loggedin == FALSE) echo '<script type="text/javascript">window.location = "login?page=search"</script>';
 	
 	// check for keywords or display form
-	if (!isset($_GET['keywords'])) {
-?>
-<!-- the search form -->
-        <form method='get' action='search'>
-        <!--<input type='text' maxlength='50' size='60' name='keywords' placeholder="Torrent Keywords..." autofocus="autofocus" required="required">-->
-        <input type='search' results='5' autosave='tordex_search_autosave' maxlength='50' size='60' name='keywords' placeholder="Torrent Keywords..." autofocus="autofocus" required="required"><br>
-        <input type="radio" id="type_all" name="type" value="all" checked><label for="type_all"><span><span></span></span>All</label>&nbsp;&nbsp;
-        <input type="radio" id="type_app" name="type" value="app"><label for="type_app"><span><span></span></span>App</label>&nbsp;&nbsp;
-        <input type="radio" id="type_game" name="type" value="game"><label for="type_game"><span><span></span></span>Game</label>&nbsp;&nbsp;
-        <input type="radio" id="type_movie" name="type" value="movie"><label for="type_movie"><span><span></span></span>Movie</label>&nbsp;&nbsp;
-        <input type="radio" id="type_tv" name="type" value="tv"><label for="type_tv"><span><span></span></span>TV</label>&nbsp;&nbsp;
-        <input type="radio" id="type_music" name="type" value="music"><label for="type_music"><span><span></span></span>Music</label>&nbsp;&nbsp;
-        <input type="radio" id="type_other" name="type" value="other"><label for="type_other"><span><span></span></span>Other</label>
-        <br><br><input type='submit' value='Search...' id='submit'>
-        </form>
-<!-- end search form -->
-<?php		
+	if (!isset($_GET['mode']) && !isset($_GET['param'])) {
+		showError("No terms were passed to list Torrents by.");
 	} else {
-	
-	// Do the search from the database
-	$result = queryMySQL("SELECT * FROM torrents WHERE  name LIKE '%" . $_GET['keywords'] . "%' ORDER BY uploaded DESC;");
+		$Mode = $_GET['mode'];
 		
-	// Check to make sure we have it in the database before continuing
-	if ($result->num_rows == 0) {
-		showError("Your search terms did not yield any results! <a href='search'>Try again</a>?");
-	} else {
+		// We want to show all torrents by an author, using the exact name supplied
+		if ($Mode == "author") {
+			$Author = $_GET['param'];
+			$result = queryMySQL("SELECT * FROM torrents WHERE author = '$Author';");
+			$ListHeading = "Listing Torrents Uploaded by " . getDisplayName($Author);
+		}
+
+		// We want to show all torrents by the type specified
+		if ($Mode == "type") {
+			$Type = $_GET['param'];
+			$result = queryMySQL("SELECT * FROM torrents WHERE type = '$Type';");
+			$ListHeading = "Listing Torrents by Type (" . $TorrentTypes[$Type] . ")";
+		}
+
+		// We want to browse torrents
+		if ($Mode == "browse") {
+			$result = queryMySQL("SELECT * FROM torrents ORDER BY uploaded DESC;");
+			$ListHeading = "Browse All Torrents";
+		}
+			
+		// Check to make sure we have it in the database before continuing
+		if ($result->num_rows == 0) {
+			showError("Your search terms did not yield any results!");
+		} else {
 ?>
-        <h3>Search Results</h3>
+        <h3><?php print $ListHeading; ?></h3>
         <table width="90%" class="sortable">
         <tr>
         	<td class="rowcap">Type:</td>
