@@ -183,9 +183,9 @@
 		}
 	}
 	
-	// Time and date stuff
-    // Set timezone
-	date_default_timezone_set("UTC");
+  // Time and date stuff
+  // Set timezone
+  date_default_timezone_set("UTC");
 	 
   // Time format is UNIX timestamp or
   // PHP strtotime compatible strings
