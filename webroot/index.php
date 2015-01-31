@@ -5,17 +5,17 @@
 	
 	if ($loggedin) {
 		$fullname = $_SESSION['fullname'];
-		echo "<h3>Welcome back, $fullname!</h3><br>Thanks for coming back to see us, we appreciate your support! Check out our torrents below.<br><br><br><br>";
+		echo "<h3>Welcome back, $fullname!</h3><br>Thanks for coming back to see us, we appreciate your support! Check out our most recent torrents below.<br><br><br><br>";
 		
-	// pull the stuff from the DB
-	$result = queryMySQL("SELECT * FROM torrents ORDER BY uploaded DESC;") or die('<h3>Ooops!!!</h3><br><b><u>Error:</b></u> <i>Info-Hash not in database!<i>');
+	// List the torrents in Order by newest to Oldest, limit to the 5 most recent
+	$result = queryMySQL("SELECT * FROM torrents ORDER BY uploaded DESC LIMIT 5;");
 		
 	// Check to make sure we have it in the database before continuing
 	if ($result->num_rows == 0) {
 		showError("Your database is EMPTY. Please contact your administrator.");
 	} else {
 ?>
-		<h3>Torrents</h3>
+		<h3>Five Most Recent Torrents</h3>
         <table width="90%" class="sortable">
         <tr>
         	<td class="rowcap">Type:</td>
@@ -37,19 +37,21 @@
 		$TorrentAuthor = getDisplayName($row->author);
 		$TorrentSize = $row->size;
 		$TorrentFileCount = $row->filecount;
-		$TorrentAge = dateDiff(time(), intval($row->uploaded), 1) 
+		$TorrentAge = dateDiff(time(), intval($row->uploaded), 1);
+
+
 ?>
 
         <tr>
         	<td class="rowdata">
-				<table align="right">
+				<table align="left">
 					<tr>
 					<td>
 						<img src="img/type_icons/<?php print $TorrentType; ?>.png" ALT="<?php print $TorrentType; ?>" width="16px" height="16px">
 					</td>
 					<td>&nbsp;</td>
 					<td>
-						<?php print $TorrentType; ?>
+						<a href="listby?mode=type&param=<?php print $row->type; ?>"><?php print $TorrentType; ?></a>
 					</td>
 					</tr>
 				</table>        		
@@ -83,6 +85,7 @@
 	}
 ?>
 </table>
+<br><br>
 <?php
 	}
 ?>        
