@@ -59,7 +59,7 @@ _END;
 		
 		// Get the info we need from the Torrent that we just uploaded
 		$torrent = PHP\BitTorrent\Torrent::createFromTorrentFile($target_file);
-		$TorrentName = $torrent->getName();
+		$TorrentName = EscapeQuotes($torrent->getName());
 		$TorrentType = $_POST["torrent-type"];
 		$TorrentHash = $torrent->getHash();
 		$TorrentUploaded = $torrent->getCreatedAt(); //date("Y-m-d @ h:ia", $torrent->getCreatedAt());
@@ -109,9 +109,14 @@ _END;
 		// Parse the Files list into something we can put into our DB
 		$TorrentFileList = "";
 		$TorrentFileCount = 0;
-		foreach ($TorrentFiles as $File) {
-			$TorrentFileList = $TorrentFileList . "- " . $File['path'][0] . " (" . humanFileSize($File['length']) . ")<br>";
-			$TorrentFileCount = $TorrentFileCount + 1;
+		if (is_array($TorrentFiles)) {
+			foreach ($TorrentFiles as $File) {
+				$TorrentFileList = $TorrentFileList . "- " . $File['path'][0] . " (" . humanFileSize($File['length']) . ")<br>";
+				$TorrentFileCount = $TorrentFileCount + 1;
+			}
+		} else {
+			$TorrentFileList = "- " . $TorrentFiles . " (" . humanFileSize($TorrentTotalSize) . ")<br>";
+			$TorrentFileCount = 1;
 		}
 		$TorrentFileList = EscapeQuotes($TorrentFileList);
 		
