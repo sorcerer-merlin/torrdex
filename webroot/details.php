@@ -8,10 +8,10 @@
     
 	if ($loggedin) {
 		
-		/* First let's get the torrent's info-hash from the GET protocol */
+		// First let's get the torrent's info-hash from the GET protocol
 		$TorrentHash = $_GET['hash'];
 
-		/* Now it is time to make the database connection and find all of our information */
+		// Now it is time to make the database connection and find all of our information
 		$result = queryMySQL("select * from torrents where hash ='". $TorrentHash ."'");
 	
 		$row = $result->fetch_object();

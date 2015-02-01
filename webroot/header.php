@@ -1,8 +1,7 @@
 <?php 
   // Start the cookie session for the login variables
   session_start();
-?>  
-
+?>   
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

@@ -207,7 +207,7 @@ input[type="text"] {
   color: #a200ff;
   display: block;
   margin: 0;
-  width: 100%;
+  /*width: 100%;*/
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
   font-weight: bold;
@@ -494,7 +494,7 @@ a:hover {
 /* Sortable tables */
 table.sortable thead {
     cursor: pointer;
-}
+}   
 
 /* style for torrent table */
 .rowcap { border:1px solid #54ff00;
