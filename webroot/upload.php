@@ -12,6 +12,15 @@
 	// Add our script
     echo <<<_END
   <script type="text/javascript">
+    function toggleNameBox()
+    {
+        e = O("torrent-name")
+        from_torrent = e.options[e.selectedIndex].value
+        if (from_torrent == 'true')
+            O("namebox").innerHTML = "&nbsp;"
+        else
+            O("namebox").innerHTML = "<input type='text' maxlength='72' required='required' id='custom' name='custom' placeholder='Custom Name' width='200px'>";
+    }
     function loadTemplate()
     {
       // get type of torrent we are trying to upload from option box 
@@ -59,7 +68,18 @@ _END;
 		
 		// Get the info we need from the Torrent that we just uploaded
 		$torrent = PHP\BitTorrent\Torrent::createFromTorrentFile($target_file);
-		$TorrentName = EscapeQuotes($torrent->getName());
+
+        // Let's see if they passed a custom name, of if we are pulling it from the torrent's info
+        // block (using double-nested if block to stop errors/warnings for undefined variable!)
+        $TorrentName = "";
+        if (isset($_POST['custom']))
+            if ($_POST['custom'] != "")
+                $TorrentName = EscapeQuotes($_POST['custom']);
+
+        // Check to see if we set the variable above, if not let's set it to the torrent's info name now
+        if ($TorrentName == "") $TorrentName = EscapeQuotes($torrent->getName());
+
+        // Get the rest of the Torrent info
 		$TorrentType = $_POST["torrent-type"];
 		$TorrentHash = $torrent->getHash();
 		$TorrentUploaded = $torrent->getCreatedAt(); //date("Y-m-d @ h:ia", $torrent->getCreatedAt());
@@ -175,6 +195,23 @@ _END;
     <tr>
         <td class="rowcap" width="168px">Torrent:</td>
         <td class="rowdata"><input type="file" name="fileToUpload" id="fileToUpload" required="required"></td>
+    </tr>
+    <tr>
+        <td class="rowcap">Name:</td>
+        <td class="rowdata">
+        <table>
+        <tr>
+            <td>
+                <select class="select-style" name="torrent-name" id="torrent-name" width="100px" onchange="toggleNameBox()">
+                    <option value='true' selected='selected'>From Torrent</option>
+                    <option value='false'>Custom</option>
+                </select>
+            </td>
+            <td>&nbsp;</td>
+            <td><span id="namebox"></span></td>
+        </tr>
+        </table>
+        </td>
     </tr>
     <tr>
         <td class="rowcap" width="168px">Type:</td>
