@@ -11,24 +11,34 @@
 		showError("No terms were passed to list Torrents by.");
 	} else {
 		$Mode = $_GET['mode'];
+
+        // Pagination. Check to see if they specified a start page number, or not. Fix it.
+        $LimitPerPage = TORRENTS_PER_PAGE;
+        if (!isset($_GET['offset']) or !is_numeric($_GET['offset'])) {
+          //we give the value of the starting row to 0 because nothing was found in URL
+          $offset = 0;
+        //otherwise we take the value from the URL
+        } else {
+          $offset = (int)$_GET['offset'];
+        }
 		
 		// We want to show all torrents by an author, using the exact name supplied
 		if ($Mode == "author") {
 			$Author = $_GET['param'];
-			$result = queryMySQL("SELECT * FROM torrents WHERE author = '$Author';");
+			$result = queryMySQL("SELECT * FROM torrents WHERE author = '$Author' ORDER BY uploaded DESC LIMIT " . $offset . "," . $LimitPerPage . ";");
 			$ListHeading = "Listing Torrents Uploaded by " . getDisplayName($Author);
 		}
 
 		// We want to show all torrents by the type specified
 		if ($Mode == "type") {
 			$Type = $_GET['param'];
-			$result = queryMySQL("SELECT * FROM torrents WHERE type = '$Type';");
+			$result = queryMySQL("SELECT * FROM torrents WHERE type = '$Type' ORDER BY uploaded DESC LIMIT " . $offset . "," . $LimitPerPage . ";");
 			$ListHeading = "Listing Torrents by Type (" . $TorrentTypes[$Type] . ")";
 		}
 
 		// We want to browse torrents
 		if ($Mode == "browse") {
-			$result = queryMySQL("SELECT * FROM torrents ORDER BY uploaded DESC;");
+			$result = queryMySQL("SELECT * FROM torrents ORDER BY uploaded DESC LIMIT " . $offset . "," . $LimitPerPage . ";");
 			$ListHeading = "Browse All Torrents";
 		}
 			
@@ -108,6 +118,13 @@
 	
 ?>               
         </table>
+        <br>
+<?php
+    $NextLink = '<a href="'. $_SERVER['PHP_SELF'] .'?mode=' . $Mode .'&param=' . $_GET['param'] .'&offset='.($offset+$LimitPerPage).'">Next &gt;&gt;</a>';
+    $PrevLink = '<a href="'. $_SERVER['PHP_SELF'] .'?mode=' . $Mode .'&param=' . $_GET['param'] .'&offset='.($offset-$LimitPerPage).'">&lt;&lt; Prev</a>';
+    if ($offset > 0) echo $PrevLink . "&nbsp;&nbsp;&nbsp;&nbsp;";
+    if (($offset+$LimitPerPage) < countTorrents($Mode, $_GET['param'])) echo $NextLink;
+?>
         <br><br>
 
 <?php

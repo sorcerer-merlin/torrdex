@@ -17,6 +17,7 @@
   $AccountTypes[ACCT_TYPE_ADMIN] = "Administrator";
 
   /* Define Torrent Type Constants */
+  define("TORR_TYPE_ALL", -1);
   define("TORR_TYPE_APP", 0);
   define("TORR_TYPE_GAME", 1);
   define("TORR_TYPE_MOVIE", 2);
@@ -30,6 +31,9 @@
   $TorrentTypes[TORR_TYPE_MUSIC] = "Music";
   $TorrentTypes[TORR_TYPE_OTHER] = "Other";
   define("DEFAULT_TORR_TYPE", TORR_TYPE_OTHER);
+
+  /* Define Pagination Constants */
+  define("TORRENTS_PER_PAGE", 3);
 
   /* Begin Functions code block */
   // Run MySQL query and return the result object
@@ -56,6 +60,28 @@
 	$result = queryMySQL("SELECT * FROM torrents WHERE hash='$var';");
 	if ($result->num_rows != 0) $TorrentExists = TRUE;
 	return($TorrentExists);
+  }
+
+  function countTorrentsSearch($type, $keywords)
+  {
+        if ($type == -1)
+            $result = queryMySQL("SELECT * FROM torrents WHERE  name LIKE '%" . $keywords . "%' ORDER BY uploaded DESC;");
+        else
+            $result = queryMySQL("SELECT * FROM torrents WHERE  name LIKE '%" . $keywords . "%' AND type='" . $type . "' ORDER BY uploaded DESC;");
+
+        return($result->num_rows);
+  }
+
+  function countTorrents($mode,$param)
+  {
+        if ($mode == "browse")
+            $result = queryMySQL("SELECT * FROM torrents;");
+        elseif ($mode == "author")
+            $result = queryMySQL("SELECT * FROM torrents WHERE author='" . $param . "';");
+        elseif ($mode == "type")
+            $result = queryMySQL("SELECT * FROM torrents WHERE type='" . $param . "';");
+            
+        return($result->num_rows);
   }
 
   // Destroy cookie session
