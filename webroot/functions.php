@@ -53,11 +53,11 @@
   }
 
   // Torrent in Database BOOL by 
-  function isTorrentinDatabase($var)
+  function isTorrentinDatabase($hash)
   {
 
   	$TorrentExists = FALSE;
-	$result = queryMySQL("SELECT * FROM torrents WHERE hash='$var';");
+	$result = queryMySQL("SELECT * FROM torrents WHERE hash='$hash';");
 	if ($result->num_rows != 0) $TorrentExists = TRUE;
 	return($TorrentExists);
   }
