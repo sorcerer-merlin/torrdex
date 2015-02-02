@@ -83,7 +83,7 @@
     echo "<li><a href='profile'>Profile</a></li>";
     echo $admin_link;
     echo "<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>";
-    echo "<li><a href='/'>Recent</a></li>";
+    echo "<li><a href='/'>Home</a></li>";
     echo "<li><a href='listby?mode=browse&param=none'>Browse</a></li>";
     echo "<li><a href='search'>Search</a></li>";
     echo $upload_link;
