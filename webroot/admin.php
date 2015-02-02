@@ -116,11 +116,11 @@ _END;
     <td class="rowcap" style="text-align:center;">Setting:</td>
 </tr>
 <?php 
-	$result = queryMySQL("select * from options");
+	$result = queryMySQL("SELECT * FROM options ORDER BY description;");
 	if ($result->num_rows != 0) {
 		while($row = $result->fetch_object()) { 
 			$opn_name = $row->name;
-			$opn_desc = $row->desc;
+			$opn_desc = $row->description;
 			$opn_value = $row->value;
 ?>
 <tr>
