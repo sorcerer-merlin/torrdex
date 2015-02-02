@@ -36,14 +36,19 @@
       $offset = (int)$_GET['offset'];
     }
 
+    if ($configOptions['enable_pagination'] == "true")
+        $Paging = " LIMIT " . $offset . "," . $LimitPerPage;
+    else
+        $Paging = "";
+
 	// Do the search from the database
     // UPDATE: We added type searches now, so check the type being submitted and then go from there
     $SearchHeading = "";
     if ($_GET['type'] == -1) {
-        $result = queryMySQL("SELECT * FROM torrents WHERE  name LIKE '%" . $_GET['keywords'] . "%' ORDER BY uploaded DESC LIMIT " . $offset . "," . $LimitPerPage . ";");
+        $result = queryMySQL("SELECT * FROM torrents WHERE  name LIKE '%" . $_GET['keywords'] . "%' ORDER BY uploaded DESC" . $Paging . ";");
         $SearchHeading = "Search Results";
     } else {
-        $result = queryMySQL("SELECT * FROM torrents WHERE  name LIKE '%" . $_GET['keywords'] . "%' AND type='" . $_GET['type'] . "' ORDER BY uploaded DESC LIMIT " . $offset . "," . $LimitPerPage . ";");
+        $result = queryMySQL("SELECT * FROM torrents WHERE  name LIKE '%" . $_GET['keywords'] . "%' AND type='" . $_GET['type'] . "' ORDER BY uploaded DESC" . $Paging . ";");
         $SearchHeading = "Search Results in " . $TorrentTypes[$_GET['type']];
     }
 		
@@ -124,10 +129,12 @@
         </table>
         <br>
 <?php
+if ($configOptions['enable_pagination'] == "true") {
     $NextLink = '<a href="'. $_SERVER['PHP_SELF'] .'?keywords=' . $_GET['keywords'] .'&type=' . $_GET['type'] .'&offset='.($offset+$LimitPerPage).'">Next &gt;&gt;</a>';
     $PrevLink = '<a href="'. $_SERVER['PHP_SELF'] .'?keywords=' . $_GET['keywords'] .'&type=' . $_GET['type'] .'&offset='.($offset-$LimitPerPage).'">&lt;&lt; Prev</a>';
     if ($offset > 0) echo $PrevLink . "&nbsp;&nbsp;&nbsp;&nbsp;";
     if (($offset+$LimitPerPage) < countTorrentsSearch($_GET['type'], $_GET['keywords'])) echo $NextLink;
+}
 ?>
         <br><br>
 
