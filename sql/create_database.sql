@@ -25,21 +25,21 @@ CREATE TABLE IF NOT EXISTS `members` (
 CREATE TABLE IF NOT EXISTS `options` (
   `name` varchar(50) NOT NULL,
   `value` varchar(50) NOT NULL,
-  `desc` varchar(200) NOT NULL
+  `description` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table torrdex.options: ~7 rows (approximately)
+-- Dumping data for table torrdex.options: ~8 rows (approximately)
 /*!40000 ALTER TABLE `options` DISABLE KEYS */;
-INSERT INTO `options` (`name`, `value`, `desc`) VALUES
-	('allow_signup', 'true', 'Allow New Sign-Up\'s'),
+INSERT INTO `options` (`name`, `value`, `description`) VALUES
+	('allow_signup', 'false', 'Allow New Sign-Up\'s'),
 	('only_seeder_uploads', 'true', 'Only Seeder Accounts Can Upload Torrents'),
 	('show_authors', 'true', 'Show Authors in Torrent Details'),
 	('hide_torrent_files', 'false', 'Hide Links to Torrent Files'),
 	('admin_only_removes', 'false', 'Only Admin Accounts Can Remove Torrents'),
 	('show_disclaimer', 'true', 'Show Disclaimer'),
-	('show_copyright', 'true', 'Show Copyright');
+	('show_copyright', 'true', 'Show Copyright'),
+	('enable_pagination', 'true', 'Page Results from Torrents');
 /*!40000 ALTER TABLE `options` ENABLE KEYS */;
-
 
 -- Dumping structure for table torrdex.torrents
 CREATE TABLE IF NOT EXISTS `torrents` (
