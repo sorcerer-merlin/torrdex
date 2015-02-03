@@ -62,6 +62,18 @@
 	return($TorrentExists);
   }
 
+  // Get the name of the Torrent Author
+  function getTorrentAuthor($hash)
+  {
+    $TorrentExists = FALSE;
+    $result = queryMySQL("SELECT * FROM torrents WHERE hash='$hash';");
+    if ($result->num_rows == 0) 
+        return(NULL);
+    else
+        $row = $result->fetch_object();
+    return($row->author);
+  }
+
   function countTorrentsSearch($type, $keywords)
   {
         if ($type == -1)

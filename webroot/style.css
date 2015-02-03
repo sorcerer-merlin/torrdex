@@ -375,7 +375,7 @@ pre {
     text-shadow:3px 3px 4px #444;  
 }
 
-#submit {
+#submit, #toggle, #save {
     border: 1px solid #54ff00;
     color: #54ff00;
     background: #a200ff;
@@ -386,7 +386,7 @@ pre {
     font-size: 18px;
     text-shadow:3px 3px 4px #444;
 }
-#submit:hover {
+#submit:hover, #toggle:hover, #save:hover {
     border: 1px solid #a200ff;
     color: #a200ff;
     background: #54ff00;
