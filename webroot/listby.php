@@ -4,7 +4,7 @@
 	$ListHeading = "";
     
 	// SECURITY: If we are not logged in, you shouldn't be uploading
-	if ($loggedin == FALSE) echo '<script type="text/javascript">window.location = "login?page=search"</script>';
+	if ($loggedin == FALSE) echo '<script type="text/javascript">window.location = "/"</script>';
 	
 	// check for keywords or display form
 	if (!isset($_GET['mode']) && !isset($_GET['param'])) {
@@ -13,7 +13,7 @@
 		$Mode = $_GET['mode'];
 
         // Pagination. Check to see if they specified a start page number, or not. Fix it.
-        $LimitPerPage = TORRENTS_PER_PAGE;
+        $LimitPerPage = $configOptions_Integers['torr_per_page'];
         if (!isset($_GET['offset']) or !is_numeric($_GET['offset'])) {
           //we give the value of the starting row to 0 because nothing was found in URL
           $offset = 0;
@@ -39,7 +39,7 @@
 		}
 
         // Use pagination or not
-        if ($configOptions['enable_pagination'] == "true")
+        if ($configOptions_Booleans['enable_pagination'] == "true")
             $Paging = " LIMIT " . $offset . "," . $LimitPerPage;
         else
             $Paging = "";
@@ -125,7 +125,7 @@
         </table>
         <br>
 <?php
-if ($configOptions['enable_pagination'] == "true") {
+if ($configOptions_Booleans['enable_pagination'] == "true") {
     $NextLink = '<a href="'. $_SERVER['PHP_SELF'] .'?mode=' . $Mode .'&param=' . $_GET['param'] .'&offset='.($offset+$LimitPerPage).'">Next &gt;&gt;</a>';
     $PrevLink = '<a href="'. $_SERVER['PHP_SELF'] .'?mode=' . $Mode .'&param=' . $_GET['param'] .'&offset='.($offset-$LimitPerPage).'">&lt;&lt; Prev</a>';
     if ($offset > 0) echo $PrevLink . "&nbsp;&nbsp;&nbsp;&nbsp;";

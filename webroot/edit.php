@@ -10,7 +10,7 @@
     // Check to see if user is logged in
     if ($loggedin == FALSE) echo '<script type="text/javascript">window.location = "/"</script>';
 
-    //if (($row->author == $_SESSION['user'] && $configOptions['admin_only_removes'] == "false") || $_SESSION['acct_type'] == ACCT_TYPE_ADMIN) {
+    //if (($row->author == $_SESSION['user'] && $configOptions_Booleans['admin_only_removes'] == "false") || $_SESSION['acct_type'] == ACCT_TYPE_ADMIN) {
 
     if (isset($_POST['info_hash']) && isset($_POST['new_name']) && isset($_POST['torrent-type']) && isset($_POST['new_desc'])) {
         // Get the values
@@ -20,7 +20,7 @@
         $TorrentDesc = htmlentities($_POST['new_desc'], ENT_QUOTES, 'UTF-8');
         $TorrentAuthor = getTorrentAuthor();
 
-        if (($TorrentAuthor != NULL) && ($TorrentAuthor == $_SESSION['user']) && ($configOptions['admin_only_removes'] == "false") || $_SESSION['acct_type'] == ACCT_TYPE_ADMIN) {
+        if (($TorrentAuthor != NULL) && ($TorrentAuthor == $_SESSION['user']) && ($configOptions_Booleans['admin_only_removes'] == "false") || $_SESSION['acct_type'] == ACCT_TYPE_ADMIN) {
             /* DEBUG
             echo $TorrentHash . "<br>";
             echo $TorrentName . "<br>";

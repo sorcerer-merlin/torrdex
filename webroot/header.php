@@ -1,11 +1,12 @@
 <?php 
   // Start the cookie session for the login variables
   session_start();
+  require_once 'functions.php';
 ?>   
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>TorrDex - <?php print $pageTitle; ?></title>
+<title><?php print $configOptions_Strings['site_title'] . " - ". $pageTitle; ?></title>
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Aclonica" />
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Unlock" />
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Snippet" />
@@ -24,7 +25,7 @@
 </head>
   
 <?php
-  require_once 'functions.php';
+  
 
 
   if (isset($_SESSION['user']))
@@ -47,7 +48,7 @@
 <body color="#00aeff">
 <table align="center" class="mytable"  width="1240px" border="1">
   <caption >
-    . : = | Sorcerer Merlin's TORRent inDEXer | = : .
+    <?php print $configOptions_Strings['table_caption']; ?>
   </caption>
   <thead><tr class="mytable">
     <th scope="col">Navigation</th>
@@ -69,7 +70,7 @@
   {
 	  	// Check to see if we are only allowing premium (and admin) accounts to upload and then
 		  // enable/disable link appropriately
-	  	if ($configOptions['only_seeder_uploads'] == "true") {
+	  	if ($configOptions_Booleans['only_seeder_uploads'] == "true") {
 	  		if ($_SESSION['acct_type'] == ACCT_TYPE_LEECHER) $upload_link = "";
   		}
 
@@ -92,7 +93,7 @@
   {
 		// Check to see if we are allowing sign ups at this time, enable/disable menu item as
 		// appropriate.	  
-	  	if ($configOptions['allow_signup'] == "false") $signup_link = "";
+	  	if ($configOptions_Booleans['allow_signup'] == "false") $signup_link = "";
 	  
 		// Finally output the constructed public menu
     echo "<li><a href='login'>Login</a></li>";

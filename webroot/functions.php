@@ -1,12 +1,22 @@
 <?php
   
+  // Get the MySQL configuration
   require_once('mysql.php');
 
-  $configOptions = [];
+  // Set the time zone
+  date_default_timezone_set("UTC");
 
-  /* Connect to the MySQL database, using the config provided above, or error out */
+  // Connect to the MySQL database, using the config provided above, or error out
   $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
   if ($connection->connect_error) die($connection->connect_error);
+
+  // Initialize the variables we use to hold the options stored in the MySQL DB
+  $configOptions_Booleans = [];
+  $configOptions_Integers = [];
+  $configOptions_Strings = [];
+
+  // Load the actual options
+  loadOptionsfromMySQL();
 
   /* Define Account Type Constants */
   define("ACCT_TYPE_LEECHER", 0);
@@ -31,9 +41,6 @@
   $TorrentTypes[TORR_TYPE_MUSIC] = "Music";
   $TorrentTypes[TORR_TYPE_OTHER] = "Other";
   define("DEFAULT_TORR_TYPE", TORR_TYPE_OTHER);
-
-  /* Define Pagination Constants */
-  define("TORRENTS_PER_PAGE", 3);
 
   /* Begin Functions code block */
   // Run MySQL query and return the result object
@@ -116,8 +123,8 @@
   // Get the status of a certified member by name
   function isCertified($var)
   {
-	global $configOptions;
-	if ($configOptions['show_authors'] == "false") return "";
+	global $configOptions_Booleans;
+	if ($configOptions_Booleans['show_authors'] == "false") return "";
 	
 	$queryString = "SELECT user FROM certified WHERE user='$var';";
 	$result = queryMysql($queryString);
@@ -132,8 +139,8 @@
   // Get the status of a ceritifed member in a bool result
   function isCertified_BOOL($var)
   {
-	global $configOptions;
-	if ($configOptions['show_authors'] == "false") return "";
+	global $configOptions_Booleans;
+	if ($configOptions_Booleans['show_authors'] == "false") return "";
 	
 	$queryString = "SELECT user FROM certified WHERE user='$var';";
 	$result = queryMysql($queryString);
@@ -164,8 +171,8 @@
   // Get the display name from the user 
   function getDisplayName($var)
   {
-	global $configOptions;
-	if ($configOptions['show_authors'] == "false") return "Anonymous";
+	global $configOptions_Booleans;
+	if ($configOptions_Booleans['show_authors'] == "false") return "Anonymous";
 	  
 	$queryString = "SELECT fullname FROM members WHERE user='$var';";
 	$result = queryMysql($queryString);
@@ -209,86 +216,108 @@
     }
     return $fileSize;
 }
-  /* End Functions code block*/
-  
-  /* Pull the configuration options from the Database  */
+
+// Does exactly what it says it does -- loads the options from our MySQL DB
+function loadOptionsfromMySQL() 
+{
+    // Pull the arrays for the options so we can write to them and not variables inside this function... duh!
+    global $configOptions_Booleans;
+    global $configOptions_Integers;
+    global $configOptions_Strings;
+
+    // Grab all of the available options from the DB and drop them into the proper arrays based on type
 	$result = queryMySQL("select * from options");
 	if ($result->num_rows != 0) {
 		while($row = $result->fetch_object()) { 
+            // Get the option's info
 			$opn_name = $row->name;
 			$opn_value = $row->value;
-			$configOptions["$opn_name"] = $opn_value;	
+            $opn_type = $row->type;
+
+            // Add it to the appropriate array based on type of variable
+            switch ($opn_type) {
+                case "bool":
+                    $configOptions_Booleans["$opn_name"] = $opn_value;  
+                    break;
+                case "int":
+                    $configOptions_Integers["$opn_name"] = $opn_value;
+                    break;
+                case "string":
+                    $configOptions_Strings["$opn_name"] = $opn_value;
+                    break;
+                default:
+                    // invalid option type
+                    break;
+            }
+			
 		}
 	}
-	
-  // Time and date stuff
-  // Set timezone
-  date_default_timezone_set("UTC");
+}
 	 
-  // Time format is UNIX timestamp or
-  // PHP strtotime compatible strings
-  function dateDiff($time1, $time2, $precision = 6) {
-	// If not numeric then convert texts to unix timestamps
-	if (!is_int($time1)) {
-	  $time1 = strtotime($time1);
-	}
-	if (!is_int($time2)) {
-	  $time2 = strtotime($time2);
-	}
- 
-	// If time1 is bigger than time2
-	// Then swap time1 and time2
-	if ($time1 > $time2) {
-	  $ttime = $time1;
-	  $time1 = $time2;
-	  $time2 = $ttime;
-	}
- 
-	// Set up intervals and diffs arrays
-	$intervals = array('year','month','day','hour','minute','second');
-	$diffs = array();
- 
-	// Loop thru all intervals
-	foreach ($intervals as $interval) {
-	  // Create temp time from time1 and interval
-	  $ttime = strtotime('+1 ' . $interval, $time1);
-	  // Set initial values
-	  $add = 1;
-	  $looped = 0;
-	  // Loop until temp time is smaller than time2
-	  while ($time2 >= $ttime) {
-		// Create new temp time from time1 and interval
-		$add++;
-		$ttime = strtotime("+" . $add . " " . $interval, $time1);
-		$looped++;
-	  }
- 
-	  $time1 = strtotime("+" . $looped . " " . $interval, $time1);
-	  $diffs[$interval] = $looped;
-	}
-	
-	$count = 0;
-	$times = array();
-	// Loop thru all diffs
-	foreach ($diffs as $interval => $value) {
-	  // Break if we have needed precission
-	  if ($count >= $precision) {
- break;
-	  }
-	  // Add value and interval 
-	  // if value is bigger than 0
-	  if ($value > 0) {
- // Add s if value is not 1
- if ($value != 1) {
-   $interval .= "s";
- }
- // Add value and interval to times array
- $times[] = $value . " " . $interval;
- $count++;
-	  }
-	}
- 
-	// Return string with times
-	return implode(", ", $times);
+// Time format is UNIX timestamp or
+// PHP strtotime compatible strings
+function dateDiff($time1, $time2, $precision = 6) {
+// If not numeric then convert texts to unix timestamps
+if (!is_int($time1)) {
+  $time1 = strtotime($time1);
+}
+if (!is_int($time2)) {
+  $time2 = strtotime($time2);
+}
+
+// If time1 is bigger than time2
+// Then swap time1 and time2
+if ($time1 > $time2) {
+  $ttime = $time1;
+  $time1 = $time2;
+  $time2 = $ttime;
+}
+
+// Set up intervals and diffs arrays
+$intervals = array('year','month','day','hour','minute','second');
+$diffs = array();
+
+// Loop thru all intervals
+foreach ($intervals as $interval) {
+  // Create temp time from time1 and interval
+  $ttime = strtotime('+1 ' . $interval, $time1);
+  // Set initial values
+  $add = 1;
+  $looped = 0;
+  // Loop until temp time is smaller than time2
+  while ($time2 >= $ttime) {
+	// Create new temp time from time1 and interval
+	$add++;
+	$ttime = strtotime("+" . $add . " " . $interval, $time1);
+	$looped++;
   }
+
+  $time1 = strtotime("+" . $looped . " " . $interval, $time1);
+  $diffs[$interval] = $looped;
+}
+
+$count = 0;
+$times = array();
+// Loop thru all diffs
+foreach ($diffs as $interval => $value) {
+  // Break if we have needed precission
+  if ($count >= $precision) {
+break;
+  }
+  // Add value and interval 
+  // if value is bigger than 0
+  if ($value > 0) {
+// Add s if value is not 1
+if ($value != 1) {
+$interval .= "s";
+}
+// Add value and interval to times array
+$times[] = $value . " " . $interval;
+$count++;
+  }
+}
+
+// Return string with times
+return implode(", ", $times);
+}
 ?>

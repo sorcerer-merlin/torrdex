@@ -94,20 +94,40 @@ _END;
 				if ($result->num_rows != 0) {
 					while($row = $result->fetch_object()) { 
 						$opn_name = $row->name;
-						$new_value = $_POST["$opn_name"];
-						$configOptions["$opn_name"] = $new_value;
+						$new_value = EscapeQuotes($_POST["$opn_name"]);
 						queryMySQL("UPDATE options SET value='$new_value' WHERE name='$opn_name';");
 					}
 				}			
+        // Load the new options back from MySQL into their arrays
+        loadOptionsfromMySQL();
+
+        // Output the success
 				$success = "<span class='available'>&nbsp;&#x2714; Settings saved!</span>";
 				break;
+      case "load_defaults":
+        $result = queryMySQL("select * from options");
+        if ($result->num_rows != 0) {
+          while($row = $result->fetch_object()) { 
+            $opn_name = $row->name;
+            $new_value = EscapeQuotes($row->default);
+            queryMySQL("UPDATE options SET value='$new_value' WHERE name='$opn_name';");
+          }
+        }     
+
+        // Output the success
+        $success = "<span class='available'>&nbsp;&#x2714; Loaded defaults!</span>";
+        break;
 			default:
 				// do nothing as we don't have this mode
+        break;
 		}
 	} 
 ?>
 <!-- Actual Admin Panel Page -->
 <h3>Feature Options</h3>
+<form id="defaults_form" method="post" action="admin">
+<input type='hidden' name='admin_mode' value='load_defaults'>
+</form>
 <form method='post' action='admin'>
 <input type='hidden' name='admin_mode' value='save_config'>
 <table width="650px">
@@ -116,30 +136,70 @@ _END;
     <td class="rowcap" style="text-align:center;">Setting:</td>
 </tr>
 <?php 
-	$result = queryMySQL("SELECT * FROM options ORDER BY description;");
+	$result = queryMySQL("SELECT * FROM options WHERE type='bool' OR type='int' ORDER BY description;");
 	if ($result->num_rows != 0) {
 		while($row = $result->fetch_object()) { 
 			$opn_name = $row->name;
 			$opn_desc = $row->description;
 			$opn_value = $row->value;
+      $opn_type = $row->type;
 ?>
 <tr>
 	<td class="rowdata" style="text-align:left;"><?php print $opn_desc; ?></td>
 	<td class="rowdata" style="text-align:center;">
-		<select class="select-style" name="<?php print $opn_name; ?>">
-			<option value="true"<?php if ($opn_value == "true") echo ' selected="selected"'; ?>>On</option>
-			<option value="false"<?php if ($opn_value == "false") echo ' selected="selected"'; ?>>Off</option>
-		</select>
+    <?php 
+      switch ($opn_type) {
+        case "bool":
+    ?>
+      		<select class="select-style" name="<?php print $opn_name; ?>">
+      			<option value="true"<?php if ($opn_value == "true") echo ' selected="selected"'; ?>>On</option>
+      			<option value="false"<?php if ($opn_value == "false") echo ' selected="selected"'; ?>>Off</option>
+      		</select>
+    <?php 
+          break;
+        case "int":
+    ?>
+          <input type="number" min="1" max="255" step="1" value="<?php print $opn_value; ?>" name="<?php print $opn_name; ?>">
+    <?php 
+        break;
+      } // end switch statement
+    ?>
 	</td>
 </tr>
 <?php 
 		}
 	}
 ?>
-</table><br><br>
+</table>
+<h3>Strings Editor</h3>
+<table width="95%">
+<tr>
+    <td class="rowcap" width="500px" style="text-align:left;">Name:</td>
+    <td class="rowcap" style="text-align:center;">Setting:</td>
+</tr>
+<?php 
+  $result = queryMySQL("SELECT * FROM options WHERE type='string' ORDER BY description;");
+  if ($result->num_rows != 0) {
+    while($row = $result->fetch_object()) { 
+      $opn_name = $row->name;
+      $opn_desc = $row->description;
+      $opn_value = $row->value;
+?>
+<tr>
+  <td class="rowdata" style="text-align:left;"><?php print $opn_desc; ?></td>
+  <td class="rowdata" style="text-align:center;">
+    <input type="text" style="width:98%;" maxlength="255" id="<?php print $opn_name; ?>" name="<?php print $opn_name; ?>" value="<?php print $opn_value; ?>"
+  </td>
+</tr>
+<?php 
+    }
+  }
+?>
+</table>
+<br><br>
 <?php print $success; ?>
 <br><br>
-<input type='submit' value='Save' id='submit'>
+<input type='submit' value='Save' id='submit'>&nbsp;&nbsp;<input type='submit' value='Defaults' id='submit' form='defaults_form'>
 </form>
 <br><br>
 <h3>User Administration</h3>

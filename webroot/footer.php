@@ -1,7 +1,7 @@
   </td>
   </tr>
 <?php
-	if ($configOptions['show_disclaimer'] == "true") {
+	if ($configOptions_Booleans['show_disclaimer'] == "true") {
 ?>
   <!-- Start Disclaimer -->
   <thead><tr class="mytable">
@@ -20,7 +20,7 @@
 <?php
 	}
 	
-	if ($configOptions['show_copyright'] == "true") {
+	if ($configOptions_Booleans['show_copyright'] == "true") {
 ?>
   <!-- Copyright info -->
   <thead><tr class="mytable">

@@ -211,7 +211,7 @@ _END;
                 	<tr>
                     	<td><a href="<?php print $TorrentMagnet; ?>"><img src="/img/Magnet.png" height="32" width="32" alt="MAGNET" /></a></td>
                         <td>&nbsp;&nbsp;<a href="<?php print $TorrentMagnet; ?>">Magnet</a>&nbsp;</td>
-                        <?php if ($configOptions['hide_torrent_files'] == "false") { ?>
+                        <?php if ($configOptions_Booleans['hide_torrent_files'] == "false") { ?>
                         <!-- only displayed if we want to show torrent files -->
                         <td><a href="<?php print $TorrentFile; ?>"><img src="/img/Download.png" height="32" width="32" alt="TORRENT" /></a></td>
                         <td>&nbsp;&nbsp;&nbsp;<a href="<?php print $TorrentFile; ?>">.Torrent</a></td>
@@ -222,7 +222,7 @@ _END;
             </td>
         </tr>
 <?php
-	if (($row->author == $_SESSION['user'] && $configOptions['admin_only_removes'] == "false") || $_SESSION['acct_type'] == ACCT_TYPE_ADMIN) {
+	if (($row->author == $_SESSION['user'] && $configOptions_Booleans['admin_only_removes'] == "false") || $_SESSION['acct_type'] == ACCT_TYPE_ADMIN) {
 		// This torrent belongs to the user logged in. Add option to remove it.
 ?>
 <!-- only shown if the user logged in happens to be the owner of the torrent we are showing details on -->
