@@ -172,9 +172,9 @@ _END;
 ?>
 </table>
 <h3>Strings Editor</h3>
-<table width="95%">
+<table width="75%">
 <tr>
-    <td class="rowcap" width="500px" style="text-align:left;">Name:</td>
+    <td class="rowcap" width="30%" style="text-align:left;">Name:</td>
     <td class="rowcap" style="text-align:center;">Setting:</td>
 </tr>
 <?php 
@@ -205,6 +205,7 @@ _END;
 <h3>User Administration</h3>
 <table width="90%" class="sortable">
 <tr>
+    <td class="rowcap" style="text-align:center;">Avatar:</td>
     <td class="rowcap" style="text-align:center;">Type:</td>
     <td class="rowcap" style="text-align:center;">Login:</td>
     <td class="rowcap" style="text-align:center;">Display Name:</td>
@@ -227,6 +228,27 @@ _END;
 ?>
 <!-- rows for accounts -->
 <tr>
+    <td class="rowdata" style="text-align:center;">
+      <?php
+        $filename = "avatars/" . $user  . ".jpg";
+        $have_avatar = FALSE;
+        if (file_exists($filename)) {
+          // echo the image tag for the actual avatar
+          //echo "<a href='#avatar_fullsize_$user' rel='ibox&width=150&height=150' title='Avatar'>";
+          echo "<img src='$filename' width='50' height='50' ALT='Avatar Mini'>";
+          //echo "</a>";
+          //echo "<div id='avatar_fullsize_$user' style='display:none;'><img src='$filename' width='100' height='100' ALT='Avatar'></div>";
+          $have_avatar = TRUE;
+        } else {
+          // the avatar doesn't exist, so use the default
+          //echo "<a href='#avatar_fullsize_$user' rel='ibox&width=150&height=150' title='Avatar'>";
+          echo "<img src='img/default_avatar.jpg' width='50' height='50' ALT='Avatar Mini'>";
+          //echo "</a>";
+          //echo "<div id='avatar_fullsize_$user' style='display:none;'><img src='img/default_avatar.jpg' width='100' height='100' ALT='Avatar'></div>";
+          $have_avatar = FALSE;
+        }
+      ?> 
+    </td>
     <td class="rowdata" style="text-align:center;">
     	<select class="select-style" id="<?php print $user; ?>_acct_type" onchange="statusModified('<?php print $user; ?>')">
 		    <?php 
