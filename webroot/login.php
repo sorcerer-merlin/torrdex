@@ -15,8 +15,7 @@
     else
     {
 	  // Grab the username from the DB based on what was posted	
-      $result = queryMySQL("SELECT user,pass,fullname,acct_type FROM members
-        WHERE user='$user'");
+      $result = queryMySQL("SELECT * FROM members WHERE user='$user'");
 
 	  // Here the user name doesn't exist
       if ($result->num_rows == 0)
@@ -30,11 +29,13 @@
 		$StoredHash = $row->pass;
 		$fullname = $row->fullname;
 		$acct_type = $row->acct_type;
+    $email = $row->email;
 		
 		// Now we need to check the password entered against the hash
 		if (PasswordHash::validate_password($pass, $StoredHash)) {
 			// save all of the important account info to our cookie session in case we need it readily available
 			$_SESSION['user'] = $user;
+      $_SESSION['email'] = $email;
 			$_SESSION['pass'] = $pass;
 			$_SESSION['fullname'] = $fullname;
 			$_SESSION['acct_type'] = $acct_type;

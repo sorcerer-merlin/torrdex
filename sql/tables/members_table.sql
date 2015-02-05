@@ -4,13 +4,14 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Dumping structure for table torrdex.members
-DROP TABLE IF EXISTS `members`;
 CREATE TABLE IF NOT EXISTS `members` (
   `user` varchar(32) NOT NULL,
   `pass` varchar(72) NOT NULL,
   `acct_type` int(1) NOT NULL DEFAULT '0',
-  `fullname` varchar(72) DEFAULT NULL
+  `fullname` varchar(72) NOT NULL,
+  `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

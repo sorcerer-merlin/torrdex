@@ -9,6 +9,7 @@ if ($loggedin == FALSE) echo '<script type="text/javascript">window.location = "
 
 // Pull the details from the Session 
 $User = $_SESSION['user'];
+$Email = $_SESSION['email'];
 $CurrentPassword = $_SESSION['pass'];
 $Fullname = $_SESSION['fullname'];
 $AccountType = $_SESSION['acct_type'];
@@ -114,6 +115,32 @@ $AccountType = $_SESSION['acct_type'];
           }
           request.send(params) 
         }
+    }
+    function changeEmail()
+    {
+      user = O('user').innerHTML
+      email = O('email').value
+      if (email == '')
+      {
+        O('info_email').innerHTML = ''
+        return
+      }
+
+      params  = "user=" + user + "&email=" + email
+      request = new ajaxRequest()
+      request.open("POST", "changename.php", true)
+      request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+      //request.setRequestHeader("Content-length", params.length)
+      //request.setRequestHeader("Connection", "close")
+
+      request.onreadystatechange = function()
+      {
+        if (this.readyState == 4)
+          if (this.status == 200)
+            if (this.responseText != null)
+              O('info_email').innerHTML = this.responseText
+      }
+      request.send(params)      
     }
     function changeName()
     {
@@ -234,8 +261,21 @@ if (isset($_POST['mode'])) {
             <td class="rowdata"><strong><span id="user"><?php print $User; ?></span></strong></td>
         </tr>
         <tr>
-        	<td class="rowcap" width="168px">Account Type:</td>
+          <td class="rowcap" width="168px">Account Type:</td>
             <td class="rowdata"><strong><?php print $AccountTypes[$AccountType]; ?></strong></td>
+        </tr>
+        <tr>
+          <td class="rowcap" width="168px">Email Address:</td>
+          <td class="rowdata">
+            <table>
+            <tr>
+            <td><input type="email" maxlength="255" id="email" name="email" value="<?php print $Email; ?>" required="required" placeholder="Email Address">
+            </td>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td><input type="submit" onclick="changeEmail()" value="Change..." id="submit_small">&nbsp;&nbsp;<span id='info_email'></span></td>
+            </tr>
+            </table>
+          </td>
         </tr>
         <tr>
         	<td class="rowcap" width="168px">Display Name:</td>

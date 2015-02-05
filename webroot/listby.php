@@ -1,5 +1,5 @@
 <?php
-	$pageTitle = "List By";
+	$pageTitle = "Browse";
 	require_once 'header.php';
 	$ListHeading = "";
     

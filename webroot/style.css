@@ -239,6 +239,41 @@ input[type="number"]:focus {
   box-shadow: 0 0 5px 1px #969696;
 }
 
+input[type="email"] {
+  background: #54ff00;
+  color: #a200ff;
+  display: block;
+  margin: 0;
+  /*width: 100%;*/
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-border-radius: none;
+  -moz-border-radius: none;
+  -ms-border-radius: none;
+  -o-border-radius: none;
+  border-radius: none;
+  padding: 5px;
+  border: solid 1px #54ff00;
+  -webkit-transition: box-shadow 0.3s, border 0.3s;
+  -moz-transition: box-shadow 0.3s, border 0.3s;
+  -o-transition: box-shadow 0.3s, border 0.3s;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+input[type="email"]:focus {
+  outline: none;
+  border: solid 1px #707070;
+  -webkit-box-shadow: 0 0 5px 1px #969696;
+  -moz-box-shadow: 0 0 5px 1px #969696;
+  box-shadow: 0 0 5px 1px #969696;
+}
+
 input[type="text"] {
   background: #54ff00;
   color: #a200ff;
@@ -315,7 +350,7 @@ input[type="password"] {
   color: #a200ff;
   display: block;
   margin: 0;
-  width: 100%;
+  /*width: 100%;*/
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
   font-weight: bold;

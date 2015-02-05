@@ -4,10 +4,10 @@
   require_once 'header.php';
   require_once 'PasswordHash.php';
   echo "<div style='margin-left:40px;'><h3>Enter your account details below:</h3>";
-  $error = $user = $fullname = $pass = $pass2 = "";
+  $error = $user = $email = $fullname = $pass = $pass2 = "";
 
   // If sign ups are closed, redirect to main page
-  if ($configOptions['allow_signup'] == "false") echo '<script type="text/javascript">window.location = "/"</script>';  
+  if ($configOptions_Booleans['allow_signup'] == "false") echo '<script type="text/javascript">window.location = "/"</script>';  
 
   // Output the scripting code for us to check the user, etc. dynamically
     echo <<<_END
@@ -70,6 +70,7 @@ _END;
 	  //	- Check to make sure passwords match
 	  //	- Start them with leecher account
 	  $user = $_POST['user'];
+    $email = $_POST['email'];
 	  $pass = $_POST['pass'];
 	  $pass2 = $_POST['pass2'];
 	  $fullname = $_POST['fullname'];
@@ -79,7 +80,7 @@ _END;
       $result = queryMySQL($mysqlQuery);
 
       if ($result->num_rows != 0) {		
-	  	$error = "<span class='error'>The username you chose already exists!</span>";
+	  	$error = "<span class='error'>The username you have chosen already exists!</span>";
 	  } else {
 		 // check to make sure passwords match
 		if ($pass != $pass2) {
@@ -87,7 +88,7 @@ _END;
 		} else {
 			// make the actual account
 			$PasswordHashed = PasswordHash::create_hash($pass);	
-			$mysqlQuery = "INSERT INTO members VALUES ('$user', '$PasswordHashed', '0', '$fullname');";
+			$mysqlQuery = "INSERT INTO members VALUES ('$user', '$PasswordHashed', '0', '$fullname', '$email');";
 			$result = queryMySQL($mysqlQuery);
 			if (!$result) {
 				$error = "<span class='error'>There was an error adding you to the database!</span>";	
@@ -108,6 +109,12 @@ _END;
     	<tr>
         	<td class="rowcap">&nbsp;&nbsp;Username:&nbsp;&nbsp;</td>
             <td class="rowdata"><input type='text' maxlength='32' name='user' value='<?php print $user; ?>' autofocus='autofocus' required="required" placeholder="Username" onBlur='checkUser(this)'></td>
+        </tr>
+        <tr>
+          <td class="rowcap">&nbsp;&nbsp;Email:&nbsp;&nbsp;</td>
+          <td class="rowdata">
+            <input type="email" maxlength="255" id="email" name="email" value="<?php print $email; ?>" required="required" placeholder="Email Address">
+          </td>
         </tr>
         <tr>
         	<td class="rowcap">&nbsp;&nbsp;Password:&nbsp;&nbsp;</td>

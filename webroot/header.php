@@ -35,12 +35,14 @@
   }
   else $loggedin = FALSE;
 
-  // NAME HACK
+  // NAME & EMAIL UPDATE HACK
   if (isset($_SESSION['fullname'])) {
-    $result = queryMySQL("SELECT user,fullname FROM members WHERE user='$user'");
+    $result = queryMySQL("SELECT user,fullname,email FROM members WHERE user='$user'");
     $row = $result->fetch_object();
     $DBfullname = $row->fullname;
+    $DBemail = $row->email;
     if ($_SESSION['fullname'] != $DBfullname) $_SESSION['fullname'] = $DBfullname;
+    if ($_SESSION['email'] != $DBemail) $_SESSION['email'] = $DBemail;
   }
 
 ?>
