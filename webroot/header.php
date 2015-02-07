@@ -65,6 +65,7 @@
   $signup_link = "<li><a href='signup'>Sign Up</a></li>";
   $upload_link = "<li><a href='upload'>Upload</a></li>";
   $admin_link = "<li><a href='admin'>Admin</a></li>";
+  $invite_link = "<li><a href='invite?mode=do_form'>Invite</a></li>";
   
   // Output the menu
   if ($loggedin)
@@ -78,11 +79,22 @@
       // Check to see if we are an Administrator, if so we can leave that link in there, if not
       // make it disappear
       if ($_SESSION['acct_type'] != ACCT_TYPE_ADMIN) $admin_link = "";
+
+      // Check to see if we are an Administrator and Only admins can send out sign up emails,
+      // or we are atleast a Seeder and then leave the invite link alone, otherwise blank it.
+      if ($configOptions_Booleans['only_admin_invites'] == "true")
+        if ($_SESSION['acct_type'] != ACCT_TYPE_ADMIN) 
+          $invite_link = "";
+      else
+        if ($_SESSION['acct_type'] == ACCT_TYPE_LEECHER)
+          $invite_link = "";
+
 		
 		// Finally output the constructed member menu
 
 		echo "<li><a href='logout'>Logout</a></li>";
     echo "<li><a href='profile'>Profile</a></li>";
+    echo $invite_link;
     echo $admin_link;
     echo "<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>";
     echo "<li><a href='/'>Home</a></li>";

@@ -79,26 +79,28 @@ _END;
 	  $mysqlQuery = "SELECT * FROM members WHERE user='$user';";
       $result = queryMySQL($mysqlQuery);
 
-      if ($result->num_rows != 0) {		
-	  	$error = "<span class='error'>The username you have chosen already exists!</span>";
+    if ($result->num_rows != 0) {		
+      $error = "<span class='error'>The username you have chosen already exists!</span>";
 	  } else {
-		 // check to make sure passwords match
-		if ($pass != $pass2) {
-			$error = "<span class='error'>The passwords DO NOT match. Try again!</span>";
-		} else {
-			// make the actual account
-			$PasswordHashed = PasswordHash::create_hash($pass);	
-			$mysqlQuery = "INSERT INTO members VALUES ('$user', '$PasswordHashed', '0', '$fullname', '$email');";
-			$result = queryMySQL($mysqlQuery);
-			if (!$result) {
-				$error = "<span class='error'>There was an error adding you to the database!</span>";	
-			} else
-				$_SESSION['user'] = $user;
-				$_SESSION['pass'] = $pass;
-				$_SESSION['fullname'] = $fullname;
-				$_SESSION['acct_type'] = ACCT_TYPE_LEECHER;
-				echo '<script type="text/javascript">window.location = "/"</script>';
-		}
+		  // check to make sure passwords match
+  		if ($pass != $pass2) {
+  			$error = "<span class='error'>The passwords DO NOT match. Try again!</span>";
+  		} else {
+  			// make the actual account
+  			$PasswordHashed = PasswordHash::create_hash($pass);	
+  			$mysqlQuery = "INSERT INTO members VALUES ('$user', '$PasswordHashed', '0', '$fullname', '$email');";
+  			$result = queryMySQL($mysqlQuery);
+  			if (!$result) {
+  				$error = "<span class='error'>There was an error adding you to the database!</span>";	
+  			} else {
+  				$_SESSION['user'] = $user;
+  				$_SESSION['pass'] = $pass;
+          $_SESSION['email'] = $email;
+  				$_SESSION['fullname'] = $fullname;
+  				$_SESSION['acct_type'] = ACCT_TYPE_LEECHER;
+  				echo '<script type="text/javascript">window.location = "/"</script>';
+        }
+  		}
 	  }
   }
 ?>

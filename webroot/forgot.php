@@ -123,7 +123,7 @@ _END;
             // Finally we create the link
             $Link = $configOptions_Strings['site_root'] . "forgot?mode=do_reset&user=" . $User . "&email=" . $Email . "&code=" . $Code;
             //echo "<a href='" . $Link . "'>Reset Password</a>";
-            echo "<h3>Verification</h3><br>An email has been dispatched to your email address with a verification link need to complete this process. <br><br>Please check your email. If you do not receive an email, please contact your Administrator!";
+            echo "<h3>Verification</h3><br>An email has been dispatched to your email address with a verification link needed to complete this process. <br><br>Please check your email. If you do not receive an email, please contact your Administrator!";
 
             // Email the reset link and instructions to the user, and then output some kind of page saying it has been done and they have an
             // hour before it expires.

@@ -23,6 +23,7 @@ Below is a list of completely finished features incorporated into TorrDex. For i
 - Administration panel with the ability to make changes and remove users, as well as enable/disable global options that change functionality of the site
 - Customizable Torrent Description templates for new uploads to ease in the writing of Torrent Descriptions (now with MarkDown support!)
 - Password Reset with Email Verification link and CAPTCHA code
+- Member Invites with Email Verification link and CAPTCHA code
 
 ## To-Do List
 

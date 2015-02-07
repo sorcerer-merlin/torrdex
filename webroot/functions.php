@@ -167,7 +167,54 @@
 	}
   }
 
-  // Send an email with a verification link
+// Send an email with a verification link
+  function sendEmailInvite($nickname,$to,$link)
+  {
+    // Pull our config variables from global
+    global $configOptions_Strings;
+
+    // Make the subject
+    $subject = $configOptions_Strings['site_title'] . " Member Invite";
+
+    // Get the site root
+    $SiteRoot = $configOptions_Strings['site_root'];
+    $SiteAdmin = $configOptions_Strings['site_email'];
+
+    // message
+    $message = "
+    <html>
+    <head>
+    <title>$subject</title>
+    </head>
+    <body>
+        <img src='$SiteRoot/img/torrdex_logo.png' width='180' height='170' ALT='TorrDex Logo'><br><br>
+        <h2>$subject</h2>
+        <h3>Dear $nicname,</h3>
+        <p>You have been invited to join the Semi-Private BitTorrent Community, TorrDex. A current member has selected you
+        personally for an invite. If you are not interested, please discard this email. Please use the link below to complete<br><br>
+         the verification process and create your new account.<br><br>
+        <a href='$link'>$link</a><br><br>
+        ~ Auto Administrator.
+        </p>
+    </body>
+    </html>
+    ";
+
+    // To send HTML mail, the Content-type header must be set
+    $headers  = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+    // Additional headers
+    //$headers .= 'To: Mary <mary@example.com>, Kelly <kelly@example.com>' . "\r\n";
+    $headers .= 'From: Auto Administrator <' . $SiteAdmin . '>' . "\r\n";
+    //$headers .= 'Cc: birthdayarchive@example.com' . "\r\n";
+    //$headers .= 'Bcc: birthdaycheck@example.com' . "\r\n";
+
+    // Mail it
+    mail($to, $subject, $message, $headers);
+  }
+
+  // Send an email with a verification link for Password Reset
   function sendEmail($user,$to,$link)
   {
     // Pull our config variables from global
