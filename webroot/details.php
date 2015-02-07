@@ -223,11 +223,11 @@ _END;
         </tr>
 <?php
 	if (($row->author == $_SESSION['user'] && $configOptions_Booleans['admin_only_removes'] == "false") || $_SESSION['acct_type'] == ACCT_TYPE_ADMIN) {
-		// This torrent belongs to the user logged in. Add option to remove it.
+		// This torrent belongs to the user logged in. Add option to remove/edit it.
 ?>
 <!-- only shown if the user logged in happens to be the owner of the torrent we are showing details on -->
         <tr>
-        	<td class="rowcap" width="168px">Remove:</td>
+        	<td class="rowcap" width="168px">Actions:</td>
             <td class="rowdata">
                 <table>
                     <tr>

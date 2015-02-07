@@ -514,6 +514,16 @@ pre {
   transform:rotate(5deg);
 }
 
+#header { 
+    background: url(img/torrdex_logo.png);
+    background-size: 180px 170px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height:170px;
+    line-height: 260px; /* <-- this is what you must define */
+    vertical-align: middle;
+}
+
 /* Style for headings */
 h1 { 
     display: block;

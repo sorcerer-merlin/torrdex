@@ -99,8 +99,7 @@
 ?>
 
 <!-- this is where we put the page that is shown when no one is logged in. News page, me thinks. -->
-<!--<img src="img/JollyRoger.png" height="350" width="350" alt="TorrDex Logo" /><br />-->
-<h1>TorrDex</h1>
+<h1 id="header">TorrDex</h1>
 <div align="left"><blockquote>
 <h3>What is TorrDex?</h3>
 In short, <strong>TorrDex</strong> is a <em>Semi-Private BitTorrent Indexing Community</em>.  It is licensed under the <a href="http://www.gnu.org/licenses/gpl-3.0-standalone.html">GNU GPLv3</a>, 
