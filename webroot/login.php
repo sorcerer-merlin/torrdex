@@ -2,7 +2,7 @@
   $pageTitle = "Login";
   require_once 'header.php';
   require_once 'PasswordHash.php';
-  echo "<div style='margin-left:40px;'><h3>Enter your login details below:</h3>";
+  echo "<h3>Enter your login details below:</h3>";
   $error = $user = $pass = "";
 
   if (isset($_POST['user']))
@@ -76,7 +76,8 @@
     <br><br>
     <span class='fieldname'>&nbsp;</span>
     <input type='submit' value='Login' id='submit'>
-    </form><br></div>
+    </form><br><br>
+    <a href="forgot?mode=form">Forgot your Username/Password?</a>
   <script type="text/javascript">
   
     //apply masking to the password field

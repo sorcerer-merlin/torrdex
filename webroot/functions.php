@@ -167,7 +167,58 @@
 	}
   }
 
-  
+  // Send an email with a verification link
+  function sendEmail($user,$to,$link)
+  {
+    // Pull our config variables from global
+    global $configOptions_Strings;
+
+    // Make the subject
+    $subject = $configOptions_Strings['site_title'] . " Reset Password Verification";
+
+    // Grab their Display Name
+    $result = queryMysql("SELECT fullname FROM members WHERE user='$user';");
+    $row = $result->fetch_object();
+    $DisplayName = $row->fullname;  
+
+    // Get the site root
+    $SiteRoot = $configOptions_Strings['site_root'];
+    $SiteAdmin = $configOptions_Strings['site_email'];
+
+    // message
+    $message = "
+    <html>
+    <head>
+    <title>$subject</title>
+    </head>
+    <body>
+        <img src='$SiteRoot/img/torrdex_logo.png' width='180' height='170' ALT='TorrDex Logo'><br><br>
+        <h2>$subject</h2>
+        <h3>Dear $DisplayName,</h3>
+        <p>You have requested to reset the password on your account.&nbsp; If you did not make this request, please contact your
+        Administrator. &nbsp;Please use the link below to complete the verification process and reset your password.<br><br>
+        <a href='$link'>$link</a><br><br>
+        If you have forgotten your Username, it is <strong>$user</strong>.<br><br>
+        ~ Auto Administrator.
+        </p>
+    </body>
+    </html>
+    ";
+
+    // To send HTML mail, the Content-type header must be set
+    $headers  = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+    // Additional headers
+    //$headers .= 'To: Mary <mary@example.com>, Kelly <kelly@example.com>' . "\r\n";
+    $headers .= 'From: Auto Administrator <' . $SiteAdmin . '>' . "\r\n";
+    //$headers .= 'Cc: birthdayarchive@example.com' . "\r\n";
+    //$headers .= 'Bcc: birthdaycheck@example.com' . "\r\n";
+
+    // Mail it
+    mail($to, $subject, $message, $headers);
+  }
+
   // Get the display name from the user 
   function getDisplayName($var)
   {

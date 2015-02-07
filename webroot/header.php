@@ -23,7 +23,6 @@
 <script src="sorttable.js"></script> 
 <script type="text/javascript" src="MaskedPassword.js"></script>
 </head>
-  
 <?php
   
 
