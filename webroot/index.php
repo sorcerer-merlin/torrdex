@@ -135,7 +135,6 @@ developed by <a href="https://github.com/defuse">Taylor Hornby</a>. BitTorrent p
  	<li>Theme support</li>
  	<li>Torrent comment/rating system</li>
  	<li>Certified Uploader (aka the Green Skull) system</li>
- 	<li>Email invite system using encrypted GUIDs</li>
  </ul></div>
 </blockquote></div><br /><br />
 <!-- end news page or whatever -->

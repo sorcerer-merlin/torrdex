@@ -32,4 +32,3 @@ This list of features and ideas is not yet implemented in TorrDex. They may have
 - Theme support
 - Torrent comment/rating system
 - Certified Uploader (aka the Green Skull) system
-- Email invite system using encrypted GUIDs
