@@ -189,7 +189,7 @@ _END;
                                 $_SESSION['captcha'] = simple_php_captcha();
 ?>
                                 <h3>Reset your password:</h3>
-                                <form action="captcha.php" method="POST">
+                                <form action="verify" method="POST">
                                 <input type="hidden" name="mode" value="pass_reset">
                                 <input type="hidden" name="user" value="<?php print $User; ?>">
                                 <input type="hidden" name="email" value="<?php print $Email; ?>">
