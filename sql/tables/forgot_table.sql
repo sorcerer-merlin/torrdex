@@ -1,10 +1,3 @@
--- --------------------------------------------------------
--- Host:                         192.168.3.4
--- Server version:               5.5.41-0ubuntu0.14.04.1 - (Ubuntu)
--- Server OS:                    debian-linux-gnu
--- HeidiSQL Version:             9.1.0.4867
--- --------------------------------------------------------
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
