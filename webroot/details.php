@@ -9,6 +9,20 @@
     // Add our script
     echo <<<_END
   <script type="text/javascript">
+    function toggle(obj){
+        obj_text = obj.innerHTML
+
+        if (obj_text == "Add your own comment") {
+            // show the form and change the text
+            O('comment_form').style.display = 'inline'
+            obj.innerHTML = "Nevermind!"
+            return
+        } else {
+            O('comment_form').style.display = 'none'
+            obj.innerHTML = "Add your own comment"
+            return
+        }
+    }
     function toggleEditMode()
     {
        btnvalue = O('toggle').value
@@ -107,7 +121,7 @@ _END;
 ?>
     	<!-- Torrent Information -->
         <form action="edit" method="post" id="edit_form">
-        </form>
+        </form><br>
         <table width="992px">
         <tr>
         	<td class="rowcap" width="168px">Name:</td>
@@ -250,6 +264,76 @@ _END;
 	}
 ?>
         </table>
+        <br>
+        <span id="comment_toggle" onclick="toggle(this)">Add your own comment</span>
+        <div id="comment_form" style="display:none;">
+        <br><br>
+        <form action="comment" method="POST">
+        <input type="hidden" name="mode" value="add_comment">
+        <input type="hidden" name="hash" value="<?php print $TorrentHash; ?>">
+        <textarea id="comment_body" name="comment_body" rows="20" cols="60" placeholder="Comment on the quality of the torrent, etc." required="required"></textarea><br><br>
+        <input type="submit" value="Add Comment" name="submit" id="submit">
+        <br>
+        </div><br>
+        <a name="com">&nbsp;</a>
+        <!--<table width="800px">
+            <tr>
+                <td class="rowcap" style="text-align:left;">Comments:</td>
+            </tr>
+            <tr>
+                <td class="rowdata">--><br>
+<?php
+
+                $result = queryMySQL("SELECT * FROM comments WHERE hash='$TorrentHash' ORDER BY time DESC;");
+                if ($result->num_rows == 0)
+                    echo "<div class='comment_body'>There are no comments.</div><br>";
+                else {
+                    echo "<table width='992px' align='center'>";
+                    while($row = $result->fetch_object()) { 
+                        $Author = $row->user;
+                        $DisplayName = getDisplayName($Author, false); // we want the user's display name, and returning Anonymous is NOT OK.
+                        $CommentID = $row->id;
+                        $CommentAge = dateDiff(time(), intval($row->time), 1); // get the age of the comment
+                        $CommentBody = $row->body;
+                        $AccountType = getAccountType($Author);
+                        $AvatarPath = "avatars/" . $Author . ".jpg";
+                        if (!file_exists($AvatarPath)) $AvatarPath = "img/default_avatar.jpg";
+?>
+<tr>
+    <td width="50px" rowspan="2" class="sidecol_comment" valign="middle">
+        <img src="<?php print $AvatarPath; ?>" height="50" width="50" ALT="Avatar">
+        <br>
+        <?php print $AccountType; ?>
+    </td>
+    <td class="rowcap_commentauthor">
+        <?php 
+            if ($Author == $_SESSION['user'] || $_SESSION['acct_type'] == ACCT_TYPE_ADMIN) {
+        ?>
+            <span class="comment_delete"><a href="delcom?hash=<?php print $TorrentHash; ?>&id=<?php print $CommentID; ?>" onclick="return confirm('Are you sure you want to DELETE this comment?')"><img src="img/x_delete.png" width="16px" height="16px"></a></span>
+        <?php
+            }
+        ?>
+        <span class="commenttime">(posted <?php if ($CommentAge == "") { print "just now"; } else { print $CommentAge . " ago"; } ?>)</span>
+        <table><tr><td><?php print $DisplayName; ?></td><td>&nbsp;</td><td><img src="img/skull-icon.png" width="16px" height="16px"></td></tr></table>        
+    </td>
+</tr>
+<tr>
+<td class="rowdata">
+<div class="comment_body"><?php print $CommentBody; ?></div>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<?php
+                    }
+                    echo "</table><br>";
+                }
+// TODO: Output the form to add more comments here
+?>
+                <!--<br><br></td>
+            </tr>
+        </table>-->
 	</td>
   </tr>
 <?php

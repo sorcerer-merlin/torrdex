@@ -24,7 +24,7 @@
   define("ACCT_TYPE_ADMIN", 2);
   $AccountTypes[ACCT_TYPE_LEECHER] = "Leecher";
   $AccountTypes[ACCT_TYPE_SEEDER] = "Seeder";
-  $AccountTypes[ACCT_TYPE_ADMIN] = "Administrator";
+  $AccountTypes[ACCT_TYPE_ADMIN] = "Admin";
 
   /* Define Torrent Type Constants */
   define("TORR_TYPE_ALL", -1);
@@ -267,10 +267,10 @@
   }
 
   // Get the display name from the user 
-  function getDisplayName($var)
+  function getDisplayName($var, $anonOK = true)
   {
 	global $configOptions_Booleans;
-	if ($configOptions_Booleans['show_authors'] == "false") return "Anonymous";
+	if ($configOptions_Booleans['show_authors'] == "false" && $anonOK) return "Anonymous";
 	  
 	$queryString = "SELECT fullname FROM members WHERE user='$var';";
 	$result = queryMysql($queryString);
@@ -281,6 +281,26 @@
 		$row = $result->fetch_object();
 		return $row->fullname;  
 	}
+  }
+
+  // Get the account type of a given user
+  function getAccountType($user, $returnString = true)
+  {
+    global $AccountTypes;
+
+    $result = queryMySQL("SELECT user,acct_type FROM members WHERE user='$user';");
+    if ($result->num_rows == 0) {
+        if ($returnString)
+            return $AccountTypes[ACCT_TYPE_LEECHER];
+        else
+            return ACCT_TYPE_LEECHER;
+    } else {
+        $row = $result->fetch_object();
+        if ($returnString)
+            return $AccountTypes[$row->acct_type];
+        else
+            return $row->acct_type;
+    }
   }
 
   // Escape quotes and single quotes

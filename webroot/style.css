@@ -554,6 +554,24 @@ h3 {
 }
 
 /* Style for the links */
+#comment_toggle {
+    color: #ff00ae;
+    text-decoration: none;
+    font-family:'Snippet';
+    font-size:14px;
+    text-shadow:3px 3px 4px #444;
+    cursor: pointer;    
+}
+#comment_toggle:hover {
+    color: #e4ff00;
+    text-decoration:underline overline;
+    font-style:normal;
+    font-weight:bold;
+    font-family:'Snippet';
+    font-size:14px;
+    cursor: pointer;
+}
+
 a {
 }
 a:link, a:active, a:visited {
@@ -579,6 +597,57 @@ table.sortable thead {
 }   
 
 /* style for torrent table */
+.commenttime {
+  /*padding-left: 50px;*/
+  float:right;
+  padding-right: 10px;
+  font-family: Spirax;
+  font-size: 16px;
+  color: #00aeff;
+  text-shadow:3px 3px 4px #444;
+}
+.rowcap_commentauthor img { 
+    float:right; 
+}
+.certified {
+  position: fixed;
+  left:10px;
+}
+.rowcap_commentauthor { 
+ border:1px solid #54ff00;
+ background:#a200ff;
+ color:#54ff00;
+ font-weight:bold;
+ /* top right bottom left */
+ padding:2px 4px 2px 10px;
+ text-align: left;
+ font-family:Aclonica;
+ font-size:14px;
+ text-shadow:3px 3px 4px #444;
+ vertical-align:middle;
+}
+
+.sidecol_comment {
+ background:#54ff00;
+ color:#a200ff;
+ padding:3px 10px 3px 10px;
+ text-align:center;
+ text-transform:uppercase;
+ font-size:14px;
+ font-family: 'Inconsolata';
+ vertical-align:middle;
+ text-shadow:3px 3px 4px #444;
+}
+
+.comment_body {
+  margin-left: 10px;
+  color: #54ff00;
+  text-shadow:3px 3px 4px #444;
+  font-family: Snippet;
+  font-size: 16px;
+  font-style: italic;
+}
+
 .rowcap { border:1px solid #54ff00;
  background:#a200ff;
  color:#54ff00;

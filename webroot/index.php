@@ -12,7 +12,7 @@
 		
 	// Check to make sure we have it in the database before continuing
 	if ($result->num_rows == 0) {
-		showError("Your database is EMPTY. Please contact your administrator.");
+		showError("Your database is EMPTY. Please contact your Administrator.");
 	} else {
 ?>
 		<h3>Five Most Recent Torrents</h3>
@@ -127,13 +127,14 @@ developed by <a href="https://github.com/defuse">Taylor Hornby</a>. BitTorrent p
  	<li>Customizable Torrent Description templates for new uploads to ease in the writing of Torrent Descriptions (now with MarkDown support!)</li>
     <li>Password Reset with Email Verification link and CAPTCHA code</li>
     <li>Member Invites with Email Verification link and CAPTCHA code</li>
+    <li>Torrent commenting system</li>
  </ul></div>
  <h3>To-Do List</h3>
  This list of features and ideas is not yet implemented in <strong>TorrDex</strong>. They may have partially working code, or not even be coded at all. Look for them in future releases of the site.
  <div class="feature_list">
  <ul>
  	<li>Theme support</li>
- 	<li>Torrent comment/rating system</li>
+ 	<li>Torrent rating system</li>
  	<li>Certified Uploader (aka the Green Skull) system</li>
  </ul></div>
 </blockquote></div><br /><br />
