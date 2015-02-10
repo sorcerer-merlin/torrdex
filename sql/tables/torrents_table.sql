@@ -8,8 +8,8 @@ DROP TABLE IF EXISTS `torrents`;
 CREATE TABLE IF NOT EXISTS `torrents` (
   `name` tinytext NOT NULL,
   `hash` varchar(40) NOT NULL,
-  `type` tinytext NOT NULL,
-  `uploaded` tinytext NOT NULL,
+  `type` int(11) NOT NULL,
+  `uploaded` varchar(10) NOT NULL,
   `files` text NOT NULL,
   `comment` tinytext NOT NULL,
   `description` text NOT NULL,
@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS `torrents` (
   `size` int(11) NOT NULL,
   `filecount` int(11) NOT NULL,
   `author` varchar(32) NOT NULL,
+  `created` varchar(10) NOT NULL,
   UNIQUE KEY `hash` (`hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

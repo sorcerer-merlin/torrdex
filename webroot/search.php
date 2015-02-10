@@ -98,8 +98,8 @@
 				</table>        		
         	</td>
             <td class="rowdata" width="300px"><a href="details?hash=<?php print $TorrentHash; ?>"><?php print $TorrentName; ?></a></td>
-            <td class="rowdata" style="text-align:right;"><?php print $TorrentAge; ?></td>
-            <td class="rowdata" style="text-align:center;"><?php print humanFileSize($TorrentSize); ?></td>
+            <td class="rowdata" style="text-align:right;" sorttable_customkey="<?php print $row->uploaded; ?>"><?php print $TorrentAge; ?></td>
+            <td class="rowdata" style="text-align:center;" sorttable_customkey="<?php print $row->size; ?>"><?php print humanFileSize($TorrentSize); ?></td>
             <td class="rowdata" style="text-align:center;"><?php print $TorrentFileCount; ?></td>
             <td class="rowdata" style="text-align:right;" >
             	<table align="right">

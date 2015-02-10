@@ -59,6 +59,13 @@
   	return($connection->error);
   }
 
+  // Get votes for torrent hash
+  function getVotes($hash, $type)
+  {
+    $result = queryMySQL("SELECT * FROM ratings WHERE vote='$type' AND hash='$hash';");
+    return ($result->num_rows);
+  }
+
   // Torrent in Database BOOL by 
   function isTorrentinDatabase($hash)
   {

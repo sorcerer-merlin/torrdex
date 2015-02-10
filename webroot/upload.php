@@ -82,7 +82,8 @@ _END;
         // Get the rest of the Torrent info
 		$TorrentType = $_POST["torrent-type"];
 		$TorrentHash = $torrent->getHash();
-		$TorrentUploaded = $torrent->getCreatedAt(); //date("Y-m-d @ h:ia", $torrent->getCreatedAt());
+		$TorrentUploaded = time(); 
+        $TorrentCreated = $torrent->getCreatedAt();
 		$TorrentFiles = $torrent->getFileList();
 		$TorrentComment = $torrent->getComment();
 		$TorrentTotalSize = $torrent->getSize();
@@ -176,7 +177,7 @@ _END;
 			// Torrent is NOT in the database
 			// Make the SQL query
 			$queryString = "INSERT INTO torrents VALUES" .
-			 "('$TorrentName', '$TorrentHash', '$TorrentType', '$TorrentUploaded', '$TorrentFileList', '$TorrentComment', '$TorrentDesc', '$TorrentMagnet', '$TorrentTotalSize', '$TorrentFileCount', '$TorrentAuthor')";
+			 "('$TorrentName', '$TorrentHash', '$TorrentType', '$TorrentUploaded', '$TorrentFileList', '$TorrentComment', '$TorrentDesc', '$TorrentMagnet', '$TorrentTotalSize', '$TorrentFileCount', '$TorrentAuthor', '$TorrentCreated')";
 			//echo $queryString;
 			
 			// Submit the SQL query

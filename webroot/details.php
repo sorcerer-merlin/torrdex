@@ -106,7 +106,8 @@ _END;
 		$row = $result->fetch_object();
 		$TorrentName = $row->name;
 		$TorrentType = $TorrentTypes[$row->type];
-		$TorrentUploaded = date("Y-m-d @ h:ia",$row->uploaded);
+		$TorrentUploaded = dateDiff(time(), intval($row->uploaded), 1) . " ago";
+        $TorrentCreated = dateDiff(time(), intval($row->created), 1) . " ago"; //date("Y-m-d @ h:ia",$row->created);
 		$TorrentFiles = $row->files;
 		$TorrentComment = $row->comment;
 		$TorrentMagnet = $row->magnet;
@@ -114,6 +115,8 @@ _END;
 		$TorrentAuthor = getDisplayName($row->author);
 		$TorrentSize = $row->size;
 		$TorrentFileCount = $row->filecount;
+        $RatingGood = getVotes($TorrentHash, "+");
+        $RatingBad = getVotes($TorrentHash, "-");
 
         // Do the description parsing (take MarkDown text from database and change into HTML to display)
         $DescMarkDown = $row->description;
@@ -158,7 +161,7 @@ _END;
                     </td>
                     <td>&nbsp;</td>
                     <td>
-                        <?php print $TorrentType; ?>
+                        <a href="listby?mode=type&param=<?php print $row->type; ?>"><?php print $TorrentType; ?></a>
                     </td>
                     </tr>
                 </table>                
@@ -185,12 +188,16 @@ _END;
             </td>
         </tr>
         <tr>
+            <td class="rowcap" width="168px">Created:</td>
+            <td class="rowdata"> <?php print $TorrentCreated . "<span class='torrent_info'>(" . date("Y-m-d @ h:ia",$row->created) . ")</span>"; ?></td>
+        </tr>
+        <tr>
         	<td class="rowcap" width="168px">Uploaded:</td>
-            <td class="rowdata"> <?php print $TorrentUploaded; ?></td>
+            <td class="rowdata"> <?php print $TorrentUploaded . "<span class='torrent_info'>(" . date("Y-m-d @ h:ia",$row->uploaded) . ")</span>"; ?></td>
         </tr>
         <tr>
         	<td class="rowcap" width="168px">Size:</td>
-            <td class="rowdata"> <?php print humanFileSize($TorrentSize) . " in " . $TorrentFileCount . " files"; ?></td>
+            <td class="rowdata"> <?php print humanFileSize($TorrentSize) . " in " . $TorrentFileCount . " files <span class='torrent_info'>(" . number_format($TorrentSize) . " bytes)</span>"; ?></td>
         </tr>
         <tr>
         	<td class="rowcap" width="168px">Files:</td>
@@ -212,6 +219,22 @@ _END;
         <tr>
         	<td class="rowcap">Description:</td>
             <td class="rowdata">
+                <?php if ($RatingGood != 0 || $RatingBad != 0) { ?>
+                <!-- Rating System -->
+                <table class="rating_table">
+                    <tr>
+                        <td><img src="img/thumbs_up.png" width="32px" height="32px" ALT="Thumbs Up"></td>
+                        <td>&nbsp;</td>
+                        <td><img src="img/thumbs_down.png" width="32px" height="32px" ALT="Thumbs Down"></td>
+                    </tr>
+                    <tr>
+                        <td>+<?php print $RatingGood; ?></td>
+                        <td>&nbsp;</td>
+                        <td>-<?php print $RatingBad; ?></td>
+                    </tr>
+                </table>
+                <!-- End Rating System -->
+                <?php } ?>
                 <div class="torrent-desc">
                 <span id="desc_holder"><?php print $TorrentDesc; ?></span>
                 </div>

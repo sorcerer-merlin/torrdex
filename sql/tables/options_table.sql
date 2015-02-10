@@ -26,7 +26,10 @@ INSERT INTO `options` (`type`, `name`, `value`, `default`, `description`) VALUES
 	('bool', 'enable_pagination', 'false', 'false', 'Page Results from Torrents'),
 	('int', 'torr_per_page', '5', '5', 'Torrents Listed Per Page'),
 	('string', 'site_title', 'TorrDex', 'TorrDex', 'Site Title in Browser'),
-	('string', 'table_caption', '. : = | Sorcerer Merlin\'s TORRent inDEXer | = : .', '. : = | Sorcerer Merlin\'s TORRent inDEXer | = : .', 'Caption of Top-Most Table');
+	('string', 'table_caption', '. : = | Sorcerer Merlin\'s TORRent inDEXer | = : .', '. : = | Sorcerer Merlin\'s TORRent inDEXer | = : .', 'Caption of Top-Most Table'),
+	('string', 'site_root', 'http://localhost/', 'http://localhost/', 'Full URL path to site'),
+	('string', 'site_email', 'auto_admin@localhost', 'auto_admin@localhost', 'Email Address of Administrator'),
+	('bool', 'only_admin_invites', 'true', 'true', 'Only Admin Accounts Can Invite New Users');
 /*!40000 ALTER TABLE `options` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

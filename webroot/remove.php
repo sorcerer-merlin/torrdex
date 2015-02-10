@@ -29,13 +29,19 @@
 			$result = queryMysql($queryString);
 			if (!$result) {
 				// failed to delete the torrent from the DB
-				echo "<h3>Ooops!!!</h3><br>There was an error removing your Torrent from the database!<br><br>";	
+				showError("There was an error removing your torrent from the database. Please contact your Administrator.");
 			}
 			
 			// Delete the file
 			$deleted = unlink("uploads/" . $TorrentHash . ".torrent");
 			if (!$deleted) {
-				echo "<h3>Ooops!!!</h3><br>There was an error removing your Torrent file!<br><br>";
+				showError("There was an error removing your .torrent file from the uploads. Please contact your Administrator.");
+			}
+
+			// Remove all of the comments
+			$result = queryMySQL("DELETE FROM comments WHERE hash='$TorrentHash';");
+			if (!$result) {
+				showError("There was an error removing the torrent's comments. Please contact your Administrator.");
 			}
 			
 			// We made it this far, no issues
