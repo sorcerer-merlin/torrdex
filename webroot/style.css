@@ -9,9 +9,43 @@ html {
 }
 
 /* description HTML tages */
-/* TODO : Add stuff for description HTML for torrents */
+.torrent-desc h1, .torrent-desc h2, .torrent-desc h3, .torrent-desc h4, .torrent-desc h5, .torrent-desc h6 {
+    color: #54ff00;
+    font-family: 'Sigmar One';
+    text-shadow:3px 3px 4px #444;
+}
+.torrent-desc p {
+    font-family: 'Snippet';
+    font-size: 16px;
+}
+.torrent-desc strong {
+    font-family: 'Aclonica';
+    text-shadow:3px 3px 4px #444;
+}
 .torrent-desc {
-    /* TODO */
+    color: #00aeff;
+    font-family: 'Inconsolata';
+    font-size: 16px;
+}
+
+.torrent_info {
+    float: right;
+    color: #54ff00;
+    font-family: 'Inconsolata';
+    font-style: italic;
+}
+
+/* Rating */
+.rating_table {
+    float: right; 
+    padding-top: 5px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Aclonica';
+    font-weight: bolder;
+    font-size: 18px;
+    color: #e4ff00;
+    text-shadow:3px 3px 4px #444;
 }
 
 /* navigation bar */
@@ -660,6 +694,7 @@ table.sortable thead {
  font-size:18px;
  text-decoration:underline;
  vertical-align:middle;
+ text-shadow:3px 3px 4px #444;
  /*cursor:pointer;*/
 }
 
@@ -683,7 +718,7 @@ table.sortable thead {
 /* text-transform:uppercase;*/
  font-size:24px;
  font-family: 'Sigmar One';
- /*text-shadow:3px 3px 4px #444;*/
+ text-shadow:3px 3px 4px #444;
 }
 
 .rowdata { border:1px solid #a200ff;
