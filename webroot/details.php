@@ -9,6 +9,29 @@
     // Add our script
     echo <<<_END
   <script type="text/javascript">
+    function doVote(vote)
+    {
+        //spanobj = O('votes_' + vote)
+        spanobj = O('votes_tabledata')
+        hash = O('torrent-hash').value
+        user = O('user_name').value
+
+      // get the pass and user here and pass it off 
+      params  = "vote=" + vote + "&hash=" + hash + "&user=" + user
+      request = new ajaxRequest()
+      request.open("POST", "vote.php", true)
+      request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+      request.onreadystatechange = function()
+      {
+        if (this.readyState == 4)
+          if (this.status == 200)
+            if (this.responseText != null) {
+              spanobj.innerHTML = this.responseText
+              O('vote_info').innerHTML = "<span class='available'>Already Voted!</span>"
+            }
+      }
+      request.send(params)
+    }
     function toggle(obj){
         obj_text = obj.innerHTML
 
@@ -219,22 +242,33 @@ _END;
         <tr>
         	<td class="rowcap">Description:</td>
             <td class="rowdata">
-                <?php if ($RatingGood != 0 || $RatingBad != 0) { ?>
+                <?php //if ($RatingGood != 0 || $RatingBad != 0) { ?>
                 <!-- Rating System -->
                 <table class="rating_table">
+                <input type="hidden" name="user_name" id="user_name" value="<?php print $_SESSION['user']; ?>">
                     <tr>
-                        <td><img src="img/thumbs_up.png" width="32px" height="32px" ALT="Thumbs Up"></td>
+                        <td class="tooltip" title="Click to Up Vote!"><span title="More"><img class="vote" src="img/thumbs_up.png" width="32px" height="32px" ALT="Thumbs Up" onclick="doVote('up')"></span></td>
                         <td>&nbsp;</td>
-                        <td><img src="img/thumbs_down.png" width="32px" height="32px" ALT="Thumbs Down"></td>
+                        <td class="tooltip" title="Click to Down Vote!"><span title="More2"><img class="vote" src="img/thumbs_down.png" width="32px" height="32px" ALT="Thumbs Down" onclick="doVote('dn')"></span></td>
+                    </tr>
+                    <tr id="votes_tabledata">
+                        <td><span id="votes_up">+<?php print $RatingGood; ?></span></td>
+                        <td>&nbsp;</td>
+                        <td><span id="votes_dn">-<?php print $RatingBad; ?></span></td>
                     </tr>
                     <tr>
-                        <td>+<?php print $RatingGood; ?></td>
-                        <td>&nbsp;</td>
-                        <td>-<?php print $RatingBad; ?></td>
+                        <td colspan="3"><span id="vote_info">
+                        <?php 
+                            if (hasVoted($_SESSION['user'], $TorrentHash))
+                                echo "<span class='available'>Already Voted!</span>";
+                            else
+                                echo "<span class='error'>Please Vote!</span>"
+                        ?>
+                        </span></td>
                     </tr>
                 </table>
                 <!-- End Rating System -->
-                <?php } ?>
+                <?php //} ?>
                 <div class="torrent-desc">
                 <span id="desc_holder"><?php print $TorrentDesc; ?></span>
                 </div>
@@ -270,7 +304,7 @@ _END;
                     <tr>
                         <td>
                             <form method="post" action="remove" onsubmit="return confirm('Are you sure you want to permanently REMOVE this torrent?');">
-                                <input type="hidden" name="torrent-hash" value="<?php print $TorrentHash; ?>" />
+                                <input type="hidden" id="torrent-hash" name="torrent-hash" value="<?php print $TorrentHash; ?>" />
                                 <input type="submit" value="Remove" id="submit">
                             </form>    
                         </td>

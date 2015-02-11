@@ -12,6 +12,7 @@ html {
 .torrent-desc h1, .torrent-desc h2, .torrent-desc h3, .torrent-desc h4, .torrent-desc h5, .torrent-desc h6 {
     color: #54ff00;
     font-family: 'Sigmar One';
+    font-size:24px  ;
     text-shadow:3px 3px 4px #444;
 }
 .torrent-desc p {
@@ -35,6 +36,42 @@ html {
     font-style: italic;
 }
 
+/* Tooltip shit */
+.tooltip{
+    display: inline;
+    position: relative;
+}
+
+.tooltip:hover:after{
+    background: #a200ff;
+    background: rgba(162,0,255,.8);
+    border-radius: 5px;
+    bottom: 46px;
+    color: #54ff00;
+    text-shadow:3px 3px 4px #444;
+    content: attr(title);
+    left: 20%;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    width: 220px;
+    font-family: 'Inconsolata';
+}
+
+.tooltip:hover:before{
+    border: solid;
+    border-color: #a200ff transparent;
+    border-width: 6px 6px 0 6px;
+    bottom: 40px;
+    content: "";
+    left: 50%;
+    position: absolute;
+    z-index: 99;
+    font-family: 'Inconsolata';
+}
+
+
+
 /* Rating */
 .rating_table {
     float: right; 
@@ -46,6 +83,16 @@ html {
     font-size: 18px;
     color: #e4ff00;
     text-shadow:3px 3px 4px #444;
+}
+
+.vote {
+    cursor: pointer;
+    border: none;
+    opacity: 1.0;
+}
+
+.vote:hover {
+    opacity: 0.4;
 }
 
 /* navigation bar */

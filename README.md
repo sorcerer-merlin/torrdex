@@ -25,11 +25,11 @@ Below is a list of completely finished features incorporated into TorrDex. For i
 - Password Reset with Email Verification link and CAPTCHA code
 - Member Invites with Email Verification link and CAPTCHA code
 - Torrent commenting system
+- Torrent rating system
 
 ## To-Do List
 
 This list of features and ideas is not yet implemented in TorrDex. They may have partially working code, or not even be coded at all. Look for them in future releases of the site.
 
 - Theme support
-- Torrent rating system
 - Certified Uploader (aka the Green Skull) system

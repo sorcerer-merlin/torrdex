@@ -66,6 +66,28 @@
     return ($result->num_rows);
   }
 
+  // Have they already voted for the specified torrent?
+  function hasVoted($User, $Hash)
+  {
+    $result = queryMySQL("SELECT hash,user,vote FROM ratings WHERE user='$User' AND hash='$Hash';");
+    if ($result->num_rows == 0)
+        return false;
+    else
+        return true;
+  }
+
+  // Grab their actual vote for this torrent
+  function getVote($User, $Hash)
+  {
+    $result = queryMySQL("SELECT hash,user,vote FROM ratings WHERE user='$User' AND hash='$Hash';");
+    if ($result->num_rows == 0)
+        return NULL;
+    else {
+        $row = $result->fetch_object();
+        return ($row->vote);
+    }
+  }
+
   // Torrent in Database BOOL by 
   function isTorrentinDatabase($hash)
   {

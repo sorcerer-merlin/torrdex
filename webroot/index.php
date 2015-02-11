@@ -128,13 +128,13 @@ developed by <a href="https://github.com/defuse">Taylor Hornby</a>. BitTorrent p
     <li>Password Reset with Email Verification link and CAPTCHA code</li>
     <li>Member Invites with Email Verification link and CAPTCHA code</li>
     <li>Torrent commenting system</li>
+    <li>Torrent rating system</li>
  </ul></div>
  <h3>To-Do List</h3>
  This list of features and ideas is not yet implemented in <strong>TorrDex</strong>. They may have partially working code, or not even be coded at all. Look for them in future releases of the site.
  <div class="feature_list">
  <ul>
  	<li>Theme support</li>
- 	<li>Torrent rating system</li>
  	<li>Certified Uploader (aka the Green Skull) system</li>
  </ul></div>
 </blockquote></div><br /><br />
