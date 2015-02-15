@@ -9,6 +9,26 @@
     // Add our script
     echo <<<_END
   <script type="text/javascript">
+    function doStats()
+    {
+        hash = O('torrent-hash').value
+        spanobj = O('torrent_stats')
+
+      // get the pass and user here and pass it off 
+      params  = "hash=" + hash
+      request = new ajaxRequest()
+      request.open("POST", "post/stats.php", true)
+      request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+      request.onreadystatechange = function()
+      {
+        if (this.readyState == 4)
+          if (this.status == 200)
+            if (this.responseText != null) {
+              spanobj.innerHTML = this.responseText
+            }
+      }
+      request.send(params)        
+    }
     function doVote(vote)
     {
         //spanobj = O('votes_' + vote)
@@ -229,7 +249,7 @@ _END;
         </tr>
         <tr>
             <td class="rowcap" width="168px">Stats:</td>
-            <td class="rowdata">
+            <td class="rowdata"><span id="torrent_stats">
                 <?php if ($WorkingTracker != "NOT_YET") { ?>
                 <span class="torrent_info">(<?php print $DownloadCount; ?> downloads)</span>
                 <table>
@@ -237,6 +257,8 @@ _END;
                         <td><span class="seeders_label">Seeders:</span></td>
                         <td>&nbsp;</td>
                         <td style="text-align:right;"><span class="seeders_number"><?php print number_format($Seeders); ?></span></td>
+                        <td rowspan="2">&nbsp;&nbsp;&nbsp;</td>
+                        <td rowspan="2"><span class="tooltip" title="Click to Refresh Stats!"><img class="vote" src="img/refresh_button.png" width="32px" height="32px" ALT="Refresh Stats" onclick="doStats()"></span></td>
                     </tr>
                     <tr>
                         <td><span class="leechers_label">Leechers:</span></td>
@@ -248,7 +270,7 @@ _END;
                     } else
                         echo "<span class='error'>There are no working trackers as of $ScrapeDate.</span>";
                 ?>
-            </td>
+            </span></td>
         </tr>
         <tr>
         	<td class="rowcap" width="168px">Size:</td>

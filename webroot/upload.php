@@ -6,6 +6,9 @@
 	// Require the Torrent library
 	require_once(dirname(__FILE__) . '/include/libs/BitTorrent/php-bittorrent.phar');
 
+    // Require the scrape library
+    require_once(dirname(__FILE__) . '/include/libs/scrape/jscrape.php');
+
 	// SECURITY: If we are not logged in, you shouldn't be uploading
 	if ($loggedin == FALSE) echo '<script type="text/javascript">window.location = "/"</script>';
 
@@ -194,7 +197,11 @@ _END;
 			
 			// Submit the SQL query
 	        $result = queryMySQL($queryString);
-	        if ($result)
+
+            // UDPATED: Now do the initial torrent scrape for seeders/leechers/downloads stats
+            scrapeTorrent($TorrentHash);
+
+	        //if ($result)
 				echo "<h3>Success!</h3><br>Your torrent has been <b>successfully</b> uploaded, you can view it <a href='details.php?hash=$TorrentHash'>here</a>!";
 		} else
 			showError("This torrent is already in our database (by info-hash). Please contact an administrator.");

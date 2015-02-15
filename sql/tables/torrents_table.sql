@@ -4,7 +4,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Dumping structure for table torrdex.torrents
-DROP TABLE IF EXISTS `torrents`;
 CREATE TABLE IF NOT EXISTS `torrents` (
   `name` tinytext NOT NULL,
   `hash` varchar(40) NOT NULL,
@@ -18,6 +17,12 @@ CREATE TABLE IF NOT EXISTS `torrents` (
   `filecount` int(11) NOT NULL,
   `author` varchar(32) NOT NULL,
   `created` varchar(10) NOT NULL,
+  `trackers` text NOT NULL,
+  `scrape_date` varchar(10) NOT NULL,
+  `seeders` int(11) NOT NULL,
+  `leechers` int(11) NOT NULL,
+  `download_count` int(11) NOT NULL,
+  `working_tracker` text NOT NULL,
   UNIQUE KEY `hash` (`hash`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

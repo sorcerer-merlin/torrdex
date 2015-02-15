@@ -52,5 +52,5 @@
 	}
 
 	// Put out the footer
-	require_once(dirname(__FILE__) . '../include/pieces/footer.php');
+	require_once(dirname(__FILE__) . '/../include/pieces/footer.php');
 ?>
