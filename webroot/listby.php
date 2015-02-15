@@ -6,12 +6,52 @@
     
 	// SECURITY: If we are not logged in, you shouldn't be uploading
 	if ($loggedin == FALSE) echo '<script type="text/javascript">window.location = "/"</script>';
+
+    // Java script
+    echo <<<_END
+  <script type="text/javascript">
+    function doSortSwitch(newcolumn)
+    {
+        // Get all of the values 
+        orderby = O('orderby').value
+        sortorder = O('sortorder').value
+        mode = O('mode').value
+        param = O('param').value
+        offset = O('offset').value
+
+        // switch the sort order, first checking to see if we have a new column to switch to, if so
+        // default sort order is desc
+        if (orderby == newcolumn) { 
+            // no column change
+            if (sortorder == 'desc')
+                sortorder = 'asc'
+            else
+                sortorder = 'desc'
+            offset = '0'
+        } else {
+            // we have a new column so start with default sort order DESC and reset offset to 0
+            sortorder = 'asc'
+            offset = '0'
+        }
+
+
+        // Fix new values
+        O('orderby').value = newcolumn
+        O('sortorder').value = sortorder
+        O('offset').value = offset
+
+        // Change the page based on what we got 
+        window.location = "listby?mode=" + mode + "&param=" + param + "&offset=" + offset + "&orderby=" + newcolumn + "&sortorder=" + sortorder
+    }
+  </script>
+_END;
 	
 	// check for keywords or display form
 	if (!isset($_GET['mode']) && !isset($_GET['param'])) {
 		showError("No terms were passed to list Torrents by.");
 	} else {
 		$Mode = $_GET['mode'];
+        $Param = $_GET['param'];
 
         // Pagination. Check to see if they specified a start page number, or not. Fix it.
         $LimitPerPage = $configOptions_Integers['torr_per_page'];
@@ -40,13 +80,36 @@
 		}
 
         // Use pagination or not
-        if ($configOptions_Booleans['enable_pagination'] == "true")
+        if ($configOptions_Booleans['enable_pagination'] == "true") {
             $Paging = " LIMIT " . $offset . "," . $LimitPerPage;
-        else
+            // Let's do an order by parameter from the GET var
+            if (!isset($_GET['orderby'])) {
+                $OrderBy = 'uploaded';
+            } else {
+                if (!isValidSortColumn($_GET['orderby'])) 
+                    $OrderBy = 'uploaded';
+                else
+                    $OrderBy = $_GET['orderby'];
+            }
+            // Let's do a sorting order parameter from the GET var
+            if (!isset($_GET['sortorder'])) {
+                $SortOrder = 'desc';
+            } else {
+                if (!isValidSortOrder($_GET['sortorder']))
+                    $SortOrder = 'desc';
+                else
+                    $SortOrder = $_GET['sortorder'];
+            }
+        } else {
             $Paging = "";
+            $OrderBy = 'uploaded';
+            $SortOrder = 'desc';
+        }
 
         // Do the actual query put together
-        $result = queryMySQL("SELECT * FROM torrents " . $Where . " ORDER BY uploaded DESC" . $Paging  . ";");
+        $finalQuery = "SELECT * FROM torrents " . $Where . " ORDER BY " . $OrderBy . " " . strtoupper($SortOrder) . $Paging  . ";";
+        //echo $finalQuery . "<br>";
+        $result = queryMySQL($finalQuery);
 			
 		// Check to make sure we have it in the database before continuing
 		if ($result->num_rows == 0) {
@@ -54,16 +117,25 @@
 		} else {
 ?>
         <h3><?php print $ListHeading; ?></h3>
-        <table width="90%" class="sortable">
+        <?php
+            echo <<<_ENDD
+            <input type="hidden" id="mode" value="$Mode">
+            <input type="hidden" id="param" value="$Param">
+            <input type="hidden" id="offset" value="$offset">
+            <input type="hidden" id="orderby" value="$OrderBy">
+            <input type="hidden" id="sortorder" value="$SortOrder">
+_ENDD;
+        ?>
+        <table width="90%"<?php if ($Paging == "") print ' class="sortable"'; else print ' class="jsort"'; ?>>
         <tr>
-        	<td class="rowcap">Type:</td>
-            <td class="rowcap" width="40%" style="text-align:center;">Name:</td>
-            <td class="rowcap">Age:</td>
-            <td class="rowcap">Seeds:</td>
-            <td class="rowcap">Peers:</td>
-            <td class="rowcap">Size:</td>
-            <td class="rowcap">Files:</td>
-            <td class="rowcap">Author:</td>
+        	<td class="rowcap"<?php if ($Paging != "") print " onclick=\"doSortSwitch('type')\""; ?>>Type:<?php if ($OrderBy == "type" && $Paging != "") print " " . getSortIcon($SortOrder); ?></td>
+            <td class="rowcap" width="40%" style="text-align:center;"<?php if ($Paging != "") print " onclick=\"doSortSwitch('name')\""; ?>>Name:<?php if ($OrderBy == "name" && $Paging != "") print " " . getSortIcon($SortOrder); ?></td>
+            <td class="rowcap"<?php if ($Paging != "") print " onclick=\"doSortSwitch('uploaded')\""; ?>>Age:<?php if ($OrderBy == "uploaded" && $Paging != "") print " " . getSortIcon($SortOrder); ?></td>
+            <td class="rowcap"<?php if ($Paging != "") print " onclick=\"doSortSwitch('seeders')\""; ?>>Seeds:<?php if ($OrderBy == "seeders" && $Paging != "") print " " . getSortIcon($SortOrder); ?></td>
+            <td class="rowcap"<?php if ($Paging != "") print " onclick=\"doSortSwitch('leechers')\""; ?>>Peers:<?php if ($OrderBy == "leechers" && $Paging != "") print " " . getSortIcon($SortOrder); ?></td>
+            <td class="rowcap"<?php if ($Paging != "") print " onclick=\"doSortSwitch('size')\""; ?>>Size:<?php if ($OrderBy == "size" && $Paging != "") print " " . getSortIcon($SortOrder); ?></td>
+            <td class="rowcap"<?php if ($Paging != "") print " onclick=\"doSortSwitch('filecount')\""; ?>>Files:<?php if ($OrderBy == "filecount" && $Paging != "") print " " . getSortIcon($SortOrder); ?></td>
+            <td class="rowcap"<?php if ($Paging != "") print " onclick=\"doSortSwitch('author')\""; ?>>Author:<?php if ($OrderBy == "author" && $Paging != "") print " " . getSortIcon($SortOrder); ?></td>
         </tr>
         
 <?php
@@ -133,10 +205,19 @@
         <br>
 <?php
 if ($configOptions_Booleans['enable_pagination'] == "true") {
-    $NextLink = '<a href="'. $_SERVER['PHP_SELF'] .'?mode=' . $Mode .'&param=' . $_GET['param'] .'&offset='.($offset+$LimitPerPage).'">Next &gt;&gt;</a>';
-    $PrevLink = '<a href="'. $_SERVER['PHP_SELF'] .'?mode=' . $Mode .'&param=' . $_GET['param'] .'&offset='.($offset-$LimitPerPage).'">&lt;&lt; Prev</a>';
-    if ($offset > 0) echo $PrevLink . "&nbsp;&nbsp;&nbsp;&nbsp;";
-    if (($offset+$LimitPerPage) < countTorrents($Mode, $_GET['param'])) echo $NextLink;
+    $NextLink = '<a href="'. $_SERVER['PHP_SELF'] .'?mode=' . $Mode .'&param=' . $_GET['param'] .'&offset='.($offset+$LimitPerPage).'&orderby=' . $OrderBy . '&sortorder=' . $SortOrder . '">Next &gt;&gt;</a>';
+    $PrevLink = '<a href="'. $_SERVER['PHP_SELF'] .'?mode=' . $Mode .'&param=' . $_GET['param'] .'&offset='.($offset-$LimitPerPage).'&orderby=' . $OrderBy . '&sortorder=' . $SortOrder . '">&lt;&lt; Prev</a>';
+    
+    if ($offset > 0) 
+        echo $PrevLink . "&nbsp;&nbsp;&nbsp;&nbsp;";
+    else
+        echo "<span class='disabledlink'>&lt;&lt; Prev</span>&nbsp;&nbsp;&nbsp;&nbsp;";
+
+    if (($offset+$LimitPerPage) < countTorrents($Mode, $_GET['param'])) 
+        echo $NextLink;
+    else
+        echo "<span class='disabledlink'>Next &gt;&gt;</span>";
+
 }
 ?>
         <br><br>

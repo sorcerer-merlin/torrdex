@@ -42,6 +42,10 @@
   $TorrentTypes[TORR_TYPE_OTHER] = "Other";
   define("DEFAULT_TORR_TYPE", TORR_TYPE_OTHER);
 
+  /* Define Constants for Sorting w/ Pagination */
+  define("SORT_ARROW_DSC", "&#x25BE;"); // ARROW DN   --- descending = largest to smallest 55, 14, 8, 3
+  define("SORT_ARROW_ASC", "&#x25B4;"); // ARROW UP   --- ascending = smallest to largest   3, 8, 14, 55
+
   /* Begin Functions code block */
   // Run MySQL query and return the result object
   function queryMysql($query)
@@ -57,6 +61,29 @@
   {
   	global $connection;
   	return($connection->error);
+  }
+
+  // Get the sort order icon
+  function getSortIcon($order)
+  {
+    if ($order == "desc")
+      return(SORT_ARROW_DSC);
+    elseif ($order == "asc")
+      return(SORT_ARROW_ASC);
+  }
+
+  // Get a valid column to sort by
+  function isValidSortColumn($column)
+  {
+      $valid_columns = array("type", "name", "uploaded", "seeders", "leechers", "size", "filecount", "author");
+      return(in_array($column, $valid_columns));
+  }
+
+  // Get a valid sort order
+  function isValidSortOrder($order)
+  {
+      $valid_orders = array("asc", "desc");
+      return(in_array($order, $valid_orders));
   }
 
   // Get votes for torrent hash

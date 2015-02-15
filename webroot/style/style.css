@@ -706,10 +706,24 @@ a:hover {
 	font-size:14px;
 }
 
+.disabledlink {
+  color: #7c7c7c;
+  text-decoration: none;
+  font-family:'Snippet';
+  font-size:14px;
+  text-shadow:3px 3px 4px #444;
+  cursor:not-allowed;
+}
+
 /* Sortable tables */
 table.sortable thead {
     cursor: pointer;
 }   
+
+/* sortable tables when using pagination (change the pointer mostly, maybe more later!) */
+table.jsort td.rowcap {
+  cursor: pointer;
+}
 
 /* style for torrent table */
 .commenttime {
