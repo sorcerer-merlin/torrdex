@@ -1,6 +1,6 @@
 <?php
 	// Grab our functions (mySQL, etc.)
-	require_once 'functions.php';
+	require_once(dirname(__FILE__) . '/../include/functions.php');
 	
 
 	if (isset($_POST['user']) && isset($_POST['fullname']) && isset($_POST['acct_type']) && isset($_POST['certified']) && isset($_POST['login'])) {

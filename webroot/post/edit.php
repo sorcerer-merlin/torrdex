@@ -2,7 +2,7 @@
 
     // Put out the header
     $pageTitle = "Edit Torrent";
-    require_once('header.php');
+    require_once(dirname(__FILE__) . '/../include/pieces/header.php');
 
     // TODO: make sure the torrent exists, make sure
     // we have changed something to even update (<--- that last part maybe silly IDK performance reasons?!)
@@ -43,5 +43,5 @@
     }
 
     // Put out the footer
-    require_once('footer.php');
+    require_once(dirname(__FILE__) . '../include/pieces/footer.php');
 ?>

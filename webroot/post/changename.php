@@ -1,6 +1,6 @@
 <?php
 	// Grab our functions (mySQL, etc.)
-	require_once 'functions.php';
+	require_once(dirname(__FILE__) . '/../include/functions.php');
 
 	if (isset($_POST['user']) && isset($_POST['fullname'])) {
 		$user = $_POST['user'];

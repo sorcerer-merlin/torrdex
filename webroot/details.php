@@ -1,7 +1,7 @@
 <?php
     $pageTitle = "Torrent Details";
-	require_once 'header.php';
-    require_once 'Parsedown.php';
+    require_once(dirname(__FILE__) . '/include/pieces/header.php');
+    require_once(dirname(__FILE__) . '/include/libs/MarkDown/Parsedown.php');
 
     // Init the MarkDown parsing library
     $Parsedown = new Parsedown();
@@ -19,7 +19,7 @@
       // get the pass and user here and pass it off 
       params  = "vote=" + vote + "&hash=" + hash + "&user=" + user
       request = new ajaxRequest()
-      request.open("POST", "vote.php", true)
+      request.open("POST", "post/vote.php", true)
       request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
       request.onreadystatechange = function()
       {
@@ -92,7 +92,7 @@
       // get the pass and user here and pass it off 
       params  = "type=" + type
       request = new ajaxRequest()
-      request.open("POST", "desc.php", true)
+      request.open("POST", "post/desc.php", true)
       request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
       request.onreadystatechange = function()
       {
@@ -140,13 +140,22 @@ _END;
 		$TorrentFileCount = $row->filecount;
         $RatingGood = getVotes($TorrentHash, "+");
         $RatingBad = getVotes($TorrentHash, "-");
+        $Seeders = $row->seeders;
+        $Leechers = $row->leechers;
+        $DownloadCount = $row->download_count;
+        $WorkingTracker = $row->working_tracker;
+        $ScrapeDate = date("Y-m-d",$row->scrape_date); //$row->scrape_date;
 
         // Do the description parsing (take MarkDown text from database and change into HTML to display)
         $DescMarkDown = $row->description;
         $TorrentDesc = $Parsedown->text($row->description);
+
+        // Grab the comments
+        $comment_result = queryMySQL("SELECT * FROM comments WHERE hash='$TorrentHash' ORDER BY time DESC;");
+        $TotalComents = $comment_result->num_rows;
 ?>
     	<!-- Torrent Information -->
-        <form action="edit" method="post" id="edit_form">
+        <form action="post/edit" method="post" id="edit_form">
         </form><br>
         <table width="992px">
         <tr>
@@ -160,7 +169,7 @@ _END;
         </tr>
         <tr>
         	<td class="rowcap" width="168px">Comment:</td>
-            <td class="rowdata" style="font-family:Snippet;"><em><?php print $TorrentComment; ?></em></td>
+            <td class="rowdata" style="font-family:Snippet;"><em><?php print $TorrentComment; ?><span class='torrent_info'>(<?php print number_format($TotalComents); ?> <a href="#com">User Comments</a>)</span></em></td>
         </tr>
         <tr>
         	<td class="rowcap" width="168px">Type:</td>
@@ -219,6 +228,29 @@ _END;
             <td class="rowdata"> <?php print $TorrentUploaded . "<span class='torrent_info'>(" . date("Y-m-d @ h:ia",$row->uploaded) . ")</span>"; ?></td>
         </tr>
         <tr>
+            <td class="rowcap" width="168px">Stats:</td>
+            <td class="rowdata">
+                <?php if ($WorkingTracker != "NOT_YET") { ?>
+                <span class="torrent_info">(<?php print $DownloadCount; ?> downloads)</span>
+                <table>
+                    <tr>
+                        <td><span class="seeders_label">Seeders:</span></td>
+                        <td>&nbsp;</td>
+                        <td style="text-align:right;"><span class="seeders_number"><?php print number_format($Seeders); ?></span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="leechers_label">Leechers:</span></td>
+                        <td>&nbsp;</td>
+                        <td style="text-align:right;"><span class="leechers_number"><?php print number_format($Leechers); ?></span></td>
+                    </tr>
+                </table>
+                <?php 
+                    } else
+                        echo "<span class='error'>There are no working trackers as of $ScrapeDate.</span>";
+                ?>
+            </td>
+        </tr>
+        <tr>
         	<td class="rowcap" width="168px">Size:</td>
             <td class="rowdata"> <?php print humanFileSize($TorrentSize) . " in " . $TorrentFileCount . " files <span class='torrent_info'>(" . number_format($TorrentSize) . " bytes)</span>"; ?></td>
         </tr>
@@ -247,9 +279,9 @@ _END;
                 <table class="rating_table">
                 <input type="hidden" name="user_name" id="user_name" value="<?php print $_SESSION['user']; ?>">
                     <tr>
-                        <td class="tooltip" title="Click to Up Vote!"><span title="More"><img class="vote" src="img/thumbs_up.png" width="32px" height="32px" ALT="Thumbs Up" onclick="doVote('up')"></span></td>
+                        <td class="tooltip" title="Click to Up Vote!"><span title="Up Vote"><img class="vote" src="img/thumbs_up.png" width="32px" height="32px" ALT="Thumbs Up" onclick="doVote('up')"></span></td>
                         <td>&nbsp;</td>
-                        <td class="tooltip" title="Click to Down Vote!"><span title="More2"><img class="vote" src="img/thumbs_down.png" width="32px" height="32px" ALT="Thumbs Down" onclick="doVote('dn')"></span></td>
+                        <td class="tooltip" title="Click to Down Vote!"><span title="Down Vote"><img class="vote" src="img/thumbs_down.png" width="32px" height="32px" ALT="Thumbs Down" onclick="doVote('dn')"></span></td>
                     </tr>
                     <tr id="votes_tabledata">
                         <td><span id="votes_up">+<?php print $RatingGood; ?></span></td>
@@ -303,7 +335,7 @@ _END;
                 <table>
                     <tr>
                         <td>
-                            <form method="post" action="remove" onsubmit="return confirm('Are you sure you want to permanently REMOVE this torrent?');">
+                            <form method="post" action="post/remove" onsubmit="return confirm('Are you sure you want to permanently REMOVE this torrent?');">
                                 <input type="hidden" id="torrent-hash" name="torrent-hash" value="<?php print $TorrentHash; ?>" />
                                 <input type="submit" value="Remove" id="submit">
                             </form>    
@@ -325,7 +357,7 @@ _END;
         <span id="comment_toggle" onclick="toggle(this)">Add your own comment</span>
         <div id="comment_form" style="display:none;">
         <br><br>
-        <form action="comment" method="POST">
+        <form action="post/comment" method="POST">
         <input type="hidden" name="mode" value="add_comment">
         <input type="hidden" name="hash" value="<?php print $TorrentHash; ?>">
         <textarea id="comment_body" name="comment_body" rows="20" cols="60" placeholder="Comment on the quality of the torrent, etc." required="required"></textarea><br><br>
@@ -341,12 +373,12 @@ _END;
                 <td class="rowdata">--><br>
 <?php
 
-                $result = queryMySQL("SELECT * FROM comments WHERE hash='$TorrentHash' ORDER BY time DESC;");
-                if ($result->num_rows == 0)
+                //$comment_result = queryMySQL("SELECT * FROM comments WHERE hash='$TorrentHash' ORDER BY time DESC;");
+                if ($comment_result->num_rows == 0)
                     echo "<div class='comment_body'>There are no comments.</div><br>";
                 else {
                     echo "<table width='992px' align='center'>";
-                    while($row = $result->fetch_object()) { 
+                    while($row = $comment_result->fetch_object()) { 
                         $Author = $row->user;
                         $DisplayName = getDisplayName($Author, false); // we want the user's display name, and returning Anonymous is NOT OK.
                         $CommentID = $row->id;
@@ -366,7 +398,7 @@ _END;
         <?php 
             if ($Author == $_SESSION['user'] || $_SESSION['acct_type'] == ACCT_TYPE_ADMIN) {
         ?>
-            <span class="comment_delete"><a href="delcom?hash=<?php print $TorrentHash; ?>&id=<?php print $CommentID; ?>" onclick="return confirm('Are you sure you want to DELETE this comment?')"><img src="img/x_delete.png" width="16px" height="16px"></a></span>
+            <span class="comment_delete"><a href="get/delcom?hash=<?php print $TorrentHash; ?>&id=<?php print $CommentID; ?>" onclick="return confirm('Are you sure you want to DELETE this comment?')"><img src="img/x_delete.png" width="16px" height="16px"></a></span>
         <?php
             }
         ?>
@@ -401,5 +433,5 @@ _END;
 		echo '<script type="text/javascript">window.location = "/login?page=details?hash=' . $HASH .'"</script>';
 	}
 
-    require_once 'footer.php';
+    require_once(dirname(__FILE__) . '/include/pieces/footer.php');
 ?>

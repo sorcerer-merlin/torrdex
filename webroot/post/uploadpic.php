@@ -1,6 +1,6 @@
 <?php
 	// Grab our functions (mySQL, etc.)
-	require_once 'functions.php';
+	require_once(dirname(__FILE__) . '/../include/functions.php');
 
 	//echo $_POST['user'] . "=" . $_FILES['imageToUpload']['name'];
 

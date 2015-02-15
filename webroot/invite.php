@@ -1,7 +1,7 @@
 <?php
     // Put out the header
     $pageTitle = "Invite New Member";
-    require_once('header.php');
+    require_once(dirname(__FILE__) . '/include/pieces/header.php');
 
 // Output the scripting code for us to check the user, etc. dynamically
     echo <<<_END
@@ -27,7 +27,7 @@
 
       params  = "user=" + user.value
       request = new ajaxRequest()
-      request.open("POST", "checkuser.php", true)
+      request.open("POST", "post/checkuser.php", true)
       request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
       //request.setRequestHeader("Content-length", params.length)
       //request.setRequestHeader("Connection", "close")
@@ -170,7 +170,7 @@ _END;
 
                                 // Do the CAPTCHA stuff
                                 $_SESSION = array();
-                                include("captcha/simple-php-captcha.php");
+                                require_once(dirname(__FILE__) . '/include/libs/captcha/simple-php-captcha.php');
                                 $_SESSION['captcha'] = simple_php_captcha();
 ?>
 <form method='post' action='verify'>
@@ -241,5 +241,5 @@ _END;
         
 
     // Put out the footer
-    require_once('footer.php');
+    require_once(dirname(__FILE__) . '/include/pieces/footer.php');
 ?>

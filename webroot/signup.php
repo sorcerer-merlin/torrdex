@@ -1,8 +1,9 @@
 <?php
 
   $pageTitle = "Sign Up";
-  require_once 'header.php';
-  require_once 'PasswordHash.php';
+  require_once(dirname(__FILE__) . '/include/pieces/header.php');  
+  require_once(dirname(__FILE__) . '/include/libs/PasswordHash/PasswordHash.php');
+ 
   echo "<div style='margin-left:40px;'><h3>Enter your account details below:</h3>";
   $error = $user = $email = $fullname = $pass = $pass2 = "";
 
@@ -33,7 +34,7 @@
 
       params  = "user=" + user.value
       request = new ajaxRequest()
-      request.open("POST", "checkuser.php", true)
+      request.open("POST", "post/checkuser.php", true)
       request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
       //request.setRequestHeader("Content-length", params.length)
       //request.setRequestHeader("Connection", "close")
@@ -140,6 +141,6 @@ _END;
 <!-- End form -->
 <?php
   
-  require_once('footer.php');
+  require_once(dirname(__FILE__) . '/include/pieces/footer.php');
   
 ?>

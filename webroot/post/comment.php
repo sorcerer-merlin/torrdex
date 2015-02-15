@@ -1,7 +1,7 @@
 <?php
     // Put out the header
     $pageTitle = "Comment";
-    require_once('header.php');
+    require_once(dirname(__FILE__) . '/../include/pieces/header.php');
 
     // SECURITY: If we are not logged in, you shouldn't be uploading
     if ($loggedin == FALSE) echo '<script type="text/javascript">window.location = "/"</script>';
@@ -42,5 +42,5 @@
     }
 
     // Put out the footer
-    require_once('footer.php');
+    require_once(dirname(__FILE__) . '../include/pieces/footer.php');
 ?>

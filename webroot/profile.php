@@ -1,8 +1,8 @@
 <?php
 
 $pageTitle = "My Profile";
-require_once 'header.php';
-require_once 'PasswordHash.php';
+require_once(dirname(__FILE__) . '/include/pieces/header.php');
+require_once(dirname(__FILE__) . '/include/libs/PasswordHash/PasswordHash.php');
 
 // SECURITY: If we are not logged in, you shouldn't be looking at a profile
 if ($loggedin == FALSE) echo '<script type="text/javascript">window.location = "/"</script>';
@@ -23,7 +23,7 @@ $AccountType = $_SESSION['acct_type'];
 
       params  = "user=" + user
       request = new ajaxRequest()
-      request.open("POST", "delpic.php", true)
+      request.open("POST", "post/delpic.php", true)
       request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
       //request.setRequestHeader("Content-length", params.length)
       //request.setRequestHeader("Connection", "close")
@@ -63,7 +63,7 @@ $AccountType = $_SESSION['acct_type'];
 
       // Do the actual request
       request = new ajaxRequest()
-      request.open("POST", "uploadpic.php", true)
+      request.open("POST", "post/uploadpic.php", true)
       //request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
       //request.setRequestHeader("Content-length", params.length)
       //request.setRequestHeader("Connection", "close")
@@ -101,7 +101,7 @@ $AccountType = $_SESSION['acct_type'];
           // get the pass and user here and pass it off 
           params  = "user=" + user + "&pass=" + pass1
           request = new ajaxRequest()
-          request.open("POST", "changepass.php", true)
+          request.open("POST", "post/changepass.php", true)
           request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
           //request.setRequestHeader("Content-length", params.length)
           //request.setRequestHeader("Connection", "close")
@@ -128,7 +128,7 @@ $AccountType = $_SESSION['acct_type'];
 
       params  = "user=" + user + "&email=" + email
       request = new ajaxRequest()
-      request.open("POST", "changename.php", true)
+      request.open("POST", "post/changename.php", true)
       request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
       //request.setRequestHeader("Content-length", params.length)
       //request.setRequestHeader("Connection", "close")
@@ -154,7 +154,7 @@ $AccountType = $_SESSION['acct_type'];
 
       params  = "user=" + user + "&fullname=" + fullname
       request = new ajaxRequest()
-      request.open("POST", "changename.php", true)
+      request.open("POST", "post/changename.php", true)
       request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
       //request.setRequestHeader("Content-length", params.length)
       //request.setRequestHeader("Connection", "close")
@@ -180,7 +180,7 @@ $AccountType = $_SESSION['acct_type'];
 
       params  = "user=" + user + "&pass=" + pass
       request = new ajaxRequest()
-      request.open("POST", "checkpass.php", true)
+      request.open("POST", "post/checkpass.php", true)
       request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
       //request.setRequestHeader("Content-length", params.length)
       //request.setRequestHeader("Connection", "close")
@@ -376,6 +376,6 @@ if (isset($_POST['mode'])) {
 /* End of Old Dynamic Code 
 } */
 
-require_once 'footer.php';
+require_once(dirname(__FILE__) . '/include/pieces/footer.php');
 
 ?>

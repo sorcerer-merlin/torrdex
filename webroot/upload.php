@@ -1,10 +1,10 @@
 <?php
 	// Put out the header
 	$pageTitle = "Upload Torrent";
-	require_once('header.php');
+	require_once(dirname(__FILE__) . '/include/pieces/header.php');
 	
 	// Require the Torrent library
-	require_once('php-bittorrent.phar');
+	require_once(dirname(__FILE__) . '/include/libs/BitTorrent/php-bittorrent.phar');
 
 	// SECURITY: If we are not logged in, you shouldn't be uploading
 	if ($loggedin == FALSE) echo '<script type="text/javascript">window.location = "/"</script>';
@@ -30,7 +30,7 @@
       // get the pass and user here and pass it off 
       params  = "type=" + type
       request = new ajaxRequest()
-      request.open("POST", "desc.php", true)
+      request.open("POST", "post/desc.php", true)
 	  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
       request.onreadystatechange = function()
       {
@@ -93,14 +93,26 @@ _END;
 		if ($torrent->getAnnounceList() == "") {
 			$TorrentTrackers =  $torrent->getAnnounce();
 			$TorrentTrackerList = "&tr=" . rawurlencode($TorrentTrackers);
+            $TorrentTrackersDB = $TorrentTrackers;
 		} else {
 			$TorrentTrackers = $torrent->getAnnounceList();
 			$TorrentTrackerList = "";
+            $TorrentTrackersDB = "";
 			foreach ($TorrentTrackers as $Tracker) {
 				//$TorrentTrackerList .= "- " . $Tracker[0] . "<br>";
 				$TorrentTrackerList .= "&tr=" . rawurlencode($Tracker[0]);
+                $TorrentTrackersDB .= $Tracker[0] . ",";
 			}
 		}
+
+        // Do the scrape part here
+        $ArrayResult = 0;
+        $Seeders = 0;
+        $Leechers = 0;
+        $Downloads = 0;
+        $ScrapeTime = time();
+        $TorrentTrackersDB = EscapeQuotes($TorrentTrackersDB);
+        $WorkingTracker = "NOT_YET";
 
 		// Comment shouldn't be NULL
 		if ($TorrentComment == "") $TorrentComment = "No Comment";
@@ -177,7 +189,7 @@ _END;
 			// Torrent is NOT in the database
 			// Make the SQL query
 			$queryString = "INSERT INTO torrents VALUES" .
-			 "('$TorrentName', '$TorrentHash', '$TorrentType', '$TorrentUploaded', '$TorrentFileList', '$TorrentComment', '$TorrentDesc', '$TorrentMagnet', '$TorrentTotalSize', '$TorrentFileCount', '$TorrentAuthor', '$TorrentCreated')";
+			 "('$TorrentName', '$TorrentHash', '$TorrentType', '$TorrentUploaded', '$TorrentFileList', '$TorrentComment', '$TorrentDesc', '$TorrentMagnet', '$TorrentTotalSize', '$TorrentFileCount', '$TorrentAuthor', '$TorrentCreated', '$TorrentTrackersDB', '$ScrapeTime', '$Seeders', '$Leechers', '$Downloads', '$WorkingTracker')";
 			//echo $queryString;
 			
 			// Submit the SQL query
@@ -243,5 +255,5 @@ _END;
 	}
 	
 	// Put out the footer
-	require_once('footer.php');
+	require_once(dirname(__FILE__) . '/include/pieces/footer.php');
 ?>

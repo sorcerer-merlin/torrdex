@@ -1,7 +1,7 @@
 <?php 
   // Start the cookie session for the login variables
   session_start();
-  require_once 'functions.php';
+  require_once(dirname(__FILE__) . '/../functions.php');
 ?>   
 <!DOCTYPE html>
 <head>
@@ -15,13 +15,13 @@
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Inconsolata" />
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Atomic+Age" />
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Spirax" />
-<link href="/style.css" rel="stylesheet" type="text/css" />
-<link href="favicon.ico" rel="icon" type="image/x-icon" />
-<script type="text/javascript" src="ibox/ibox.js"></script>
-<link rel="stylesheet" href="ibox/skins/darkbox/darkbox.css" type="text/css" media="screen"/>
-<script src='javascript.js'></script>
-<script src="sorttable.js"></script> 
-<script type="text/javascript" src="MaskedPassword.js"></script>
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+<link rel="stylesheet" type="text/css" href="include/libs/ibox/skins/darkbox/darkbox.css" media="screen"/>
+<link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+<script type="text/javascript" src="include/libs/ibox/ibox.js"></script>
+<script type="text/javascript" src='javascript/javascript.js'></script>
+<script type="text/javascript" src="javascript/sorttable.js"></script> 
+<script type="text/javascript" src="javascript/MaskedPassword.js"></script>
 </head>
 <?php
   

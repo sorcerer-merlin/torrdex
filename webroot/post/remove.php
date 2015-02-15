@@ -2,10 +2,12 @@
 
 	// Put out the header
 	$pageTitle = "Remove Torrent";
-	require_once('header.php');
+	require_once(dirname(__FILE__) . '/../include/pieces/header.php');
 
 	// SECURITY: If we are not logged in, you shouldn't be removing a torrent
 	if ($loggedin == FALSE) echo '<script type="text/javascript">window.location = "/"</script>';
+
+	// TODO: check validity of torrent-hash, maybe even write a function that does it in functions.php
 
 	$TorrentHash = $_POST['torrent-hash'];
 	
@@ -49,6 +51,6 @@
 		}
 	}
 
-	require_once('footer.php');
-
+	// Put out the footer
+	require_once(dirname(__FILE__) . '../include/pieces/footer.php');
 ?>

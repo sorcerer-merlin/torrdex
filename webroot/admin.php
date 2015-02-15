@@ -1,7 +1,8 @@
 <?php
 	// Put out the header
 	$pageTitle = "Admin";
-	require_once('header.php');
+	require_once(dirname(__FILE__) . '/include/pieces/header.php');
+
 	$success = "";
 
 	// Add our script
@@ -21,7 +22,7 @@
 
       params  = "user=" + user
       request = new ajaxRequest()
-      request.open("POST", "deluser.php", true)
+      request.open("POST", "post/deluser.php", true)
       request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
       //request.setRequestHeader("Content-length", params.length)
       //request.setRequestHeader("Connection", "close")
@@ -50,7 +51,7 @@
 
       params  = "user=" + user + "&acct_type=" + acct_type + "&fullname=" + fullname + "&certified=" + certified + "&login=" + login
       request = new ajaxRequest()
-      request.open("POST", "moduser.php", true)
+      request.open("POST", "post/moduser.php", true)
       request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
       //request.setRequestHeader("Content-length", params.length)
       //request.setRequestHeader("Connection", "close")
@@ -292,5 +293,5 @@ _END;
 <?php
 
 	// Put out the footer
-	require_once('footer.php')
+	require_once(dirname(__FILE__) . '/include/pieces/footer.php');
 ?>

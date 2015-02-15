@@ -1,7 +1,7 @@
 <?php
 	// Grab our functions (mySQL, etc.)
-	require_once 'functions.php';
-	require_once 'PasswordHash.php';
+	require_once(dirname(__FILE__) . '/../include/functions.php');
+	require_once(dirname(__FILE__) . '/../include/libs/PasswordHash/PasswordHash.php');
 
 	if (isset($_POST['user']) && isset($_POST['pass'])) {
 		$user = $_POST['user'];

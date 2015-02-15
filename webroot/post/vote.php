@@ -1,6 +1,6 @@
 <?php
     // Grab our functions (mySQL, etc.)
-    require_once 'functions.php';
+    require_once(dirname(__FILE__) . '/../include/functions.php');
 
     if (isset($_POST['hash']) && isset($_POST['vote']) && isset($_POST['user'])) {
         $User = $_POST['user'];

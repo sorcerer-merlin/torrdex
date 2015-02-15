@@ -1,7 +1,6 @@
 <?php
 	$pageTitle = "Home";
-	require_once 'header.php';
-    
+    	require_once(dirname(__FILE__) . '/include/pieces/header.php');
 	
 	if ($loggedin) {
 		$fullname = $_SESSION['fullname'];
@@ -19,8 +18,10 @@
         <table width="90%" class="sortable">
         <tr>
         	<td class="rowcap">Type:</td>
-            <td class="rowcap" width="50%" style="text-align:center;">Name:</td>
+            <td class="rowcap" width="40%" style="text-align:center;">Name:</td>
             <td class="rowcap">Age:</td>
+            <td class="rowcap">Seeds:</td>
+            <td class="rowcap">Peers:</td>
             <td class="rowcap">Size:</td>
             <td class="rowcap">Files:</td>
             <td class="rowcap">Author:</td>
@@ -38,6 +39,8 @@
 		$TorrentSize = $row->size;
 		$TorrentFileCount = $row->filecount;
 		$TorrentAge = dateDiff(time(), intval($row->uploaded), 1);
+        $Seeders = $row->seeders;
+        $Leechers = $row->leechers;
 
 
 ?>
@@ -58,6 +61,8 @@
         	</td>
             <td class="rowdata" width="300px"><a href="details?hash=<?php print $TorrentHash; ?>"><?php print $TorrentName; ?></a></td>
             <td class="rowdata" style="text-align:right;" sorttable_customkey="<?php print $row->uploaded; ?>"><?php print $TorrentAge; ?></td>
+            <td class="rowdata" style="text-align:right;"><span class="seeders_number"><?php print number_format($Seeders); ?></span></td>
+            <td class="rowdata" style="text-align:right;"><span class="leechers_number"><?php print number_format($Leechers); ?></span></td>
             <td class="rowdata" style="text-align:center;" sorttable_customkey="<?php print $row->size; ?>"><?php print humanFileSize($TorrentSize); ?></td>
             <td class="rowdata" style="text-align:center;"><?php print $TorrentFileCount; ?></td>
             <td class="rowdata" style="text-align:right;" >
@@ -146,5 +151,5 @@ developed by <a href="https://github.com/defuse">Taylor Hornby</a>. BitTorrent p
 	</td>
   </tr>
 <?php  
-    require_once 'footer.php';
+    require_once(dirname(__FILE__) . '/include/pieces/footer.php');
 ?>

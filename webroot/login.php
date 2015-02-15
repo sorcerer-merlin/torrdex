@@ -1,7 +1,8 @@
 <?php 
   $pageTitle = "Login";
-  require_once 'header.php';
-  require_once 'PasswordHash.php';
+  require_once(dirname(__FILE__) . '/include/pieces/header.php');
+  require_once(dirname(__FILE__) . '/include/libs/PasswordHash/PasswordHash.php');
+
   echo "<h3>Enter your login details below:</h3>";
   $error = $user = $pass = "";
 
@@ -85,5 +86,5 @@
     new MaskedPassword(document.getElementById("pass-field"), '\u25C6'); //'\u25CF');
   </script>
 <?php
-  require_once 'footer.php';
+  require_once(dirname(__FILE__) . '/include/pieces/footer.php');
 ?>

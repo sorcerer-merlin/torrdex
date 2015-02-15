@@ -1,11 +1,41 @@
 /* Style for the main background */
 html { 
-  background: url(img/Background.png) no-repeat center center fixed; 
+  background: url(/img/Background.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   color:#00aeff;
+}
+
+/* seeders and leechers */
+.leechers_label {
+  color:#FE0001;
+  font-weight: bold;
+  font-family: 'Aclonica';
+  font-size:16px;
+  text-shadow:3px 3px 4px #444;
+}
+.seeders_label {
+  color:#54ff00;
+  font-weight: bold;
+  font-family: 'Aclonica';
+  font-size:16px;
+  text-shadow:3px 3px 4px #444;
+}
+.leechers_number {
+  color:#FE0001;
+  font-weight: bold;
+  font-family: 'Inconsolata';
+  font-size:16px;
+  text-shadow:3px 3px 4px #444;
+}
+.seeders_number {
+  color:#54ff00;
+  font-weight: bold;
+  font-family: 'Inconsolata';
+  font-size:16px;
+  text-shadow:3px 3px 4px #444;
 }
 
 /* description HTML tages */
@@ -463,7 +493,7 @@ input[type="password"]:focus {
 
 /* fix the list items */
 .feature_list ul {
-   list-style-image: url('img/Bullet.png');
+   list-style-image: url('/img/Bullet.png');
    vertical-align: middle;
 }
 .feature_list li { 
@@ -596,7 +626,7 @@ pre {
 }
 
 #header { 
-    background: url(img/torrdex_logo.png);
+    background: url(/img/torrdex_logo.png);
     background-size: 180px 170px;
     background-position: center center;
     background-repeat: no-repeat;
@@ -775,6 +805,7 @@ table.sortable thead {
  font-size:14px;
  font-family: Merriweather;
  vertical-align:middle;
+ text-shadow:3px 3px 4px #444;
 }
 
 .rowdata:hover {

@@ -1,7 +1,7 @@
 <?php
   
   // Get the MySQL configuration
-  require_once('mysql.php');
+  require_once(dirname(__FILE__) . '/config/mysql.php');
 
   // Set the time zone
   date_default_timezone_set("UTC");

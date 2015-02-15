@@ -1,7 +1,7 @@
 <?php
     // Put out the header
     $pageTitle = "Forgot Username/Password";
-    require_once('header.php');
+    require_once(dirname(__FILE__) . '/include/pieces/header.php');
 
 // Add our script
  echo <<<_END
@@ -30,7 +30,7 @@
           // get the pass and user here and pass it off 
           params  = "user=" + user + "&pass=" + pass1
           request = new ajaxRequest()
-          request.open("POST", "changepass.php", true)
+          request.open("POST", "post/changepass.php", true)
           request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
           //request.setRequestHeader("Content-length", params.length)
           //request.setRequestHeader("Connection", "close")
@@ -185,7 +185,7 @@ _END;
                                 // Do the CAPTCHA stuff.
                                 //session_start(); <---- should have already happened by this point
                                 $_SESSION = array();
-                                include("captcha/simple-php-captcha.php");
+                                require_once(dirname(__FILE__) . '/include/libs/captcha/simple-php-captcha.php');
                                 $_SESSION['captcha'] = simple_php_captcha();
 ?>
                                 <h3>Reset your password:</h3>
@@ -260,5 +260,5 @@ _END;
     }
 
     // Put out the footer
-    require_once('footer.php');
+    require_once(dirname(__FILE__) . '/include/pieces/footer.php');
 ?>
