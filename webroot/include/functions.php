@@ -241,10 +241,16 @@
     <html>
     <head>
     <title>$subject</title>
+    <link rel='stylesheet' type='text/css' href='$SiteRoot/style/email.css' />
     </head>
     <body>
-        <img src='$SiteRoot/img/torrdex_logo.png' width='180' height='170' ALT='TorrDex Logo'><br><br>
-        <h2>$subject</h2>
+        <table>
+        <tr>
+          <td><img src='$SiteRoot/img/torrdex_logo.png' width='180' height='170' ALT='TorrDex Logo'></td>
+          <td valign='middle'><h1>$subject</h1></td>
+        </tr>
+        </table>
+        <Br>
         <h3>Dear $nicname,</h3>
         <p>You have been invited to join the Semi-Private BitTorrent Community, TorrDex. A current member has selected you
         personally for an invite. If you are not interested, please discard this email. Please use the link below to complete<br><br>
@@ -293,10 +299,16 @@
     <html>
     <head>
     <title>$subject</title>
+    <link rel='stylesheet' type='text/css' href='$SiteRoot/style/email.css' />
     </head>
     <body>
-        <img src='$SiteRoot/img/torrdex_logo.png' width='180' height='170' ALT='TorrDex Logo'><br><br>
-        <h2>$subject</h2>
+        <table>
+        <tr>
+          <td><img src='$SiteRoot/img/torrdex_logo.png' width='180' height='170' ALT='TorrDex Logo'></td>
+          <td valign='middle'><h1>$subject</h1></td>
+        </tr>
+        </table>
+        <br>
         <h3>Dear $DisplayName,</h3>
         <p>You have requested to reset the password on your account.&nbsp; If you did not make this request, please contact your
         Administrator. &nbsp;Please use the link below to complete the verification process and reset your password.<br><br>
