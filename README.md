@@ -14,18 +14,16 @@ TorrDex is built using [HTML5](http://en.wikipedia.org/wiki/HTML5), [PHP5](http:
 
 Below is a list of completely finished features incorporated into TorrDex. For incomplete or planned features, look at the next section.
 
-- 3 types of User Accounts with encrypted Passwords and Display Names
-- Profile picture (avatar) support
-- New User sign up's available only when enabled in the Administration panel
-- Session-based login system, with modifiable User profiles
-- Searchable database of Torrents with sortable Table columns
-- Ability to Upload Torrents to database
-- Administration panel with the ability to make changes and remove users, as well as enable/disable global options that change functionality of the site
-- Customizable Torrent Description templates for new uploads to ease in the writing of Torrent Descriptions (now with MarkDown support!)
-- Password Reset with Email Verification link and CAPTCHA code
-- Member Invites with Email Verification link and CAPTCHA code
-- Torrent commenting system
-- Torrent rating system
+- Member Accounts with 3 Levels of Access, Encrypted Passwords & Avatars
+- New User Sign Up's (Only If Enabled in Administration Panel)
+- Session-Based Login System With Modifiable User Profiles
+- Searchable Database of Torrents with Sorting and Pagination
+- Ability to Upload New Torrents to Database with 2 Levels of Access
+- Administration Panel with Access to TorrDex Options and User Administration and Removal
+- Customizable Torrent Description Templates for New Uploads with MarkDown Support
+- Password Reset System with Email Encrypted Verification Link and CAPTCHA code
+- Member Invites with Email Encrypted Verification Link and CAPTCHA code
+- Complex Torrent Commenting / Rating System with Administration Support
 
 ## To-Do List
 

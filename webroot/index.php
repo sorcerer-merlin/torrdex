@@ -122,18 +122,16 @@ developed by <a href="https://github.com/defuse">Taylor Hornby</a>. BitTorrent p
  Below is a list of completely finished features incorporated into <strong>TorrDex</strong>.  For incomplete or planned features, look at the next section.
  <div class="feature_list">
  <ul>
- 	<li>3 types of User Accounts with encrypted Passwords and Display Names</li>
- 	<li>Profile picture (avatar) support</li>
- 	<li>New User sign up's available only when enabled in the Administration panel</li>
- 	<li>Session-based login system, with modifiable User profiles</li>
- 	<li>Searchable database of Torrents with sortable Table columns</li>
- 	<li>Ability to Upload Torrents to database</li>
- 	<li>Administration panel with the ability to make changes and remove users, as well as enable/disable global options that change functionality of the site</li>
- 	<li>Customizable Torrent Description templates for new uploads to ease in the writing of Torrent Descriptions (now with MarkDown support!)</li>
-    <li>Password Reset with Email Verification link and CAPTCHA code</li>
-    <li>Member Invites with Email Verification link and CAPTCHA code</li>
-    <li>Torrent commenting system</li>
-    <li>Torrent rating system</li>
+    <li>Member Accounts with 3 Levels of Access, Encrypted Passwords & Avatars</li>
+    <li>New User Sign Up's (Only If Enabled in Administration Panel)</li>
+    <li>Session-Based Login System With Modifiable User Profiles</li>
+    <li>Searchable Database of Torrents with Sorting and Pagination</li>
+    <li>Ability to Upload New Torrents to Database with 2 Levels of Access</li>
+    <li>Administration Panel with Access to TorrDex Options and User Administration and Removal</li>
+    <li>Customizable Torrent Description Templates for New Uploads with MarkDown Support</li>
+    <li>Password Reset System with Email Encrypted Verification Link and CAPTCHA code</li>
+    <li>Member Invites with Email Encrypted Verification Link and CAPTCHA code</li>
+    <li>Complex Torrent Commenting / Rating System with Administration Support</li>
  </ul></div>
  <h3>To-Do List</h3>
  This list of features and ideas is not yet implemented in <strong>TorrDex</strong>. They may have partially working code, or not even be coded at all. Look for them in future releases of the site.
