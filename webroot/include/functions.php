@@ -223,115 +223,84 @@
 	}
   }
 
-// Send an email with a verification link
-  function sendEmailInvite($nickname,$to,$link)
+  // Send an email with a verification link for a password reset
+  function sendEmailPassReset($user,$to,$link)
   {
-    // Pull our config variables from global
-    global $configOptions_Strings;
-
-    // Make the subject
-    $subject = $configOptions_Strings['site_title'] . " Member Invite";
-
-    // Get the site root
-    $SiteRoot = $configOptions_Strings['site_root'];
-    $SiteAdmin = $configOptions_Strings['site_email'];
-
-    // message
-    $message = "
-    <html>
-    <head>
-    <title>$subject</title>
-    <link rel='stylesheet' type='text/css' href='$SiteRoot/style/email.css' />
-    </head>
-    <body>
-        <table>
-        <tr>
-          <td><img src='$SiteRoot/img/torrdex_logo.png' width='180' height='170' ALT='TorrDex Logo'></td>
-          <td valign='middle'><h1>$subject</h1></td>
-        </tr>
-        </table>
-        <Br>
-        <h3>Dear $nicname,</h3>
-        <p>You have been invited to join the Semi-Private BitTorrent Community, TorrDex. A current member has selected you
-        personally for an invite. If you are not interested, please discard this email. Please use the link below to complete<br><br>
-         the verification process and create your new account.<br><br>
-        <a href='$link'>$link</a><br><br>
-        ~ Auto Administrator.
-        </p>
-    </body>
-    </html>
-    ";
-
-    // To send HTML mail, the Content-type header must be set
-    $headers  = 'MIME-Version: 1.0' . "\r\n";
-    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
-    // Additional headers
-    //$headers .= 'To: Mary <mary@example.com>, Kelly <kelly@example.com>' . "\r\n";
-    $headers .= 'From: Auto Administrator <' . $SiteAdmin . '>' . "\r\n";
-    //$headers .= 'Cc: birthdayarchive@example.com' . "\r\n";
-    //$headers .= 'Bcc: birthdaycheck@example.com' . "\r\n";
-
-    // Mail it
-    mail($to, $subject, $message, $headers);
-  }
-
-  // Send an email with a verification link for Password Reset
-  function sendEmail($user,$to,$link)
-  {
-    // Pull our config variables from global
-    global $configOptions_Strings;
-
-    // Make the subject
-    $subject = $configOptions_Strings['site_title'] . " Reset Password Verification";
-
     // Grab their Display Name
     $result = queryMysql("SELECT fullname FROM members WHERE user='$user';");
     $row = $result->fetch_object();
     $DisplayName = $row->fullname;  
 
-    // Get the site root
+    // Set the variables
+    $Head = "Reset Password Verification";
+    $Subhead = "Dear " . $DisplayName . ",";
+    $LinkName = "Complete Password Reset";
+
+    // Set the paragraph text for the email
+    $Para = "
+        You have requested to reset the password on your account.&nbsp; If you did not make this request, please contact your
+        Administrator. &nbsp;Please use the link below to complete the verification process and reset your password.<br><br>
+        If you have forgotten your Username, it is <strong>$user</strong>.<br><br>
+    ";
+
+    // Do the actual emailing w/ the template
+    sendEmailfromTemplate($to, $Head, $Subhead, $Para, $link, $LinkName);
+  }
+
+  // Send an email with a verification link for a new member invite
+  function sendEmailInvite($nickname,$to,$link)
+  {
+    // Set the variables
+    $Head = "Member Invite";
+    $Subhead = "Dear " . $nickname . ",";
+    $LinkName = "Complete Member Sign Up";
+
+    // Set the paragraph text for the email
+    $Para = "
+      You have been invited to join the Semi-Private BitTorrent Community, TorrDex. &nbsp;A current member has selected you
+      personally for an invite. &nbsp;If you are not interested, please discard this email. &nbsp;Please use the link below to complete
+      the verification process and create your new account.<br><br>
+    ";
+
+    // Do the actual emailing w/ the template
+    sendEmailfromTemplate($to, $Head, $Subhead, $Para, $link, $LinkName);
+  }
+
+  // Send an email using the template we created
+  function sendEmailfromTemplate($To,$Heading,$Subheading,$Paragraph,$LinkAddress,$LinkText)
+  {
+    // First we are going to grab the contents of the email template, via the relative
+    // path based on the current script
+    $TPL = file_get_contents(dirname(__FILE__) . '/email/template.dat');
+
+    // Pull the global variables from outside the function
+    global $configOptions_Strings;
+    $SiteTitle = $configOptions_Strings['site_title'];
     $SiteRoot = $configOptions_Strings['site_root'];
     $SiteAdmin = $configOptions_Strings['site_email'];
 
-    // message
-    $message = "
-    <html>
-    <head>
-    <title>$subject</title>
-    <link rel='stylesheet' type='text/css' href='$SiteRoot/style/email.css' />
-    </head>
-    <body>
-        <table>
-        <tr>
-          <td><img src='$SiteRoot/img/torrdex_logo.png' width='180' height='170' ALT='TorrDex Logo'></td>
-          <td valign='middle'><h1>$subject</h1></td>
-        </tr>
-        </table>
-        <br>
-        <h3>Dear $DisplayName,</h3>
-        <p>You have requested to reset the password on your account.&nbsp; If you did not make this request, please contact your
-        Administrator. &nbsp;Please use the link below to complete the verification process and reset your password.<br><br>
-        <a href='$link'>$link</a><br><br>
-        If you have forgotten your Username, it is <strong>$user</strong>.<br><br>
-        ~ Auto Administrator.
-        </p>
-    </body>
-    </html>
-    ";
+    // Replace all of the placeholders with their actual variables
+    $Heading = $SiteTitle . " " . $Heading;
+    $LogoPath = $SiteRoot . "/img/torrdex_logo.png";
+    $TPL = str_replace('{{heading_text}}', $Heading, $TPL);
+    $TPL = str_replace('{{subheading_text}}', $Subheading, $TPL);
+    $TPL = str_replace('{{paragraph_placeholder}}', $Paragraph, $TPL);
+    $TPL = str_replace('{{link_address}}', $LinkAddress, $TPL);
+    $TPL = str_replace('{{link_text}}', $LinkText, $TPL);
+    $TPL = str_replace('{{site_root}}', $SiteRoot, $TPL);
+    $TPL = str_replace('{{logo_path}}', $LogoPath, $TPL);
 
-    // To send HTML mail, the Content-type header must be set
-    $headers  = 'MIME-Version: 1.0' . "\r\n";
-    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    // TODO: Until we can find another solution, the only way I know of to offer a 
+    // view email in web browser link is to add the body of the message to some
+    // sort of MySQL table and then delete it later or something -- IDK.
 
-    // Additional headers
-    //$headers .= 'To: Mary <mary@example.com>, Kelly <kelly@example.com>' . "\r\n";
-    $headers .= 'From: Auto Administrator <' . $SiteAdmin . '>' . "\r\n";
-    //$headers .= 'Cc: birthdayarchive@example.com' . "\r\n";
-    //$headers .= 'Bcc: birthdaycheck@example.com' . "\r\n";
-
-    // Mail it
-    mail($to, $subject, $message, $headers);
+    // Build the email variables, and then send the email
+    $Subject = $Heading;
+    $Headers  = 'MIME-Version: 1.0' . "\r\n";
+    $Headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $Headers .= 'From: Auto Administrator <' . $SiteAdmin . '>' . "\r\n";
+    $Message = $TPL;
+    mail($To, $Subject, $Message, $Headers);
   }
 
   // Get the display name from the user 

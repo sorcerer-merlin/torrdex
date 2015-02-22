@@ -127,7 +127,7 @@ _END;
 
             // Email the reset link and instructions to the user, and then output some kind of page saying it has been done and they have an
             // hour before it expires.
-            sendEmail($User, $Email, $Link);
+            sendEmailPassReset($User, $Email, $Link);
         }
     }
 
