@@ -270,7 +270,7 @@ _END;
     </td>
     <td class="rowdata" style="text-align:center;">
     	<select class="select-style" id="<?php print $user; ?>_certified" onchange="statusModified('<?php print $user; ?>')">
-    		<?php print isCertified_ADMIN($user); ?>
+    		<?php print isCertified($user,"radio"); ?>
     	</select>
     </td>
     <td class="rowdata" style="text-align:left;">

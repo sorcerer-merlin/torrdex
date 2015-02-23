@@ -47,7 +47,7 @@
 					<td>&nbsp;</td>
 					<td>
 						<?php
-							if (isCertified_BOOL($Author))
+							if (isCertified($Author,"bool"))
 								echo "<img src='/img/skull-icon.png' height='24' width='24' alt='Certified Uploader' />";
 							else
 								echo "&nbsp;";
@@ -67,7 +67,7 @@
 		<td class="sidecol_author" width="200px">Certified:</td>
 		<td class="rowdata">
 			<?php
-				if (isCertified_BOOL($Author))
+				if (isCertified($Author,"bool"))
 					echo "Yes";
 				else 
 					echo "No";

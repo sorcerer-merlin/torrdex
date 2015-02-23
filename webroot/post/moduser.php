@@ -40,12 +40,12 @@
         	// Check for certified uploader status and change accordingly
         	if ($certified == "true") {
         		// We are showing that they are NOT certified and want to be, so fix it
-        		if (!isCertified_BOOL($user)) {
+        		if (!isCertified($user, "bool")) {
         			$result = queryMySQL("INSERT INTO certified VALUES ('$user');");
         			if (!$result) $error = "error";
         		}
         	} elseif ($certified == "false") {
-        		if (isCertified_BOOL($user)) {
+        		if (isCertified($user, "bool")) {
         			$result = queryMySQL("DELETE FROM certified WHERE user='$user';");
         			if (!$result) $error = "error";
         		}
