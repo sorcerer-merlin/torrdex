@@ -92,6 +92,11 @@ _END;
 		$TorrentTotalSize = $torrent->getSize();
 		$TorrentAuthor = $_SESSION['user'];
 
+        // Fix for a blank time when the torrent was created (as in the client didn't specify).
+        // FUTURE: check for valid time?
+        if ($TorrentCreated == "")
+            $TorrentCreated = time();
+
 		// Grab the trackers list (or single tracker if not multiple listed in torrent) and URL encode for use in MAGNET link
 		if ($torrent->getAnnounceList() == "") {
 			$TorrentTrackers =  $torrent->getAnnounce();
