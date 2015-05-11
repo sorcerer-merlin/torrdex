@@ -35,7 +35,7 @@
 			}
 			
 			// Delete the file
-			$deleted = unlink("uploads/" . $TorrentHash . ".torrent");
+			$deleted = unlink("../uploads/" . $TorrentHash . ".torrent");
 			if (!$deleted) {
 				showError("There was an error removing your .torrent file from the uploads. Please contact your Administrator.");
 			}

@@ -29,6 +29,6 @@
   <!-- End Copyright -->
 <?php } ?>
  </table>
- <img id="bottom" src="img/linux-inside.png" height="150" width="166" alt="Linux Inside">
+ <img id="bottom" src="/img/linux-inside.png" height="150" width="166" alt="Linux Inside">
 </body>
 </html>

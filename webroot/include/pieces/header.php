@@ -15,13 +15,13 @@
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Inconsolata" />
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Atomic+Age" />
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Spirax" />
-<link rel="stylesheet" type="text/css" href="style/style.css" />
-<link rel="stylesheet" type="text/css" href="include/libs/ibox/skins/darkbox/darkbox.css" media="screen"/>
-<link rel="icon" type="image/x-icon" href="img/favicon.ico" />
-<script type="text/javascript" src="include/libs/ibox/ibox.js"></script>
-<script type="text/javascript" src='javascript/javascript.js'></script>
-<script type="text/javascript" src="javascript/sorttable.js"></script> 
-<script type="text/javascript" src="javascript/MaskedPassword.js"></script>
+<link rel="stylesheet" type="text/css" href="/style/style.css" />
+<link rel="stylesheet" type="text/css" href="/include/libs/ibox/skins/darkbox/darkbox.css" media="screen"/>
+<link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
+<script type="text/javascript" src="/include/libs/ibox/ibox.js"></script>
+<script type="text/javascript" src='/javascript/javascript.js'></script>
+<script type="text/javascript" src="/javascript/sorttable.js"></script> 
+<script type="text/javascript" src="/javascript/MaskedPassword.js"></script>
 </head>
 <?php
   
@@ -62,10 +62,10 @@
   // Special links to pages with options showing/hiding them are listed below, followed
   // by their logic statements to enable/disable based on mySQL configuration options
   // table.
-  $signup_link = "<li><a href='signup'>Sign Up</a></li>";
-  $upload_link = "<li><a href='upload'>Upload</a></li>";
-  $admin_link = "<li><a href='admin'>Admin</a></li>";
-  $invite_link = "<li><a href='invite?mode=do_form'>Invite</a></li>";
+  $signup_link = "<li><a href='/signup'>Sign Up</a></li>";
+  $upload_link = "<li><a href='/upload'>Upload</a></li>";
+  $admin_link = "<li><a href='/admin'>Admin</a></li>";
+  $invite_link = "<li><a href='/invite?mode=do_form'>Invite</a></li>";
   
   // Output the menu
   if ($loggedin)
@@ -92,14 +92,14 @@
 		
 		// Finally output the constructed member menu
 
-		echo "<li><a href='logout'>Logout</a></li>";
-    echo "<li><a href='profile'>Profile</a></li>";
+		echo "<li><a href='/logout'>Logout</a></li>";
+    echo "<li><a href='/profile'>Profile</a></li>";
     echo $invite_link;
     echo $admin_link;
     echo "<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>";
     echo "<li><a href='/'>Home</a></li>";
-    echo "<li><a href='listby?mode=browse&param=none'>Browse</a></li>";
-    echo "<li><a href='search'>Search</a></li>";
+    echo "<li><a href='/listby?mode=browse&param=none'>Browse</a></li>";
+    echo "<li><a href='/search'>Search</a></li>";
     echo $upload_link;
   }
   else
@@ -109,7 +109,7 @@
 	  	if ($configOptions_Booleans['allow_signup'] == "false") $signup_link = "";
 	  
 		// Finally output the constructed public menu
-    echo "<li><a href='login'>Login</a></li>";
+    echo "<li><a href='/login'>Login</a></li>";
     echo $signup_link;
     echo "<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>";
     echo "<li><a href='/'>Home</a></li>";
