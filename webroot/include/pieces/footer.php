@@ -24,7 +24,7 @@
 ?>
   <!-- Copyright info -->
   <thead><tr class="mytable">
-    <th scope="col" style="font-family: Snippet; text-align: center; font-size:16px;">Copyright &copy; 2014-2015 by Sorcerer Merlin & MediEvil Ages INC. All rights reserved.</th>
+    <th scope="col" style="font-family: Snippet; text-align: center; font-size:16px;">Copyright &copy; 2014-2016 by Sorcerer Merlin & MediEvil Ages INC (under <a href="http://www.gnu.org/licenses/gpl-3.0-standalone.html">GNU GPLv3</a>). All rights reserved. Hosted on <a href="https://github.com/sorcerer-merlin/torrdex">GitHub</a>.</th>
   </tr></thead>
   <!-- End Copyright -->
 <?php } ?>
