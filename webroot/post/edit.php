@@ -33,7 +33,7 @@
 
             // Check the results, should be OK but error checking is a good practice
             if ($result)
-                echo '<script type="text/javascript">window.location = "details?hash=' . $TorrentHash . '"</script>';
+                echo '<script type="text/javascript">window.location = "/details?hash=' . $TorrentHash . '"</script>';
             else
                 showError('That torrent does not exist, or you do not have permission to edit it! Please contact your Administrator.');
         } else
