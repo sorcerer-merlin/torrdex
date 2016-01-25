@@ -88,7 +88,7 @@ _END;
 		$TorrentUploaded = time(); 
         $TorrentCreated = $torrent->getCreatedAt();
 		$TorrentFiles = $torrent->getFileList();
-		$TorrentComment = $torrent->getComment();
+		$TorrentComment = EscapeQuotes($torrent->getComment());
 		$TorrentTotalSize = $torrent->getSize();
 		$TorrentAuthor = $_SESSION['user'];
 
