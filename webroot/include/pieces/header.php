@@ -31,8 +31,13 @@
   {
     $user     = $_SESSION['user'];
     $loggedin = TRUE;
+    $tableCap = $configOptions_Strings['table_caption'];
   }
-  else $loggedin = FALSE;
+  else 
+  {
+    $loggedin = FALSE;
+    $tableCap = ". : = | TORRDEX | = : .";
+  }
 
   // NAME & EMAIL UPDATE HACK
   if (isset($_SESSION['fullname'])) {
@@ -49,7 +54,7 @@
 <body color="#00aeff">
 <table align="center" class="mytable"  width="1240px" border="1">
   <caption >
-    <?php print $configOptions_Strings['table_caption']; ?>
+    <?php print $tableCap ; ?>
   </caption>
   <thead><tr class="mytable">
     <th scope="col">Navigation</th>
