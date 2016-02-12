@@ -161,7 +161,7 @@ _ENDD;
 				<table align="left">
 					<tr>
 					<td>
-						<img src="img/type_icons/<?php print $TorrentType; ?>.png" ALT="<?php print $TorrentType; ?>" width="16px" height="16px">
+						<img src="/style/<?php print $configOptions_Strings['theme_name']; ?>/img/type_icons/<?php print $TorrentType; ?>.png" ALT="<?php print $TorrentType; ?>" width="16px" height="16px">
 					</td>
 					<td>&nbsp;</td>
 					<td>

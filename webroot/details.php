@@ -209,7 +209,7 @@ _END;
                 <table>
                     <tr>
                     <td>
-                        <img src="img/type_icons/<?php print $TorrentType; ?>.png" ALT="<?php print $TorrentType; ?>" width="32px" height="32px">
+                        <img src="/style/<?php print $configOptions_Strings['theme_name']; ?>/img/type_icons/<?php print $TorrentType; ?>.png" ALT="<?php print $TorrentType; ?>" width="32px" height="32px">
                     </td>
                     <td>&nbsp;</td>
                     <td>
@@ -258,7 +258,7 @@ _END;
                         <td>&nbsp;</td>
                         <td style="text-align:right;"><span class="seeders_number"><?php print number_format($Seeders); ?></span></td>
                         <td rowspan="2">&nbsp;&nbsp;&nbsp;</td>
-                        <td rowspan="2"><span class="tooltip" title="Click to Refresh Stats!"><img class="vote" src="img/refresh_button.png" width="32px" height="32px" ALT="Refresh Stats" onclick="doStats()"></span></td>
+                        <td rowspan="2"><span class="tooltip" title="Click to Refresh Stats!"><img class="vote" src="/style/<?php print $configOptions_Strings['theme_name']; ?>/img/refresh_button.png" width="32px" height="32px" ALT="Refresh Stats" onclick="doStats()"></span></td>
                     </tr>
                     <tr>
                         <td><span class="leechers_label">Leechers:</span></td>
@@ -286,7 +286,7 @@ _END;
             </div>
             <table>
                 <tr>
-                    <td><img src="/img/files-icon.png" height="24" width="24" alt="Files" /></a></td>
+                    <td><img src="/style/<?php print $configOptions_Strings['theme_name']; ?>/img/files-icon.png" height="24" width="24" alt="Files" /></a></td>
                     <td>&nbsp;</td>
                     <td><a href="#file_list" rel="ibox&width=900&height=500" title="Torrent's Files" >Show List of Files...</a></td>
                 </tr>
@@ -301,9 +301,9 @@ _END;
                 <table class="rating_table">
                 <input type="hidden" name="user_name" id="user_name" value="<?php print $_SESSION['user']; ?>">
                     <tr>
-                        <td class="tooltip" title="Click to Up Vote!"><span title="Up Vote"><img class="vote" src="img/thumbs_up.png" width="32px" height="32px" ALT="Thumbs Up" onclick="doVote('up')"></span></td>
+                        <td class="tooltip" title="Click to Up Vote!"><span title="Up Vote"><img class="vote" src="/style/<?php print $configOptions_Strings['theme_name']; ?>/img/thumbs_up.png" width="32px" height="32px" ALT="Thumbs Up" onclick="doVote('up')"></span></td>
                         <td>&nbsp;</td>
-                        <td class="tooltip" title="Click to Down Vote!"><span title="Down Vote"><img class="vote" src="img/thumbs_down.png" width="32px" height="32px" ALT="Thumbs Down" onclick="doVote('dn')"></span></td>
+                        <td class="tooltip" title="Click to Down Vote!"><span title="Down Vote"><img class="vote" src="/style/<?php print $configOptions_Strings['theme_name']; ?>/img/thumbs_down.png" width="32px" height="32px" ALT="Thumbs Down" onclick="doVote('dn')"></span></td>
                     </tr>
                     <tr id="votes_tabledata">
                         <td><span id="votes_up">+<?php print $RatingGood; ?></span></td>
@@ -334,11 +334,11 @@ _END;
             <td class="rowdata">
             	<table>
                 	<tr>
-                    	<td><a href="<?php print $TorrentMagnet; ?>"><img src="/img/Magnet.png" height="32" width="32" alt="MAGNET" /></a></td>
+                    	<td><a href="<?php print $TorrentMagnet; ?>"><img src="/style/<?php print $configOptions_Strings['theme_name']; ?>/img/Magnet.png" height="32" width="32" alt="MAGNET" /></a></td>
                         <td>&nbsp;&nbsp;<a href="<?php print $TorrentMagnet; ?>">Magnet</a>&nbsp;</td>
                         <?php if ($configOptions_Booleans['hide_torrent_files'] == "false") { ?>
                         <!-- only displayed if we want to show torrent files -->
-                        <td><a href="<?php print $TorrentFile; ?>"><img src="/img/Download.png" height="32" width="32" alt="TORRENT" /></a></td>
+                        <td><a href="<?php print $TorrentFile; ?>"><img src="/style/<?php print $configOptions_Strings['theme_name']; ?>/img/Download.png" height="32" width="32" alt="TORRENT" /></a></td>
                         <td>&nbsp;&nbsp;&nbsp;<a href="<?php print $TorrentFile; ?>">.Torrent</a></td>
                         <!-- end display torrent file -->
                         <?php } ?>

@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Inconsolata" />
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Atomic+Age" />
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Spirax" />
-<link rel="stylesheet" type="text/css" href="/style/style.css" />
+<link rel="stylesheet" type="text/css" href="/style/<?php print $configOptions_Strings['theme_name']; ?>/style.css" />
 <link rel="stylesheet" type="text/css" href="/include/libs/ibox/skins/darkbox/darkbox.css" media="screen"/>
 <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
 <script type="text/javascript" src="/include/libs/ibox/ibox.js"></script>

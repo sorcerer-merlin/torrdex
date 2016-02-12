@@ -138,7 +138,7 @@ function scrapeTorrent($Hash)
 _END;
         //if (!$update_result) echo "*** MySQL Error: Couldnt update torrent stats in DB" . PHP_EOL;
     } else {
-        $msg = "<span class='error'>There are no working trackers as of $ScrapeDate.</span>";
+        $msg = "<span class='error'>There are no working trackers as of " . date("Y-m-d @ h:ia",$ScrapeDate) . ".</span>";
     }
     //echo "--------------------------------------------------" . PHP_EOL;
     //print PHP_EOL . PHP_EOL;

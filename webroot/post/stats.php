@@ -11,7 +11,7 @@
         if ($Hash != "") {
             $retval = scrapeTorrent($Hash);
             echo $retval;
-            //echo $Hash;
+            #echo $Hash;
         }
     }
 

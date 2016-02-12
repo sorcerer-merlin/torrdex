@@ -164,6 +164,7 @@ function isCertified($user, $return_type = "image") {
 
     // Grab the options, and whether or not we are showing authors globally
     global $configOptions_Booleans;
+    global $configOptions_Strings;
     $ShowAuthors = $configOptions_Booleans['show_authors'];
 
     // Attempt to find the row in the certified table
@@ -196,7 +197,7 @@ function isCertified($user, $return_type = "image") {
                 return TRUE;
                 break;
             case "image":
-                return "<img src='/img/skull-icon.png' height='16' width='16' alt='Certified Uploader' />";
+                return "<img src='/style/" . $configOptions_Strings['theme_name'] . "/img/skull-icon.png' height='16' width='16' alt='Certified Uploader' />";
                 break;
             case "radio":
                 return "<option value='true' selected='selected'>Yes</option><option value='false'>No</option>";
