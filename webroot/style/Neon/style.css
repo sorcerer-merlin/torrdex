@@ -15,7 +15,7 @@ html {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    color: var(--blue-color);
+    color: #00AEFF;
 }
 
 /* ===[ Seeders & Leechers Style ]=== */
@@ -29,7 +29,7 @@ html {
 }
 
 .seeders_label {
-    color: var(--green-color);
+    color: #54FF00;
     font-weight: bold;
     font-family: 'Aclonica';
     font-size: 16px;
@@ -45,7 +45,7 @@ html {
 }
 
 .seeders_number {
-    color: var(--green-color);
+    color: #54FF00;
     font-weight: bold;
     font-family: 'Inconsolata';
     font-size: 16px;
@@ -60,7 +60,7 @@ html {
 .torrent-desc h4,
 .torrent-desc h5,
 .torrent-desc h6 {
-    color: var(--green-color);
+    color: #54FF00;
     font-family: 'Sigmar One';
     font-size: 24px;
     text-shadow: 3px 3px 4px #444;
@@ -77,14 +77,14 @@ html {
 }
 
 .torrent-desc {
-    color: var(--blue-color);
+    color: #00AEFF;
     font-family: 'Inconsolata';
     font-size: 16px;
 }
 
 .torrent_info {
     float: right;
-    color: var(--green-color);
+    color: #54FF00;
     font-family: 'Inconsolata';
     font-style: italic;
 }
@@ -97,11 +97,11 @@ html {
 }
 
 .tooltip:hover:after {
-    background: var(--purple-color);
+    background: #A200FF;
     background: rgba(162,0,255,.8);
     border-radius: 5px;
     bottom: 46px;
-    color: var(--green-color);
+    color: #54FF00;
     text-shadow: 3px 3px 4px #444;
     content: attr(title);
     left: 20%;
@@ -116,7 +116,7 @@ html {
 
 .tooltip:hover:before {
     border: solid;
-    border-color: var(--purple-color) transparent;
+    border-color: #A200FF transparent;
     border-width: 6px 6px 0 6px;
     bottom: 40px;
     content: "";
@@ -138,7 +138,7 @@ html {
     font-family: 'Aclonica';
     font-weight: bolder;
     font-size: 18px;
-    color: var(--yellow-color);
+    color: #E4FF00;
     text-shadow: 3px 3px 4px #444;
 }
 
@@ -175,8 +175,8 @@ html {
     width: 120px;
     font-weight: bold;
     font-family: 'Sigmar One';
-    color: var(--green-color);
-    background-color: var(--purple-color);
+    color: #54FF00;
+    background-color: #A200FF;
     text-align: center;
     padding: 4px;
     text-decoration: none;
@@ -187,8 +187,8 @@ html {
 
 .navbar a:hover,
 .navbar a:active {
-    background-color: var(--blue-color);
-    color: var(--pink-color);
+    background-color: #00AEFF;
+    color: #FF00AE;
     font-style: none;
 }
 
@@ -197,24 +197,24 @@ html {
 .select-style {
     padding: 0;
     margin: 0;
-    border: 1px solid var(--purple-color);
+    border: 1px solid #A200FF;
     /*width: 150px;*/
     border-radius: 3px;
     overflow: hidden;
-    background-color: var(--green-color);
+    background-color: #54FF00;
     font-family: "Open Sans", sans-serif;
     font-size: 16px;
     font-weight: bold;
-    color: var(--purple-color);
+    color: #A200FF;
     padding: 5px;
-    /*background: var(--green-color) url("img/arrowdown.gif") no-repeat 90% 50%;*/
+    /*background: #54FF00 url("img/arrowdown.gif") no-repeat 90% 50%;*/
 }
 
 .select-style select {
     font-family: "Open Sans", sans-serif;
     font-size: 16px;
     font-weight: bold;
-    color: var(--purple-color);
+    color: #A200FF;
     padding: 5px 8px;
     width: 130%;
     border: none;
@@ -249,7 +249,7 @@ input[type=radio   ]:not(old) + label {
     display      : inline-block;
     margin-left  : -2em;
     line-height  : 1.5em;
-    color: var(--purple-color);
+    color: #A200FF;
     font-size: 16px;
     font-family: 'Atomic Age';
     text-shadow: 3px 3px 4px #444;
@@ -311,8 +311,8 @@ input[type=radio]:not(old):checked +  label > span > span {
 /* ===[ Search Boxes Style ]=== */
 
 input[type="search"] {
-    background: var(--green-color);
-    color: var(--purple-color);
+    background: #54FF00;
+    color: #A200FF;
     display: block;
     margin: 0;
     font-family: "Open Sans", sans-serif;
@@ -330,7 +330,7 @@ input[type="search"] {
     -o-border-radius: none;
     border-radius: none;
     padding: 5px;
-    border: solid 1px var(--green-color);
+    border: solid 1px #54FF00;
     -webkit-transition: box-shadow 0.3s, border 0.3s;
     -moz-transition: box-shadow 0.3s, border 0.3s;
     -o-transition: box-shadow 0.3s, border 0.3s;
@@ -349,8 +349,8 @@ input[type="search"]:focus {
 
 input[type="number"] {
     text-align: center;
-    background: var(--green-color);
-    color: var(--purple-color);
+    background: #54FF00;
+    color: #A200FF;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -370,7 +370,7 @@ input[type="number"] {
     -o-border-radius: none;
     border-radius: none;
     padding: 5px;
-    border: solid 1px var(--green-color);
+    border: solid 1px #54FF00;
     -webkit-transition: box-shadow 0.3s, border 0.3s;
     -moz-transition: box-shadow 0.3s, border 0.3s;
     -o-transition: box-shadow 0.3s, border 0.3s;
@@ -388,8 +388,8 @@ input[type="number"]:focus {
 /* ===[ Email Box Style ]=== */
 
 input[type="email"] {
-    background: var(--green-color);
-    color: var(--purple-color);
+    background: #54FF00;
+    color: #A200FF;
     display: block;
     margin: 0;
     /*width: 100%;*/
@@ -408,7 +408,7 @@ input[type="email"] {
     -o-border-radius: none;
     border-radius: none;
     padding: 5px;
-    border: solid 1px var(--green-color);
+    border: solid 1px #54FF00;
     -webkit-transition: box-shadow 0.3s, border 0.3s;
     -moz-transition: box-shadow 0.3s, border 0.3s;
     -o-transition: box-shadow 0.3s, border 0.3s;
@@ -426,8 +426,8 @@ input[type="email"]:focus {
 /* ===[ Text Box Style ]=== */
 
 input[type="text"] {
-    background: var(--green-color);
-    color: var(--purple-color);
+    background: #54FF00;
+    color: #A200FF;
     display: block;
     margin: 0;
     /*width: 100%;*/
@@ -446,7 +446,7 @@ input[type="text"] {
     -o-border-radius: none;
     border-radius: none;
     padding: 5px;
-    border: solid 1px var(--green-color);
+    border: solid 1px #54FF00;
     -webkit-transition: box-shadow 0.3s, border 0.3s;
     -moz-transition: box-shadow 0.3s, border 0.3s;
     -o-transition: box-shadow 0.3s, border 0.3s;
@@ -464,8 +464,8 @@ input[type="text"]:focus {
 /* ===[ Text Area Style ]=== */
 
 textarea {
-    background: var(--green-color);
-    color: var(--purple-color);
+    background: #54FF00;
+    color: #A200FF;
     display: block;
     margin: 0;
     /*font-family: "Open Sans", sans-serif;*/
@@ -483,7 +483,7 @@ textarea {
     -o-border-radius: none;
     border-radius: none;
     padding: 5px;
-    border: solid 1px var(--green-color);
+    border: solid 1px #54FF00;
     -webkit-transition: box-shadow 0.3s, border 0.3s;
     -moz-transition: box-shadow 0.3s, border 0.3s;
     -o-transition: box-shadow 0.3s, border 0.3s;
@@ -501,8 +501,8 @@ textarea:focus {
 /* ===[ Password Boxes Style ]=== */
 
 input[type="password"] {
-    background: var(--green-color);
-    color: var(--purple-color);
+    background: #54FF00;
+    color: #A200FF;
     display: block;
     margin: 0;
     /*width: 100%;*/
@@ -521,7 +521,7 @@ input[type="password"] {
     -o-border-radius: none;
     border-radius: none;
     padding: 5px;
-    border: solid 1px var(--green-color);
+    border: solid 1px #54FF00;
     -webkit-transition: box-shadow 0.3s, border 0.3s;
     -moz-transition: box-shadow 0.3s, border 0.3s;
     -o-transition: box-shadow 0.3s, border 0.3s;
@@ -546,8 +546,8 @@ input[type="password"]:focus {
 .feature_list li {
     margin: 3px;
     padding: 3px;
-    color: var(--green-color);
-    text-shadow: 2px 2px 3px var(--purple-color);
+    color: #54FF00;
+    text-shadow: 2px 2px 3px #A200FF;
     font-family: 'Snippet';
     font-style: italic;
 }
@@ -567,9 +567,9 @@ pre {
 /* ===[ Upload File Button Style ]=== */
 
 ::-webkit-file-upload-button {
-    border: 1px solid var(--green-color);
-    color: var(--green-color);
-    background: var(--purple-color);
+    border: 1px solid #54FF00;
+    color: #54FF00;
+    background: #A200FF;
     padding: 5px 10px;
     border-radius: 3px;
     font-weight: normal;
@@ -579,9 +579,9 @@ pre {
 }
 
 ::-webkit-file-upload-button:hover {
-    border: 1px solid var(--purple-color);
-    color: var(--purple-color);
-    background: var(--green-color);
+    border: 1px solid #A200FF;
+    color: #A200FF;
+    background: #54FF00;
     font-weight: bold;
     font-family: 'Sigmar One';
     font-size: 10px;
@@ -589,9 +589,9 @@ pre {
 }
 
 ::-ms-browse {
-    border: 1px solid var(--green-color);
-    color: var(--green-color);
-    background: var(--purple-color);
+    border: 1px solid #54FF00;
+    color: #54FF00;
+    background: #A200FF;
     padding: 5px 10px;
     border-radius: 3px;
     font-weight: normal;
@@ -601,9 +601,9 @@ pre {
 }
 
 ::-ms-browse:hover {
-    border: 1px solid var(--purple-color);
-    color: var(--purple-color);
-    background: var(--green-color);
+    border: 1px solid #A200FF;
+    color: #A200FF;
+    background: #54FF00;
     font-weight: bold;
     font-family: 'Sigmar One';
     font-size: 10px;
@@ -615,9 +615,9 @@ pre {
 #submit,
 #toggle,
 #save {
-    border: 1px solid var(--green-color);
-    color: var(--green-color);
-    background: var(--purple-color);
+    border: 1px solid #54FF00;
+    color: #54FF00;
+    background: #A200FF;
     padding: 5px 10px;
     border-radius: 3px;
     font-weight: normal;
@@ -629,9 +629,9 @@ pre {
 #submit:hover,
 #toggle:hover,
 #save:hover {
-    border: 1px solid var(--purple-color);
-    color: var(--purple-color);
-    background: var(--green-color);
+    border: 1px solid #A200FF;
+    color: #A200FF;
+    background: #54FF00;
     font-weight: bold;
     font-family: 'Sigmar One';
     font-size: 18px;
@@ -639,9 +639,9 @@ pre {
 }
 
 #submit_small {
-    border: 1px solid var(--green-color);
-    color: var(--green-color);
-    background: var(--purple-color);
+    border: 1px solid #54FF00;
+    color: #54FF00;
+    background: #A200FF;
     padding: 5px 10px;
     border-radius: 3px;
     font-weight: normal;
@@ -651,9 +651,9 @@ pre {
 }
 
 #submit_small:hover {
-    border: 1px solid var(--purple-color);
-    color: var(--purple-color);
-    background: var(--green-color);
+    border: 1px solid #A200FF;
+    color: #A200FF;
+    background: #54FF00;
     font-weight: bold;
     font-family: 'Sigmar One';
     font-size: 10px;
@@ -672,7 +672,7 @@ pre {
 }
 
 .available {
-    color: var(--green-color);
+    color: #54FF00;
     font-weight: bold;
     font-family: 'Spirax';
     font-size: 16px;
@@ -710,10 +710,10 @@ h1 {
     margin-left: 0;
     margin-right: 0;
     font-weight: bold;
-    color: var(--green-color);
+    color: #54FF00;
     font-size: 48px;
     font-family: 'Sigmar One';
-    text-shadow: 3px 3px 4px var(--purple-color);
+    text-shadow: 3px 3px 4px #A200FF;
 }
 
 h3 {
@@ -723,16 +723,16 @@ h3 {
     margin-left: 0;
     margin-right: 0;
     font-weight: bold;
-    color: var(--green-color);
+    color: #54FF00;
     font-size: 18px;
     font-family: Unlock;
-    text-shadow: 3px 3px 4px var(--purple-color);
+    text-shadow: 3px 3px 4px #A200FF;
 }
 
 /* ===[ Comment Show/Hide "Link" Style ]=== */
 
 #comment_toggle {
-    color: var(--pink-color);
+    color: #FF00AE;
     text-decoration: none;
     font-family: 'Snippet';
     font-size: 14px;
@@ -741,7 +741,7 @@ h3 {
 }
 
 #comment_toggle:hover {
-    color: var(--yellow-color);
+    color: #E4FF00;
     text-decoration: underline overline;
     font-style: normal;
     font-weight: bold;
@@ -757,7 +757,7 @@ a { }
 a:link,
 a:active,
 a:visited {
-    color: var(--pink-color);
+    color: #FF00AE;
     text-decoration: none;
     font-family: 'Snippet';
     font-size: 14px;
@@ -765,7 +765,7 @@ a:visited {
 }
 
 a:hover {
-    color: var(--yellow-color);
+    color: #E4FF00;
     text-decoration: underline overline;
     font-style: normal;
     font-weight: bold;
@@ -798,7 +798,7 @@ table.jsort td.rowcap {    cursor: pointer }
     padding-right: 10px;
     font-family: Spirax;
     font-size: 16px;
-    color: var(--blue-color);
+    color: #00AEFF;
     text-shadow: 3px 3px 4px #444;
 }
 
@@ -810,9 +810,9 @@ table.jsort td.rowcap {    cursor: pointer }
 }
 
 .rowcap_commentauthor {
-    border: 1px solid var(--green-color);
-    background: var(--purple-color);
-    color: var(--green-color);
+    border: 1px solid #54FF00;
+    background: #A200FF;
+    color: #54FF00;
     font-weight: bold;
     /* top right bottom left */
     padding: 2px 4px 2px 10px;
@@ -824,8 +824,8 @@ table.jsort td.rowcap {    cursor: pointer }
 }
 
 .sidecol_comment {
-    background: var(--green-color);
-    color: var(--purple-color);
+    background: #54FF00;
+    color: #A200FF;
     padding: 3px 10px 3px 10px;
     text-align: center;
     text-transform: uppercase;
@@ -837,7 +837,7 @@ table.jsort td.rowcap {    cursor: pointer }
 
 .comment_body {
     margin-left: 10px;
-    color: var(--green-color);
+    color: #54FF00;
     text-shadow: 3px 3px 4px #444;
     font-family: Snippet;
     font-size: 16px;
@@ -845,9 +845,9 @@ table.jsort td.rowcap {    cursor: pointer }
 }
 
 .rowcap_author {
-    border: 1px solid var(--green-color);
-    background: var(--purple-color);
-    color: var(--green-color);
+    border: 1px solid #54FF00;
+    background: #A200FF;
+    color: #54FF00;
     font-weight: bold;
     padding: 6px 4px 8px 10px;
     text-align: center;
@@ -858,8 +858,8 @@ table.jsort td.rowcap {    cursor: pointer }
 }
 
 .sidecol_author {
-    background: var(--green-color);
-    color: var(--purple-color);
+    background: #54FF00;
+    color: #A200FF;
     padding: 3px 10px 3px 10px;
     text-align: left;
     /* text-transform: uppercase;*/
@@ -871,9 +871,9 @@ table.jsort td.rowcap {    cursor: pointer }
 /* ===[ Row Captions & Data Style ]=== */
 
 .rowcap {
-    border: 1px solid var(--green-color);
-    background: var(--purple-color);
-    color: var(--green-color);
+    border: 1px solid #54FF00;
+    background: #A200FF;
+    color: #54FF00;
     font-weight: bold;
     /* letter-spacing: 20px;*/
     padding: 6px 4px 8px 10px;
@@ -888,7 +888,7 @@ table.jsort td.rowcap {    cursor: pointer }
 }
 
 .rowdata {
-    border: 1px solid var(--purple-color);
+    border: 1px solid #A200FF;
     padding: 3px 10px 3px 10px;
     text-align: left;
     /* text-transform: uppercase;*/
@@ -904,9 +904,9 @@ table.jsort td.rowcap {    cursor: pointer }
 
 table.mytable {
     background: #101010;
-    border: 1px solid var(--purple-color);
+    border: 1px solid #A200FF;
     /*border-collapse: collapse;*/
-    color: var(--blue-color);
+    color: #00AEFF;
     font: normal 12px verdana, arial, helvetica, sans-serif;
     vertical-align: middle;
     /*(white-space: nowrap;*/
@@ -921,9 +921,9 @@ table.mytable {
 }
 
 caption {
-    border: 1px solid var(--green-color);
-    background: var(--purple-color);
-    color: var(--green-color);
+    border: 1px solid #54FF00;
+    background: #A200FF;
+    color: #54FF00;
     font-weight: bold;
     /* letter-spacing: 20px;*/
     padding: 6px 4px 8px 0px;
@@ -946,8 +946,8 @@ tr.mytable {    border: 1.5px solid #454545 }
 
 thead th,
 tfoot th {
-    background: var(--green-color);
-    color: var(--purple-color);
+    background: #54FF00;
+    color: #A200FF;
     padding: 3px 10px 3px 10px;
     text-align: left;
     /* text-transform: uppercase;*/
@@ -960,7 +960,7 @@ tbody th.mytable,
 tbody td.mytable {
     /* text-align: center; */
     vertical-align: middle;
-    color: var(--blue-color);
+    color: #00AEFF;
 }
 
 tfoot td.mytable {
