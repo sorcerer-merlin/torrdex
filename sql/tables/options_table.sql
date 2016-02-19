@@ -29,7 +29,8 @@ INSERT INTO `options` (`type`, `name`, `value`, `default`, `description`) VALUES
 	('string', 'table_caption', '. : = | Sorcerer Merlin\'s TORRent inDEXer | = : .', '. : = | Sorcerer Merlin\'s TORRent inDEXer | = : .', 'Caption of Top-Most Table'),
 	('string', 'site_root', 'http://localhost/', 'http://localhost/', 'Full URL path to site'),
 	('string', 'site_email', 'auto_admin@localhost', 'auto_admin@localhost', 'Email Address of Administrator'),
-	('bool', 'only_admin_invites', 'true', 'true', 'Only Admin Accounts Can Invite New Users');
+	('bool', 'only_admin_invites', 'true', 'true', 'Only Admin Accounts Can Invite New Users'),
+        ('string', 'theme_name', 'Neon', 'Neon', 'Theme used for styling entire website.');
 /*!40000 ALTER TABLE `options` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
